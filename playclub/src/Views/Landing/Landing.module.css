@@ -1,57 +1,57 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.658), rgba(0, 0, 0, 0.651)),  url(https://asset.cloudinary.com/dby8lelja/928cd2d4fea46ca9b32a3115984d6aa1);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #060817;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.contentInfo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    width: 1000px;
-    background-color: rgb(3, 6, 58);
-    border-radius: 20px;
-    margin: 0;
-    padding: 0;
-    opacity: 0.9;
+.contentInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.titulo{
-    font-size: 4rem;
-    font-weight: 700;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 1rem;
+.titulo {
+  font-size: 4rem;
+  font-weight: 700;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 1rem;
 }
 
-.btn{
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin-bottom: 1rem;
-    text-decoration: none;
+.btn {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 1rem;
+  text-decoration: none;
 }
 
-.btn:hover{
-    background-color: #ffffff;
-    color: #000000;
-    transform: scale(1.1);
+.btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+  transform: scale(1.1);
+}
+
+.containerBienvenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.contImage {
+  width: 30vw;
 }
