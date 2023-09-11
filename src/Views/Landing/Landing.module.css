@@ -5,7 +5,13 @@
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  background-color: #060817;
+  background: rgb(5, 65, 158);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 65, 158, 1) 30%,
+    rgba(2, 21, 51, 1) 50%,
+    rgba(5, 65, 158, 1) 66%
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -47,11 +53,22 @@
 
 .containerBienvenido {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   text-align: center;
+  max-width: 100vw;
 }
 
 .contImage {
-  width: 30vw;
+  width: 400px;
+  animation: rotar 5s linear infinite;
+}
+
+@keyframes rotar {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
