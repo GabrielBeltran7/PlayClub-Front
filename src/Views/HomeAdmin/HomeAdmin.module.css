@@ -1,0 +1,10 @@
+.contenedor {
+  background: rgb(5, 65, 158);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 65, 158, 1) 30%,
+    rgba(2, 21, 51, 1) 50%,
+    rgba(5, 65, 158, 1) 66%
+  );
+  min-height: 100vh;
+}
