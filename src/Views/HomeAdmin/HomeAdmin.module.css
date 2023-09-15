@@ -8,3 +8,21 @@
   );
   min-height: 100vh;
 }
+
+/* Añade transiciones para una animación suave */
+.content-container {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0);
+}
+
+.content-container.hidden {
+  transform: translateX(-100%);
+}
+
+.componente {
+  z-index: 1;
+}
+
+.aviso {
+  font-size: 25px;
+}
