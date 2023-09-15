@@ -1,0 +1,13 @@
+.containerAviso {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.aviso {
+  font-size: 35px;
+  text-align: center;
+  width: 30rem;
+  font-weight: 800;
+  background-color: transparent transparent;
+}

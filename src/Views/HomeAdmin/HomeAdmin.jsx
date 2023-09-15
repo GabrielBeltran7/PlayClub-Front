@@ -1,70 +1,125 @@
+import React, { useState } from "react";
 import {
-  AppstoreOutlined,
-  UserAddOutlined,
-  PieChartOutlined,
-  DollarOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  FlagOutlined,
   AuditOutlined,
+  DollarOutlined,
+  UserAddOutlined,
   BookOutlined,
 } from "@ant-design/icons";
-import { Button, Menu } from "antd";
-import React, { useState } from "react";
+import { Layout, Menu, Button, theme } from "antd";
 import style from "./HomeAdmin.module.css";
 import CrearCorredor from "../../Components/crearCorredor/CrearCorredor";
-function getItem(label, key, icon, children, type) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
-}
-const items = [
-  getItem("Crear Corredor", "1", <UserAddOutlined />),
-  getItem("Recargar Puntos", "2", <DollarOutlined />),
-  getItem("Informe Individual", "3", <AuditOutlined />),
-  getItem("Informe General", "4", <BookOutlined />),
-  getItem("Crear Apuesta", "sub2", <AppstoreOutlined />, [
-    getItem("WIN", "9"),
-    getItem("EXACTA", "10"),
-    getItem("TRIFECTA", "11"),
-    getItem("SUPERFECTA", "12"),
-  ]),
-];
-
+import RecargarPuntos from "../../Components/RecargarPuntos/RecargarPuntos";
+import CrearCarrera from "../../Components/CrearCarrera/CrearCarrera";
+const { Header, Sider, Content } = Layout;
 const HomeAdmin = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-  const [showCreateUser, setShowCreateUser] = useState(false); // Estado para controlar la visibilidad
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
 
-  const toggleCreateUser = () => {
-    setShowCreateUser(!showCreateUser);
+  // Estado para rastrear el elemento seleccionado
+  const [selectedItem, setSelectedItem] = useState("1");
+
+  // Función para cambiar el elemento seleccionado
+  const handleMenuItemClick = (key) => {
+    setSelectedItem(key);
   };
+
+  const imagenRace =
+    "https://res.cloudinary.com/dou3yyisb/image/upload/v1694751058/PlayGame/race_lgienn.png";
+
+  // Función para renderizar el componente correspondiente en función del elemento seleccionado
+  const renderSelectedComponent = () => {
+    switch (selectedItem) {
+      case "1":
+        return <RecargarPuntos />;
+      case "2":
+        return <CrearCorredor />;
+      case "3":
+        return <InformeIndividual />;
+      case "4":
+        return <InformeGeneral />;
+      case "5":
+        return <CrearCarrera />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className={style.contenedor}>
-      <div
-        style={{
-          width: 300,
-        }}
-      >
-        <Menu
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-          mode="inline"
-          theme="dark"
-          inlineCollapsed={collapsed}
-          items={items}
-          style={{ minHeight: "100vh", overflowY: "auto" }}
-        />
-      </div>
-      <div className={style.content}>
-        {/* Mostrar o ocultar el componente de crear corredor según el estado */}
-        {showCreateUser && <CrearCorredor />}
-      </div>
+    <div className={style.container}>
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={collapsed}>
+          <div className="demo-logo-vertical" />
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            onClick={({ key }) => handleMenuItemClick(key)} // Maneja los clics en los elementos del menú
+            items={[
+              {
+                key: "1",
+                icon: <DollarOutlined />,
+                label: "Usuarios",
+              },
+              {
+                key: "2",
+                icon: <UserAddOutlined />,
+                label: "Crear Corredor",
+              },
+              {
+                key: "3",
+                icon: <AuditOutlined />,
+                label: "Informe Individual",
+              },
+              {
+                key: "4",
+                icon: <BookOutlined />,
+                label: "Informe General",
+              },
+              {
+                key: "5",
+                icon: <FlagOutlined />,
+                label: "Crear Carrera",
+              },
+            ]}
+          />
+        </Sider>
+        <Layout>
+          <Header
+            style={{
+              padding: 0,
+              background: colorBgContainer,
+            }}
+          >
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+          </Header>
+          <Content
+            style={{
+              margin: "10px 10px",
+              padding: 24,
+              minHeight: "91.1vh",
+              background: colorBgContainer,
+            }}
+          >
+            {/* Renderiza el componente seleccionado */}
+            {renderSelectedComponent()}
+          </Content>
+        </Layout>
+      </Layout>
     </div>
   );
 };
-
 export default HomeAdmin;

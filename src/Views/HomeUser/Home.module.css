@@ -7,8 +7,6 @@
     rgba(2, 21, 51, 1) 50%,
     rgba(5, 65, 158, 1) 66%
   );
-  display: flex;
-  justify-content: center;
 }
 
 .formContainer {
@@ -20,15 +18,23 @@
 
 .formContainer form {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
   background-color: beige;
   padding: 10px;
+  padding-bottom: 20px;
   border: 1px solid black;
   border-radius: 20px;
   gap: 10px;
   font-size: 18px;
+  height: 25rem;
+}
+
+.containerInfoUser {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .infoUsuario {
@@ -42,9 +48,8 @@
   gap: 5px;
   border-radius: 20px;
   font-weight: 600;
-  position: absolute;
 }
 
 .infoUsuario img {
-  width: 30px;
+  width: fit-content;
 }
