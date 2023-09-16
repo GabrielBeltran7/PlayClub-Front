@@ -80,7 +80,6 @@ export const getUserById = (id) => {
 };
 
 export const getUserByIdParams = (id) => {
-  console.log("ididididididididididididididididid", id);
   return async (dispatch) => {
     try {
       const response = await axios.get(`http://localhost:3001/users/${id}`);
@@ -88,10 +87,9 @@ export const getUserByIdParams = (id) => {
       return response;
     } catch (error) {
       throw error;
-    }
-  };
+    }
+  };
 };
-
 
 export const postCorredor = (corredor) => {
   console.log("corredor action", corredor);
