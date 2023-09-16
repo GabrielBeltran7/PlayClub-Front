@@ -1,7 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
-import { Button, Input, Space, Table } from "antd";
+import { Button, Input, Space, Table, Typography, Tag, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../Redux/Actions";
 import style from "./RecargarPuntos.module.css";
@@ -145,14 +145,53 @@ const RecargarPuntos = () => {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      width: "40%",
+      width: "20%",
       ...getColumnSearchProps("email"),
+    },
+    {
+      title: "Role",
+      dataIndex: "admin",
+      key: "role",
+      render: (text, record) => (
+        console.log(record),
+        (
+          <Tag
+            color={record.admin ? "red" : record.subadmin ? "green" : "blue"}
+          >
+            {record.admin ? "Admin" : record.subadmin ? "SubAdmin" : "Usuario"}
+          </Tag>
+        )
+      ),
     },
     {
       title: "Cantidad de puntos",
       dataIndex: "cantidadtotal",
       key: "cantidadtotal",
       ...getColumnSearchProps("cantidadtotal"),
+    },
+    {
+      title: "Cantidad de puntos",
+      dataIndex: "cantidadtotal",
+      key: "cantidadtotal",
+      ...getColumnSearchProps("cantidadtotal"),
+    },
+    {
+      title: "Permisos",
+      dataIndex: "admin",
+      key: "city",
+      render: (text, record) => (
+        <Select
+          defaultValue={
+            record.admin ? "admin" : record.subadmin ? "subadmin" : "usuario"
+          }
+          style={{ width: 120 }}
+        >
+          <Select.Option value="admin">Admin</Select.Option>
+          <Select.Option value="subadmin">Sub Admin</Select.Option>
+          <Select.Option value="usuario">Usuario</Select.Option>
+          {/* Agrega otras opciones según tus necesidades */}
+        </Select>
+      ),
     },
   ];
   return (
