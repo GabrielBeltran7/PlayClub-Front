@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import Landing from "./Views/Landing/Landing";
 import Register from "./Components/Register/Register";
@@ -6,7 +7,7 @@ import Login from "./Components/login/Login";
 import Home from "./Views/HomeUser/Home";
 import HomeAdmin from "./Views/HomeAdmin/HomeAdmin";
 import CargaPuntosUser from "./Components/CargarPuntosUser/CargaPuntosUser";
-
+axios.defaults.baseURL = "https://play-club-back.vercel.app/";
 function App() {
   const [count, setCount] = useState(0);
 
