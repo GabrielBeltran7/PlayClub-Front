@@ -1,23 +1,41 @@
 import { useEffect } from "react";
 import style from "./Home.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../../Redux/Actions";
+import { getUserByUsername, logoutUser } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 
 const Home = () => {
-  const usuario = useSelector((state) => state.user);
-  const userId = useSelector((state) => state.userId);
-  console.log("este es el usuario", usuario);
-  //onsole.log("usuario useselector", usuario);
   const dispatch = useDispatch();
+  const usuario = useSelector((state) => state.user);
+  console.log("el LOGUEO  HOME", usuario);
+  const username = usuario ? usuario.username : null; // Cambiamos userId a username
+
+ 
+  const handleLogout = () => {
+    localStorage.removeItem("username"); 
+    dispatch(logoutUser()); 
+  };
+
   useEffect(() => {
-    dispatch(getUserById(usuario.id));
-  }, []);
+    // Verifica si existe un nombre de usuario en el almacenamiento local
+    const storedUsername = localStorage.getItem("username"); // Cambiamos userId a username
+
+    // Si hay un nombre de usuario almacenado localmente, úsalo
+    if (storedUsername) {
+      dispatch(getUserByUsername(storedUsername)); // Cambiamos la acción a getUserByUsername
+    } else if (username) {
+      // Si no hay un nombre de usuario almacenado localmente pero hay uno en el estado, guárdalo en el almacenamiento local
+      localStorage.setItem("username", username); // Cambiamos userId a username
+      console.log("username", username);
+      dispatch(getUserByUsername(username)); // Cambiamos la acción a getUserByUsername
+    }
+  }, [dispatch, username]); // Cambiamos userId a username
 
   return (
     <div className={style.container}>
+      <button onClick={handleLogout}>Desloguear</button>
       <div className={style.containerInfoUser}>
         <div className={style.infoUsuario}>
           <Avatar
@@ -29,8 +47,8 @@ const Home = () => {
               xl: 80,
               xxl: 100,
             }}
-            src={usuario.imagen}
-            icon={<AntDesignOutlined />}
+            src={usuario.imagen? usuario.imagen:<AntDesignOutlined />}
+          
           />
           <label>{usuario.username}</label>
           <label>Creditos:{usuario.cantidadtotal}</label>

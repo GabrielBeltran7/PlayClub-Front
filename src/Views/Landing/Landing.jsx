@@ -34,6 +34,9 @@ export default function Landing() {
       <a className={style.btn} href="/register">
         Registrarse
       </a>
+      <a className={style.btn} href="/home">
+        Home
+      </a>
     </div>
   );
 }

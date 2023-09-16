@@ -6,9 +6,31 @@ import {
   POST_CORREDOR,
   POST_PUNTOS,
   POST_CARRERA,
+  GET_USER_LOGIN,
+  LOGOUT_USER
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
+
+
+
+
+export const getUserByUsername = (username) => {
+  console.log("pruebaiddddddddddddddd", username)
+ 
+  return async (dispatch) => {
+    try {
+      const response = (await axios.get(`http://localhost:3001/users/getUserByUsername/${username}`)).data;
+      console.log("prueba2222222222222RESPONSE", response)
+      dispatch({ 
+        type: GET_USER_LOGIN, 
+        payload: response });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
 
 export const postUser = (user) => {
   return async (dispatch) => {
@@ -58,6 +80,7 @@ export const getUserById = (id) => {
 };
 
 export const getUserByIdParams = (id) => {
+  console.log("ididididididididididididididididid", id);
   return async (dispatch) => {
     try {
       const response = await axios.get(`http://localhost:3001/users/${id}`);
@@ -68,6 +91,7 @@ export const getUserByIdParams = (id) => {
     }
   };
 };
+
 
 export const postCorredor = (corredor) => {
   console.log("corredor action", corredor);
@@ -116,3 +140,12 @@ export const crearCarrera = (carrera) => {
     }
   };
 };
+
+
+export function logoutUser(){
+  return  function (dispatch){
+     return dispatch ({
+         type: LOGOUT_USER, 
+     })
+  }
+}

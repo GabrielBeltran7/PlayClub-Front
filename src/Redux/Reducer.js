@@ -7,8 +7,10 @@ import {
   POST_CORREDOR,
   POST_PUNTOS,
   POST_CARRERA,
+  GET_USER_LOGIN,
 } from "./ActionsTypes";
 let inicialState = {
+  isAuthenticated: false,
   user: [],
   userId: [],
   corredor: [],
@@ -27,13 +29,25 @@ const rootReducer = (state = inicialState, action) => {
     case LOGIN_USER:
       return {
         ...state,
+        isAuthenticated: true,
         user: action.payload,
       };
+      case 'LOGOUT_USER':
+        return {
+          ...state,
+          isAuthenticated: false,
+          user: "Deslogueado"
+        };
     case GET_USER:
       return {
         ...state,
         userId: action.payload,
       };
+      case GET_USER_LOGIN:
+        return {
+          ...state,
+          user: action.payload,
+        };
     case POST_CORREDOR:
       return {
         ...state,
