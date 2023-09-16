@@ -74,96 +74,93 @@ const Register = () => {
   };
 
   return (
-    <div className={style.registerContainer}>
-      <div className={style.formContainer}>
-        <div className={style.pruebaCont}>
-          <div className={style.prueba2}>
-            <div className={style.registrate}>
-              <h1 className={style.title}>Registrate en PLAYCLUB</h1>
-              <p>
-                Ya tienes cuenta? <a href="/login">Ingresar</a>
-              </p>
-            </div>
-            <form className={style.form} onSubmit={handleSubmit}>
-              <div className={style.campoForm}>
-                <img
-                  src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/account_hjcmcp.png"
-                  alt=""
-                  width="25"
-                />
-                <input
-                  type="text"
-                  placeholder=" Usuario"
-                  name="username"
-                  onChange={handleChange}
-                />
-              </div>{" "}
-              <br />
-              <div className={style.campoForm}>
-                <img
-                  src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/arroba_rzzcre.png"
-                  alt=""
-                  width="25"
-                />
-                <input
-                  type="mail"
-                  placeholder=" Email"
-                  name="email"
-                  onChange={handleChange}
-                />
-              </div>
-              <br />
-              <div className={style.campoForm}>
-                <img
-                  src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/secured-lock_slyfz7.png"
-                  alt=""
-                  width="25"
-                />
-                <input
-                  type="password"
-                  placeholder=" Password"
-                  name="password"
-                  onChange={handleChange}
-                />
-              </div>
-              <Upload
-                name="avatar"
-                listType="picture-circle"
-                className="avatar-uploader"
-                showUploadList={false}
-                action="https://api.cloudinary.com/v1_1/dou3yyisb/image/upload?upload_preset=Playclub"
-                beforeUpload={beforeUpload}
-                onChange={handleChangeimage}
-              >
-                {imageUrl ? (
-                  <img
-                    src={imageUrl}
-                    alt="avatar"
-                    style={{
-                      width: "100%",
-                    }}
-                  />
-                ) : (
-                  uploadButton
-                )}
-              </Upload>
-              <br />
-              <div className={style.termCondic}>
-                <input type="checkbox" />
-                <p>
-                  Yo estoy de acuerdo con los{" "}
-                  <a href="">terminos y condiciones</a>
-                </p>
-              </div>
-              <button className={style.button}>Registrate</button>
-            </form>
-          </div>
-          <div className={style.logo}>
+    <div className={style.container}>
+      <div className={style.registrate}>
+        <h1 className={style.title}>
+          Registrate en <span className={style.span}>WIN123</span>
+        </h1>
+        <p>
+          Ya tienes cuenta? <a href="/login">Ingresar</a>
+        </p>
+      </div>
+      <div className={style.containerForm}>
+        <form className={style.form} onSubmit={handleSubmit}>
+          <div className={style.campoForm}>
             <img
-              src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
+              src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/account_hjcmcp.png"
               alt=""
+              width="25"
+            />
+            <input
+              type="text"
+              placeholder=" Usuario"
+              name="username"
+              onChange={handleChange}
+            />
+          </div>{" "}
+          <br />
+          <div className={style.campoForm}>
+            <img
+              src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/arroba_rzzcre.png"
+              alt=""
+              width="25"
+            />
+            <input
+              type="mail"
+              placeholder=" Email"
+              name="email"
+              onChange={handleChange}
             />
           </div>
+          <br />
+          <div className={style.campoForm}>
+            <img
+              src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/secured-lock_slyfz7.png"
+              alt=""
+              width="25"
+            />
+            <input
+              type="password"
+              placeholder=" Password"
+              name="password"
+              onChange={handleChange}
+            />
+          </div>
+          <Upload
+            name="avatar"
+            listType="picture-circle"
+            className="avatar-uploader"
+            showUploadList={false}
+            action="https://api.cloudinary.com/v1_1/dou3yyisb/image/upload?upload_preset=Playclub"
+            beforeUpload={beforeUpload}
+            onChange={handleChangeimage}
+          >
+            {imageUrl ? (
+              <img
+                src={imageUrl}
+                alt="avatar"
+                style={{
+                  width: "100%",
+                }}
+              />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+          <br />
+          <div className={style.termCondic}>
+            <input type="checkbox" />
+            <p>
+              Yo estoy de acuerdo con los <a href="">terminos y condiciones</a>
+            </p>
+          </div>
+          <button className={style.button}>Registrate</button>
+        </form>
+        <div className={style.logo}>
+          <img
+            src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
+            alt=""
+          />
         </div>
       </div>
     </div>
@@ -171,3 +168,98 @@ const Register = () => {
 };
 
 export default Register;
+
+{
+  /* <div className={style.registerContainer}>
+  <div className={style.formContainer}>
+    <div className={style.pruebaCont}>
+      <div className={style.prueba2}>
+        <div className={style.registrate}>
+          <h1 className={style.title}>Registrate en PLAYCLUB</h1>
+          <p>
+            Ya tienes cuenta? <a href="/login">Ingresar</a>
+          </p>
+        </div>
+        <form className={style.form} onSubmit={handleSubmit}>
+          <div className={style.campoForm}>
+            <img
+              src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/account_hjcmcp.png"
+              alt=""
+              width="25"
+            />
+            <input
+              type="text"
+              placeholder=" Usuario"
+              name="username"
+              onChange={handleChange}
+            />
+          </div>{" "}
+          <br />
+          <div className={style.campoForm}>
+            <img
+              src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/arroba_rzzcre.png"
+              alt=""
+              width="25"
+            />
+            <input
+              type="mail"
+              placeholder=" Email"
+              name="email"
+              onChange={handleChange}
+            />
+          </div>
+          <br />
+          <div className={style.campoForm}>
+            <img
+              src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694446492/PlayGame/secured-lock_slyfz7.png"
+              alt=""
+              width="25"
+            />
+            <input
+              type="password"
+              placeholder=" Password"
+              name="password"
+              onChange={handleChange}
+            />
+          </div>
+          <Upload
+            name="avatar"
+            listType="picture-circle"
+            className="avatar-uploader"
+            showUploadList={false}
+            action="https://api.cloudinary.com/v1_1/dou3yyisb/image/upload?upload_preset=Playclub"
+            beforeUpload={beforeUpload}
+            onChange={handleChangeimage}
+          >
+            {imageUrl ? (
+              <img
+                src={imageUrl}
+                alt="avatar"
+                style={{
+                  width: "100%",
+                }}
+              />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+          <br />
+          <div className={style.termCondic}>
+            <input type="checkbox" />
+            <p>
+              Yo estoy de acuerdo con los <a href="">terminos y condiciones</a>
+            </p>
+          </div>
+          <button className={style.button}>Registrate</button>
+        </form>
+      </div>
+      <div className={style.logo}>
+        <img
+          src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</div>; */
+}

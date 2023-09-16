@@ -11,9 +11,11 @@
 
 .formContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 15px;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10rem;
 }
 
 .formContainer form {
@@ -22,8 +24,8 @@
   align-items: center;
   flex-direction: column;
   background-color: beige;
-  padding: 10px;
   padding-bottom: 20px;
+  padding: 30px;
   border: 1px solid black;
   border-radius: 20px;
   gap: 10px;
@@ -31,25 +33,47 @@
   height: 25rem;
 }
 
+.formContainer form input {
+  width: 90%;
+}
+
 .containerInfoUser {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .infoUsuario {
   background-color: orange;
   height: fit-content;
-  padding: 20px;
-  margin: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
   border-radius: 20px;
   font-weight: 600;
+  padding: 2rem;
 }
 
 .infoUsuario img {
   width: fit-content;
+}
+
+/* ------------------------------------------------- */
+/* Media querys -- responsive*/
+@media screen and (max-width: 500px) {
+  .formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-direction: column;
+    width: 100vw;
+  }
+  .containerInfoUser {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+  }
 }

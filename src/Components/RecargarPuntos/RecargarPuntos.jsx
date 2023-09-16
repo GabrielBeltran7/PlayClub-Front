@@ -163,12 +163,7 @@ const RecargarPuntos = () => {
         )
       ),
     },
-    {
-      title: "Cantidad de puntos",
-      dataIndex: "cantidadtotal",
-      key: "cantidadtotal",
-      ...getColumnSearchProps("cantidadtotal"),
-    },
+
     {
       title: "Cantidad de puntos",
       dataIndex: "cantidadtotal",

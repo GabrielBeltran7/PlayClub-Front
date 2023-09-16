@@ -1,6 +1,5 @@
-.registerContainer {
+.container {
   min-height: 100vh;
-  width: 100%;
   background: rgb(5, 65, 158);
   background: linear-gradient(
     90deg,
@@ -11,81 +10,117 @@
 }
 
 .registrate {
-  width: 20em;
-  text-align: start;
-  margin: 50px;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  text-align: center;
+}
+
+.registrate h1 {
+  margin: 0;
+  font-size: 55px;
+  color: gold;
+  width: 25rem;
 }
 
 .registrate p {
-  font-size: 20px;
+  margin: 0;
+  font-size: 25px;
   color: white;
+  width: 25rem;
 }
 
 .registrate a {
   text-decoration: none;
-  color: magenta;
+  color: orange;
+}
+
+.span {
+  text-shadow: 2px 2px 5px white;
+}
+
+.containerForm {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .form {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
+  align-items: start;
   flex-direction: column;
-  min-height: 30rem;
-  margin: 50px;
-}
-
-.form input {
-  border: none;
-  outline: none;
-  margin-top: 0;
-  background-color: transparent;
+  gap: 1rem;
+  width: 40%;
 }
 
 .campoForm {
   display: flex;
-  justify-content: start;
-  align-items: center;
-  border-bottom: 1px solid #fff;
+  gap: 5px;
+  border-bottom: 1px solid black;
+  width: 60%;
 }
 
-.title {
-  color: gold;
-  margin: 0;
-  font-size: 55px;
-}
-
-.button {
-  width: fit-content;
+.campoForm input {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: white;
+  font-size: 20px;
 }
 
 .termCondic {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.termCondic p {
-  font-size: 19px;
-  margin-left: 10px;
+  gap: 5px;
   color: white;
 }
 
+.termCondic a {
+  gap: 5px;
+  color: orange;
+}
+
 .logo {
-  max-width: 40rem;
+  width: 40%;
 }
 
 .logo img {
   width: 100%;
 }
 
-.pruebaCont {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.prueba2 {
-  display: flex;
-  justify-content: space-around;
-  align-items: start;
-  flex-direction: column;
+@media screen and (max-width: 500px) {
+  .registrate h1 {
+    margin: 0;
+    font-size: 45px;
+    color: gold;
+    width: 100%;
+  }
+  .registrate p {
+    margin: 0;
+    font-size: 25px;
+    color: white;
+    width: 100%;
+  }
+  .containerForm {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  .logo {
+    width: 100%;
+  }
+  .inputs {
+    width: 100%;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px;
+  }
 }
