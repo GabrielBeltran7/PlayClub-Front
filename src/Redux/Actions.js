@@ -35,7 +35,7 @@ export const getUserByUsername = (username) => {
 export const postUser = (user) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("https://play-club-back.vercel.app/users", user);
+      const response = await axios.post("/users", user);
       dispatch({ type: POST_USER, payload: response.data });
       console.log("response postuser", response);
       return response;
@@ -50,7 +50,7 @@ export const loginUser = (user) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://play-club-back.vercel.app/users/login",
+        "/users/login",
         user
       );
       //console.log("response de login user", response);
