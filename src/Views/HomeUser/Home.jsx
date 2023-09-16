@@ -50,7 +50,6 @@ const Home = () => {
         </div>
       </div>
       <div className={style.formContainer}>
-        <div className={style.containerLogo}></div>
         <form>
           <h2>Win</h2>
           <label>Puesto 1</label>
