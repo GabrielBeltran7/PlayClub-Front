@@ -7,7 +7,7 @@ import Login from "./Components/login/Login";
 import Home from "./Views/HomeUser/Home";
 import HomeAdmin from "./Views/HomeAdmin/HomeAdmin";
 import CargaPuntosUser from "./Components/CargarPuntosUser/CargaPuntosUser";
-axios.defaults.baseURL = "https://play-club-back.vercel.app/";
+axios.defaults.baseURL = "https://win123.onrender.com/";
 function App() {
   const [count, setCount] = useState(0);
 

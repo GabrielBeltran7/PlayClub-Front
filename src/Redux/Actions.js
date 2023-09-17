@@ -20,7 +20,7 @@ export const getUserByUsername = (username) => {
  
   return async (dispatch) => {
     try {
-      const response = (await axios.get(`http://localhost:3001/users/getUserByUsername/${username}`)).data;
+      const response = (await axios.get(`/users/getUserByUsername/${username}`)).data;
       console.log("prueba2222222222222RESPONSE", response)
       dispatch({ 
         type: GET_USER_LOGIN, 
@@ -67,7 +67,7 @@ export const getUserById = (id) => {
   console.log("el id de la actionnnn", id);
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:3001/users/", {
+      const response = await axios.get("/users/", {
         id: id,
       });
       dispatch({ type: GET_USER, payload: response.data });
@@ -82,7 +82,7 @@ export const getUserById = (id) => {
 export const getUserByIdParams = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`http://localhost:3001/users/${id}`);
+      const response = await axios.get(`/users/${id}`);
       dispatch({ type: GET_USER, payload: response.data });
       return response;
     } catch (error) {
@@ -96,7 +96,7 @@ export const postCorredor = (corredor) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/admin/corredor",
+        "/admin/corredor",
         corredor
       );
       dispatch({ type: POST_CORREDOR, payload: response.data });
@@ -112,7 +112,7 @@ export const cargaPuntos = (user) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/admin/puntos",
+        "/admin/puntos",
         user
       );
       dispatch({ type: POST_PUNTOS, payload: response.data });
@@ -128,7 +128,7 @@ export const crearCarrera = (carrera) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/admin/carrera",
+        "/admin/carrera",
         carrera
       );
       dispatch({ type: POST_CARRERA, payload: response.data });
