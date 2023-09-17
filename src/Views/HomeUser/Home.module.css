@@ -70,6 +70,12 @@
   font-size: 20px;
 }
 
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* ------------------------------------------------- */
 /* Media querys -- responsive*/
 @media screen and (max-width: 530px) {

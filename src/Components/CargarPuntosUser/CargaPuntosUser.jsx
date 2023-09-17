@@ -68,6 +68,7 @@ const CargaPuntosUser = () => {
 
   return (
     <div className={style.container}>
+      <div></div>
       <h1 className={style.title}>Recarga de puntos</h1>
       <div className={style.formContainer}>
         <div className={style.contImage}>

@@ -5,6 +5,7 @@ import { getUserByUsername, logoutUser } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
+import Navbar from "../../Components/Navbar/Navbar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,13 @@ const Home = () => {
 
   return (
     <div className={style.container}>
+      {usuario.admin || usuario.subadmin ? (
+        <div className={style.navbar}>
+          <Navbar />
+        </div>
+      ) : (
+        <></>
+      )}
       <div className={style.containerInfoUser}>
         <div className={style.contendorUser}>
           <div className={style.infoUsuario}>
