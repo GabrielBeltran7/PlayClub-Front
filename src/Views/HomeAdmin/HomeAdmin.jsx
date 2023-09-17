@@ -7,12 +7,14 @@ import {
   DollarOutlined,
   UserAddOutlined,
   BookOutlined,
+  DashboardOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
 import style from "./HomeAdmin.module.css";
 import CrearCorredor from "../../Components/crearCorredor/CrearCorredor";
 import RecargarPuntos from "../../Components/RecargarPuntos/RecargarPuntos";
 import CrearCarrera from "../../Components/CrearCarrera/CrearCarrera";
+import AllCorredores from "../../Components/AllCorredores/AllCorredores";
 const { Header, Sider, Content } = Layout;
 const HomeAdmin = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -44,6 +46,8 @@ const HomeAdmin = () => {
         return <InformeGeneral />;
       case "5":
         return <CrearCarrera />;
+      case "6":
+        return <AllCorredores />;
       default:
         return null;
     }
@@ -84,6 +88,11 @@ const HomeAdmin = () => {
                 key: "5",
                 icon: <FlagOutlined />,
                 label: "Crear Carrera",
+              },
+              {
+                key: "6",
+                icon: <DashboardOutlined />,
+                label: "Corredores",
               },
             ]}
           />

@@ -12,10 +12,9 @@ const Home = () => {
   console.log("el LOGUEO  HOME", usuario);
   const username = usuario ? usuario.username : null; // Cambiamos userId a username
 
- 
   const handleLogout = () => {
-    localStorage.removeItem("username"); 
-    dispatch(logoutUser()); 
+    localStorage.removeItem("username");
+    dispatch(logoutUser());
   };
 
   useEffect(() => {
@@ -35,29 +34,47 @@ const Home = () => {
 
   return (
     <div className={style.container}>
-      <button onClick={handleLogout}>Desloguear</button>
       <div className={style.containerInfoUser}>
-        <div className={style.infoUsuario}>
-          <Avatar
-            size={{
-              xs: 24,
-              sm: 32,
-              md: 40,
-              lg: 64,
-              xl: 80,
-              xxl: 100,
-            }}
-            src={usuario.imagen? usuario.imagen:<AntDesignOutlined />}
-          
-          />
-          <label>{usuario.username}</label>
-          <label>Creditos:{usuario.cantidadtotal}</label>
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/566/566445.png"
-            alt=""
-            width="20"
-            height="50"
-          />
+        <div className={style.contendorUser}>
+          <div className={style.infoUsuario}>
+            <Avatar
+              size={{
+                xs: 24,
+                sm: 32,
+                md: 40,
+                lg: 64,
+                xl: 80,
+                xxl: 100,
+              }}
+              src={usuario.imagen ? usuario.imagen : <AntDesignOutlined />}
+            />
+            <p>
+              {usuario.username ? (
+                usuario.username
+              ) : (
+                <p>
+                  <a href="/login">Inicia sesion</a> o
+                  <a href="/register"> registrate</a>
+                </p>
+              )}
+            </p>
+            <label>
+              {usuario.id ? <p>Creditos:{usuario.cantidadtotal}</p> : ""}{" "}
+            </label>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/566/566445.png"
+              alt=""
+              width="20"
+              height="50"
+            />
+          </div>
+          <div>
+            {usuario.id ? (
+              <button onClick={handleLogout}>Desloguear</button>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
         <div>
           <img
@@ -78,7 +95,14 @@ const Home = () => {
             <option value="Corredor 4">Corredor 4</option>
           </select>
           <input type="number" placeholder="Ingrese monto a apostar" />
-          <button>Enviar apuesta</button>
+          {usuario.id ? (
+            <button>Enviar apuesta</button>
+          ) : (
+            <p className={style.avisoNoLogin}>
+              <a href="/login">Inicia sesion</a> o
+              <a href="/register"> registrate</a>
+            </p>
+          )}
         </form>
         <form>
           <h2>Exacta</h2>
@@ -97,7 +121,14 @@ const Home = () => {
             <option value="Corredor 4">Corredor 4</option>
           </select>
           <input type="number" placeholder="Ingrese monto a apostar" />
-          <button>Enviar apuesta</button>
+          {usuario.id ? (
+            <button>Enviar apuesta</button>
+          ) : (
+            <p className={style.avisoNoLogin}>
+              <a href="/login">Inicia sesion</a> o
+              <a href="/register"> registrate</a>
+            </p>
+          )}
         </form>
         <form>
           <h2>Trifecta</h2>
@@ -123,7 +154,14 @@ const Home = () => {
             <option value="Corredor 4">Corredor 4</option>
           </select>
           <input type="number" placeholder="Ingrese monto a apostar" />
-          <button>Enviar apuesta</button>
+          {usuario.id ? (
+            <button>Enviar apuesta</button>
+          ) : (
+            <p className={style.avisoNoLogin}>
+              <a href="/login">Inicia sesion</a> o
+              <a href="/register"> registrate</a>
+            </p>
+          )}
         </form>
         <form>
           <h2>Superfecta</h2>
@@ -156,7 +194,14 @@ const Home = () => {
             <option value="Corredor 4">Corredor 4</option>
           </select>
           <input type="number" placeholder="Ingrese monto a apostar" />
-          <button>Enviar apuesta</button>
+          {usuario.id ? (
+            <button>Enviar apuesta</button>
+          ) : (
+            <p className={style.avisoNoLogin}>
+              <a href="/login">Inicia sesion</a> o
+              <a href="/register"> registrate</a>
+            </p>
+          )}
         </form>
       </div>
     </div>

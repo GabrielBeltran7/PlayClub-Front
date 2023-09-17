@@ -2,15 +2,16 @@ import style from "./CrearCarrera.module.css";
 import React, { useRef, useState, useEffect } from "react";
 import { crearCarrera } from "../../Redux/Actions";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 const CrearCarrera = () => {
   const [carrera, setCarrera] = useState({
     username: "Gabriel",
     nombrecarrera: "",
-    porcentajeWin: 0,
-    porcentajeExacta: 0,
-    porcentajeTrifecta: 0,
-    porcentajeSuperfecta: 0,
+    porcentajeWin: "",
+    porcentajeExacta: "",
+    porcentajeTrifecta: "",
+    porcentajeSuperfecta: "",
   });
 
   const dispatch = useDispatch();
@@ -33,7 +34,34 @@ const CrearCarrera = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(crearCarrera(carrera));
+    if (
+      !carrera.nombrecarrera ||
+      !carrera.porcentajeWin ||
+      !carrera.porcentajeExacta ||
+      !carrera.porcentajeTrifecta ||
+      !carrera.porcentajeSuperfecta
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Completa todos los campos correctamente",
+        text: "Completa los campos",
+      });
+    } else {
+      dispatch(crearCarrera(carrera));
+      Swal.fire({
+        icon: "success",
+        title: "Corredor Añadido",
+        text: "Corredor cargado correctamente",
+      });
+      setCarrera({
+        username: "Gabriel",
+        nombrecarrera: "",
+        porcentajeWin: "",
+        porcentajeExacta: "",
+        porcentajeTrifecta: "",
+        porcentajeSuperfecta: "",
+      });
+    }
   };
 
   return (
@@ -47,6 +75,7 @@ const CrearCarrera = () => {
             placeholder="Nombre carrera"
             name="nombrecarrera"
             onChange={handleChange}
+            value={carrera.nombrecarrera}
           />
           <label> % Ganancia WIN</label>
           <input
@@ -54,6 +83,7 @@ const CrearCarrera = () => {
             placeholder="% de ganancia WIN"
             name="porcentajeWin"
             onChange={handleChange}
+            value={carrera.porcentajeWin}
           />
           <label> % Ganancia EXACTA</label>
           <input
@@ -61,6 +91,7 @@ const CrearCarrera = () => {
             placeholder="% de ganancia EXACTA"
             name="porcentajeExacta"
             onChange={handleChange}
+            value={carrera.porcentajeExacta}
           />
           <label> % Ganancia TRIFECTA</label>
           <input
@@ -68,6 +99,7 @@ const CrearCarrera = () => {
             placeholder="% de ganancia TRIFECTA"
             name="porcentajeTrifecta"
             onChange={handleChange}
+            value={carrera.porcentajeTrifecta}
           />
           <label> % Ganancia SUPERFECTA</label>
           <input
@@ -75,6 +107,7 @@ const CrearCarrera = () => {
             placeholder="% de ganancia SUPERFECTA"
             name="porcentajeSuperfecta"
             onChange={handleChange}
+            value={carrera.porcentajeSuperfecta}
           />
           <button>Crear carrera</button>
         </form>

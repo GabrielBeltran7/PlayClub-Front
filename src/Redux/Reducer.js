@@ -8,7 +8,11 @@ import {
   POST_PUNTOS,
   POST_CARRERA,
   GET_USER_LOGIN,
+<<<<<<< HEAD
 
+=======
+  GET_CORREDOR,
+>>>>>>> dd537b4f2baa49cd159fa9f7ce4466775c91afcd
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -33,22 +37,22 @@ const rootReducer = (state = inicialState, action) => {
         isAuthenticated: true,
         user: action.payload,
       };
-      case 'LOGOUT_USER':
-        return {
-          ...state,
-          isAuthenticated: false,
-          user: "Deslogueado"
-        };
+    case "LOGOUT_USER":
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: "Deslogueado",
+      };
     case GET_USER:
       return {
         ...state,
         userId: action.payload,
       };
-      case GET_USER_LOGIN:
-        return {
-          ...state,
-          user: action.payload,
-        };
+    case GET_USER_LOGIN:
+      return {
+        ...state,
+        user: action.payload,
+      };
     case POST_CORREDOR:
       return {
         ...state,
@@ -63,6 +67,11 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         puntos: action.payload,
+      };
+    case GET_CORREDOR:
+      return {
+        ...state,
+        corredor: action.payload,
       };
   }
   return state;

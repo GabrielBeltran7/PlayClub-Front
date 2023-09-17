@@ -31,7 +31,30 @@
 
 .formContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  min-height: 60vh;
+}
+
+.formulario label {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.formulario input {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.contImage {
+  width: 40rem;
+  animation: rotar 5s linear infinite;
+}
+
+@keyframes rotar {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
