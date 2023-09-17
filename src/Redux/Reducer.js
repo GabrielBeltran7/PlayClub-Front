@@ -8,11 +8,7 @@ import {
   POST_PUNTOS,
   POST_CARRERA,
   GET_USER_LOGIN,
-<<<<<<< HEAD
-
-=======
   GET_CORREDOR,
->>>>>>> dd537b4f2baa49cd159fa9f7ce4466775c91afcd
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
