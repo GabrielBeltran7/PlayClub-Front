@@ -25,6 +25,11 @@ const CrearCorredor = () => {
       return;
     }
     dispatch(postCorredor(corredor));
+    Swal.fire({
+      icon: "success",
+      title: "Corredor Añadido",
+      text: "Corredor cargado correctamente",
+    });
     setCorredor({
       nombre: "",
       numero: "",
@@ -78,8 +83,8 @@ const CrearCorredor = () => {
         </form>
         <div className={style.previewCorredor}>
           <h2>{corredor.nombre}</h2>
-          <label>{corredor.numero}</label>
-          <label>{corredor.descripcion}</label>
+          <p>{corredor.numero}</p>
+          <p>{corredor.descripcion}</p>
           <div>
             <img src={corredor.imagen1} alt="" width="80rem" />
             <img src={corredor.imagen2} alt="" width="80rem" />

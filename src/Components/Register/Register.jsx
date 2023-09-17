@@ -4,6 +4,8 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
 import { useDispatch } from "react-redux";
 import { postUser } from "../../Redux/Actions";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
@@ -32,6 +34,7 @@ const Register = () => {
     imagen: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setUsuario({
@@ -68,9 +71,30 @@ const Register = () => {
     </div>
   );
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(postUser(usuario));
+    try {
+      const response = await dispatch(postUser(usuario));
+      if (response) {
+        Swal.fire({
+          icon: "success",
+          title: "Bienvenido a WIN123...",
+          text: `Registro completado logueate`,
+        });
+        navigate("/login");
+      }
+    } catch (error) {
+      if (error) {
+        const errorAviso = error.response.data.error;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorAviso,
+          timerProgressBar: true,
+          timer: 1500,
+        });
+      }
+    }
   };
 
   return (

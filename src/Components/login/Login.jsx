@@ -61,10 +61,11 @@ const Login = () => {
         navigate("/home");
       }
     } catch (error) {
+      const errorAviso = error.response.data;
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Usuario no existente",
+        text: errorAviso,
         timerProgressBar: true,
         timer: 1500,
       });
