@@ -7,13 +7,24 @@ import {
   POST_PUNTOS,
   POST_CARRERA,
   GET_USER_LOGIN,
-  LOGOUT_USER
+  LOGOUT_USER,
+ 
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
 
-
-
+export const apdateRoluser = (rol) => {
+ 
+ 
+  return async (dispatch) => {
+    try {
+      const response = (await axios.patch(`/admin/roluser/`, rol)).data;
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
 
 export const getUserByUsername = (username) => {
   console.log("pruebaiddddddddddddddd", username)

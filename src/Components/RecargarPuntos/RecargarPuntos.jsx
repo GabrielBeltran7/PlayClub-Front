@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
 import { Button, Input, Space, Table, Typography, Tag, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../../Redux/Actions";
+import { getUserById, apdateRoluser} from "../../Redux/Actions";
 import style from "./RecargarPuntos.module.css";
 const RecargarPuntos = () => {
   const [searchText, setSearchText] = useState("");
@@ -15,10 +15,27 @@ const RecargarPuntos = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const response = dispatch(getUserById());
-  }, []);
 
+const [rol, setRol ] = useState(false)
+
+  const handleChange = (record) => (event)=>{
+    dispatch(apdateRoluser({
+      username: record.username,
+      rol: event
+    }))
+    if(rol){
+     
+    setRol(false)
+    }else {
+      setRol(true)
+    }
+  };
+
+    useEffect(() => {
+      dispatch(getUserById());
+   }, [rol]);
+ 
+ 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -130,6 +147,9 @@ const RecargarPuntos = () => {
         text
       ),
   });
+  
+
+ 
   const columns = [
     {
       title: "Username",
@@ -175,15 +195,15 @@ const RecargarPuntos = () => {
       dataIndex: "admin",
       key: "city",
       render: (text, record) => (
-        <Select
+        <Select onChange={handleChange(record)} 
           defaultValue={
             record.admin ? "admin" : record.subadmin ? "subadmin" : "usuario"
           }
           style={{ width: 120 }}
         >
-          <Select.Option value="admin">Admin</Select.Option>
-          <Select.Option value="subadmin">Sub Admin</Select.Option>
-          <Select.Option value="usuario">Usuario</Select.Option>
+          <Select.Option value="Admin">Admin</Select.Option>
+          <Select.Option value="SubAdmin">Sub Admin</Select.Option>
+          <Select.Option value="Usuario">Usuario</Select.Option>
           {/* Agrega otras opciones según tus necesidades */}
         </Select>
       ),
