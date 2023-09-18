@@ -193,10 +193,52 @@ export const getCarrera = () => {
 };
 
 export const postApuestaWin = (apuesta) => {
-  console.log("apuestaaaaaaaaaaaaaaa", apuesta);
+  //console.log("apuestaaaaaaaaaaaaaaa", apuesta);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/apuestas/win/`, apuesta);
+      dispatch({ type: POST_APUESTA_WIN, payload: response });
+      console.log("response", response);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const postApuestaExacta = (apuesta) => {
+  console.log("apuestaaaaaaaaaaaaaaa", apuesta);
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/apuestas/exacta/`, apuesta);
+      dispatch({ type: POST_APUESTA_WIN, payload: response });
+      console.log("response", response);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const postApuestaTrifecta = (apuesta) => {
+  console.log("apuestaaaaaaaaaaaaaaa", apuesta);
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/apuestas/trifecta/`, apuesta);
+      dispatch({ type: POST_APUESTA_WIN, payload: response });
+      console.log("response", response);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const postApuestaSuperfecta = (apuesta) => {
+  console.log("apuestaaaaaaaaaaaaaaa", apuesta);
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/apuestas/superfecta/`, apuesta);
       dispatch({ type: POST_APUESTA_WIN, payload: response });
       console.log("response", response);
       return response;

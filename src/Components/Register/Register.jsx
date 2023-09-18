@@ -84,6 +84,7 @@ const Register = () => {
         navigate("/login");
       }
     } catch (error) {
+      console.log("errrrrrr", error);
       if (error) {
         const errorAviso = error.response.data.error;
         Swal.fire({
@@ -91,7 +92,7 @@ const Register = () => {
           title: "Oops...",
           text: errorAviso,
           timerProgressBar: true,
-          timer: 1500,
+          timer: 5000,
         });
       }
     }

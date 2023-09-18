@@ -8,6 +8,9 @@ import {
   getCorredores,
   getcarreraActiva,
   postApuestaWin,
+  postApuestaExacta,
+  postApuestaTrifecta,
+  postApuestaSuperfecta,
 } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
@@ -33,7 +36,38 @@ const Home = () => {
     puntosapostados: "",
     puntosganados: "",
   });
+  const [exacta, setExacta] = useState({
+    id: usuario.id,
+    username: usuario.username,
+    nombreapuesta: "",
+    puesto1: "",
+    puesto2: "",
+    puntosapostados: "",
+    puntosganados: "",
+  });
+  const [trifecta, setTrifecta] = useState({
+    id: usuario.id,
+    username: usuario.username,
+    nombreapuesta: "",
+    puesto1: "",
+    puesto2: "",
+    puesto3: "",
+    puntosapostados: "",
+    puntosganados: "",
+  });
 
+  const [superfecta, setSuperfecta] = useState({
+    id: usuario.id,
+    username: usuario.username,
+    nombreapuesta: "",
+    puesto1: "",
+    puesto2: "",
+    puesto3: "",
+    puesto4: "",
+    puntosapostados: "",
+    puntosganados: "",
+  });
+  //!---------------------Handle para cargar la carrera al estado---------------------
   const handlechangecarreraActiva = (event) => {
     dispatch(getcarreraActiva(event.target.value));
     setWin({
@@ -42,7 +76,26 @@ const Home = () => {
       username: usuario.username,
       [event.target.name]: event.target.value,
     });
+    setExacta({
+      ...exacta,
+      id: usuario.id,
+      username: usuario.username,
+      [event.target.name]: event.target.value,
+    });
+    setTrifecta({
+      ...trifecta,
+      id: usuario.id,
+      username: usuario.username,
+      [event.target.name]: event.target.value,
+    });
+    setSuperfecta({
+      ...superfecta,
+      id: usuario.id,
+      username: usuario.username,
+      [event.target.name]: event.target.value,
+    });
   };
+  //!------------------------------------handlechange win-------------------------------
   const handleChangewin = (event) => {
     const pointsApost = event.target.value;
     const puntosganados = (pointsApost * unicacarrera.porcentajeWin) / 100;
@@ -55,14 +108,58 @@ const Home = () => {
     });
   };
 
+  //!---------------------------------------handlechange Exacta----------------------------
+  const handleChangeExacta = (event) => {
+    const pointsApost = event.target.value;
+    const puntosganados = (pointsApost * unicacarrera.porcentajeExacta) / 100;
+    setExacta({
+      ...exacta,
+      id: usuario.id,
+      username: usuario.username,
+      puntosganados: puntosganados,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  //!--------------------------------------handlechange Trifecta-----------------------------
+
+  const handleChangeTrifecta = (event) => {
+    const pointsApost = event.target.value;
+    const puntosganados = (pointsApost * unicacarrera.porcentajeTrifecta) / 100;
+    setTrifecta({
+      ...trifecta,
+      id: usuario.id,
+      username: usuario.username,
+      puntosganados: puntosganados,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  //!--------------------------------------handlechange superfecta-----------------------------
+
+  const handleChangeSuperfecta = (event) => {
+    const pointsApost = event.target.value;
+    const puntosganados =
+      (pointsApost * unicacarrera.porcentajeSuperfecta) / 100;
+    setSuperfecta({
+      ...superfecta,
+      id: usuario.id,
+      username: usuario.username,
+      puntosganados: puntosganados,
+      [event.target.name]: event.target.value,
+    });
+  };
+  //*--------------------handle logout-----------------------
   const handleLogout = () => {
     localStorage.removeItem("username");
     dispatch(logoutUser());
   };
+  //*--------------------- peticiones carrera y corredores--------------------------------
   useEffect(() => {
     dispatch(getCarrera());
     dispatch(getCorredores());
   }, []);
+  //*------------------------mmantener logueado-------------------------------------
   useEffect(() => {
     // Verifica si existe un nombre de usuario en el almacenamiento local
     const storedUsername = localStorage.getItem("username"); // Cambiamos userId a username
@@ -77,8 +174,8 @@ const Home = () => {
       dispatch(getUserByUsername(username)); // Cambiamos la acción a getUserByUsername
     }
   }, [dispatch, username]); // Cambiamos userId a username
-
-  const handleSubmit = async (event) => {
+  //!-----------------------------submit win-------------------------
+  const handleSubmitWin = async (event) => {
     event.preventDefault();
     try {
       const response = await dispatch(postApuestaWin(win));
@@ -89,7 +186,7 @@ const Home = () => {
           title: "Apuesta Realizada",
           text: "Se concretó la apuesta",
           timerProgressBar: true,
-          timer: 1000,
+          timer: 2500,
         });
         dispatch(getUserByUsername(username));
       }
@@ -100,7 +197,91 @@ const Home = () => {
         title: error.response.data.error,
         text: "Adquiere más puntos para seguir",
         timerProgressBar: true,
-        timer: 1000,
+        timer: 2500,
+      });
+    }
+  };
+  //!------------------------------------Submit Exacta----------------------
+  const handleSubmitExacta = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await dispatch(postApuestaExacta(exacta));
+
+      if (response) {
+        Swal.fire({
+          icon: "success",
+          title: "Apuesta Realizada",
+          text: "Se concretó la apuesta",
+          timerProgressBar: true,
+          timer: 2500,
+        });
+        dispatch(getUserByUsername(username));
+      }
+    } catch (error) {
+      console.log("11111111111111111", error.response.data.error);
+      Swal.fire({
+        icon: "error",
+        title: error.response.data.error,
+        text: "Adquiere más puntos para seguir",
+        timerProgressBar: true,
+        timer: 2500,
+      });
+    }
+  };
+
+  //!-------------------------------------------Submit Trifecta--------------------------------
+  const handleSubmitTrifecta = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await dispatch(postApuestaTrifecta(trifecta));
+
+      if (response) {
+        Swal.fire({
+          icon: "success",
+          title: "Apuesta Realizada",
+          text: "Se concretó la apuesta",
+          timerProgressBar: true,
+          timer: 2500,
+        });
+        dispatch(getUserByUsername(username));
+      }
+    } catch (error) {
+      console.log("11111111111111111", error.response.data.error);
+      Swal.fire({
+        icon: "error",
+        title: error.response.data.error,
+        text: "Adquiere más puntos para seguir",
+        timerProgressBar: true,
+        timer: 2500,
+      });
+    }
+  };
+
+  //!-------------------------------------------Submit Superfecta--------------------------------
+
+  const handleSubmitSuperfecta = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await dispatch(postApuestaSuperfecta(superfecta));
+
+      if (response) {
+        Swal.fire({
+          icon: "success",
+          title: "Apuesta Realizada",
+          text: "Se concretó la apuesta",
+          timerProgressBar: true,
+          timer: 2500,
+        });
+        dispatch(getUserByUsername(username));
+      }
+    } catch (error) {
+      console.log("11111111111111111", error.response.data.error);
+      Swal.fire({
+        icon: "error",
+        title: error.response.data.error,
+        text: "Adquiere más puntos para seguir",
+        timerProgressBar: true,
+        timer: 2500,
       });
     }
   };
@@ -165,7 +346,6 @@ const Home = () => {
           />
         </div>
       </div>
-
       <select
         className={style.avisoNoLogin}
         name="nombreapuesta"
@@ -180,9 +360,9 @@ const Home = () => {
         ))}
         ,
       </select>
-
+      {/* //? ------------------------FormularioWIN--------------------------------- */}
       <div className={style.formContainer}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmitWin}>
           <h2>Win</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
@@ -208,11 +388,7 @@ const Home = () => {
             "Seleccione una carrera"
           )}
 
-          <p>
-            {unicacarrera.porcentajeWin
-              ? (win.puntosapostados * unicacarrera.porcentajeWin) / 100
-              : ""}
-          </p>
+          <p>{win.puntosganados}</p>
           {usuario.id ? (
             <button>Enviar apuesta</button>
           ) : (
@@ -222,16 +398,16 @@ const Home = () => {
             </p>
           )}
         </form>
-
-        <form>
+        {/* //?-----------------------Formulario Exacta----------------------------- */}
+        <form onSubmit={handleSubmitExacta}>
           <h2>Exacta</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
 
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto1" onChange={handleChangeExacta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
@@ -239,17 +415,27 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto2" onChange={handleChangeExacta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
             ))}
             ,
           </select>
-          <input type="number" placeholder="Ingrese monto a apostar" />
+          {unicacarrera.id ? (
+            <input
+              type="number"
+              placeholder="Ingrese monto a apostar"
+              name="puntosapostados"
+              onChange={handleChangeExacta}
+            />
+          ) : (
+            "Seleccione una carrera"
+          )}
+          <p>{exacta.puntosganados}</p>
           {usuario.id ? (
             <button>Enviar apuesta</button>
           ) : (
@@ -259,14 +445,15 @@ const Home = () => {
             </p>
           )}
         </form>
-        <form>
+        {/* //?-------------------Formulario Trifecta------------ */}
+        <form onSubmit={handleSubmitTrifecta}>
           <h2>Trifecta</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto1" onChange={handleChangeTrifecta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
@@ -274,10 +461,10 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto2" onChange={handleChangeTrifecta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
@@ -285,17 +472,27 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 3</label>
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto3" onChange={handleChangeTrifecta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
             ))}
             ,
           </select>
-          <input type="number" placeholder="Ingrese monto a apostar" />
+          {unicacarrera.id ? (
+            <input
+              type="number"
+              placeholder="Ingrese monto a apostar"
+              name="puntosapostados"
+              onChange={handleChangeTrifecta}
+            />
+          ) : (
+            "Seleccione una carrera"
+          )}
+          <p>{trifecta.puntosganados}</p>
           {usuario.id ? (
             <button>Enviar apuesta</button>
           ) : (
@@ -305,14 +502,15 @@ const Home = () => {
             </p>
           )}
         </form>
-        <form>
+        {/* //?-------------------Formulario Superfecta------------ */}
+        <form onSubmit={handleSubmitSuperfecta}>
           <h2>Superfecta</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto1" onChange={handleChangeSuperfecta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
@@ -320,10 +518,10 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto2" onChange={handleChangeSuperfecta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
@@ -331,10 +529,10 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 3</label>
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto3" onChange={handleChangeSuperfecta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
@@ -342,17 +540,27 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 4</label>
-          <select name="win">
-            <option value=""></option>
+          <select name="puesto4" onChange={handleChangeSuperfecta}>
+            <option value="select"></option>
             {corredor.map((element) => (
-              <option key={element.id} value={element.id}>
+              <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
               </option>
             ))}
             ,
           </select>
-          <input type="number" placeholder="Ingrese monto a apostar" />
+          {unicacarrera.id ? (
+            <input
+              type="number"
+              placeholder="Ingrese monto a apostar"
+              name="puntosapostados"
+              onChange={handleChangeSuperfecta}
+            />
+          ) : (
+            "Seleccione una carrera"
+          )}
+          <p>{superfecta.puntosganados}</p>
           {usuario.id ? (
             <button>Enviar apuesta</button>
           ) : (
