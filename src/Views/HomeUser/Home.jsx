@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./Home.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserByUsername, logoutUser, getCarrera, getCorredores,getcarreraActiva } from "../../Redux/Actions";
+
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
@@ -11,13 +12,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.user);
   
-  
   const corredor = useSelector((state)=> state.corredor)
   const carrera = useSelector((state)=> state.carrera)
   const unicacarrera = useSelector((state)=>state.unicacarrera)
 
-
- 
   const username = usuario ? usuario.username : null; // Cambiamos userId a username
 
 
@@ -48,7 +46,6 @@ const handleChangewin =(event)=>{
     [event.target.name]: event.target.value
   })
 }
-
 const previewWin =()=>{
   const prueba = win.puntosapostados * unicacarrera.porcentajeWin /100
   return <p>{prueba}</p>
