@@ -51,7 +51,7 @@ const CrearCarrera = () => {
       Swal.fire({
         icon: "success",
         title: "Corredor Añadido",
-        text: "Corredor cargado correctamente",
+        text: "Carrera cargada correctamente",
       });
       setCarrera({
         username: "Gabriel",
