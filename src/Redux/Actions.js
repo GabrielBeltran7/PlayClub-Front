@@ -196,7 +196,7 @@ export const postApuestaWin = (apuesta) => {
   console.log("apuestaaaaaaaaaaaaaaa", apuesta);
   return async (dispatch) => {
     try {
-      const response = await axios.post(`/apuestas/win/`, apuesta);
+      const response = await axios.post(`/apuestas/win`, apuesta);
       dispatch({ type: POST_APUESTA_WIN, payload: response });
       console.log("response", response);
       return response;
