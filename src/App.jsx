@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
  //  axios.defaults.baseURL = "http://localhost:3001/";
 function App() {
  const user = useSelector((state)=>state.user)
+ console.log("5555555555555555555555",user)
 
   return (
     <div className="App">
