@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import style from "./Home.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserByUsername, logoutUser } from "../../Redux/Actions";
+import { getUserByUsername, logoutUser, getCarrera, getCorredores,getcarreraActiva } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
@@ -10,14 +10,59 @@ import Navbar from "../../Components/Navbar/Navbar";
 const Home = () => {
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.user);
-  console.log("el LOGUEO  HOME", usuario);
+  
+  
+  const corredor = useSelector((state)=> state.corredor)
+  const carrera = useSelector((state)=> state.carrera)
+  const unicacarrera = useSelector((state)=>state.unicacarrera)
+
+
+ 
   const username = usuario ? usuario.username : null; // Cambiamos userId a username
 
+
+  const [win, setWin] = useState({
+    id:usuario.id,
+    nombreapuesta:"",
+    puesto1:"", 
+    username: usuario.username,
+    puntosapostados:"",
+    puntosganados:""
+  })
+
+  const handlechangecarreraActiva = (event) => { 
+    dispatch(getcarreraActiva(event.target.value));
+    setWin({
+      ...win,
+      id:usuario.id,
+      username:usuario.username,
+      [event.target.name]: event.target.value
+    })
+  };
+const handleChangewin =(event)=>{
+  setWin({
+    ...win,
+    id:usuario.id,
+    username:usuario.username,
+    
+    [event.target.name]: event.target.value
+  })
+}
+
+const previewWin =()=>{
+  const prueba = win.puntosapostados * unicacarrera.porcentajeWin /100
+  return <p>{prueba}</p>
+}
+
+previewWin()
   const handleLogout = () => {
     localStorage.removeItem("username");
     dispatch(logoutUser());
   };
-
+useEffect(()=>{
+  dispatch(getCarrera())
+  dispatch(getCorredores())
+},[])
   useEffect(() => {
     // Verifica si existe un nombre de usuario en el almacenamiento local
     const storedUsername = localStorage.getItem("username"); // Cambiamos userId a username
@@ -84,6 +129,7 @@ const Home = () => {
             )}
           </div>
         </div>
+
         <div>
           <img
             src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
@@ -92,18 +138,40 @@ const Home = () => {
           />
         </div>
       </div>
+
+      <select  className={style.avisoNoLogin} name='nombreapuesta'  onChange={handlechangecarreraActiva} >
+            <option >Seleccione Carrera</option>
+            {carrera.map(element => (
+
+              <option key={element.id}  > {element.nombrecarrera}  {element.numero} </option>
+            )
+              ,)},
+          </select> 
+          
       <div className={style.formContainer}>
+        
+
+
         <form>
           <h2>Win</h2>
+          <label>Corredores</label>
           <label>Puesto 1</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          
+          <select  name='puesto1' onChange={handleChangewin} >
+            <option value="Select"></option>
+            {corredor.map(element => (
+
+              <option key={element.id}  > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
-          <input type="number" placeholder="Ingrese monto a apostar" />
+          
+          <input type="number" placeholder="Ingrese monto a apostar" name="puntosapostados"  onChange={handleChangewin}/>
+       <previewWin/>
+          {/* <p >{unicacarrera.porcentajeWin ? win.puntosapostados * unicacarrera.porcentajeWin /100: "Selecciona una carrera"}</p> */}
           {usuario.id ? (
+
+            
             <button>Enviar apuesta</button>
           ) : (
             <p className={style.avisoNoLogin}>
@@ -112,21 +180,35 @@ const Home = () => {
             </p>
           )}
         </form>
+
+
+
+
+
+
+
+
         <form>
           <h2>Exacta</h2>
+          <label>Corredores</label>
           <label>Puesto 1</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <label>Puesto 2</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <input type="number" placeholder="Ingrese monto a apostar" />
           {usuario.id ? (
@@ -140,26 +222,33 @@ const Home = () => {
         </form>
         <form>
           <h2>Trifecta</h2>
+          <label>Corredores</label>
           <label>Puesto 1</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <label>Puesto 2</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <label>Puesto 3</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <input type="number" placeholder="Ingrese monto a apostar" />
           {usuario.id ? (
@@ -173,33 +262,42 @@ const Home = () => {
         </form>
         <form>
           <h2>Superfecta</h2>
+          <label>Corredores</label>
           <label>Puesto 1</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <label>Puesto 2</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <label>Puesto 3</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <label>Puesto 4</label>
-          <select>
-            <option value="Corredor 1">Corredor 1</option>
-            <option value="Corredor 2">Corredor 2</option>
-            <option value="Corredor 3">Corredor 3</option>
-            <option value="Corredor 4">Corredor 4</option>
+          <select  name='win'  >
+            <option value=""></option>
+            {corredor.map(element => (
+
+              <option key={element.id} value={element.id} > {element.nombre}  {element.numero} </option>
+            )
+              ,)},
           </select>
           <input type="number" placeholder="Ingrese monto a apostar" />
           {usuario.id ? (

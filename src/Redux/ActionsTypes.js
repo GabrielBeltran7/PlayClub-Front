@@ -7,3 +7,5 @@ export const POST_CARRERA = "POST_CARRERA";
 export const GET_USER_LOGIN = "GET_USER_LOGIN";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_CORREDOR = "GET_CORREDOR";
+export const GET_CARRERA = "GET_CARRERA";
+export const GET_CARRERA_ACTIVA = "GET_CARRERA_ACTIVA";

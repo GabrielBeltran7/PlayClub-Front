@@ -9,6 +9,8 @@ import {
   POST_CARRERA,
   GET_USER_LOGIN,
   GET_CORREDOR,
+  GET_CARRERA,
+  GET_CARRERA_ACTIVA
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -17,10 +19,18 @@ let inicialState = {
   corredor: [],
   puntos: [],
   carrera: [],
+  unicacarrera:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
   switch (action.type) {
+
+    case GET_CARRERA_ACTIVA:
+      return {
+        ...state,
+        unicacarrera: action.payload,
+      };
+
     case POST_USER:
       return {
         ...state,
@@ -68,6 +78,14 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         corredor: action.payload,
+      };
+
+      
+
+      case GET_CARRERA:
+      return {
+        ...state,
+        carrera: action.payload,
       };
   }
   return state;

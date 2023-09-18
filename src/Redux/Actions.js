@@ -9,13 +9,13 @@ import {
   GET_USER_LOGIN,
   LOGOUT_USER,
   GET_CORREDOR,
+  GET_CARRERA,
+  GET_CARRERA_ACTIVA
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
 
 export const apdateRoluser = (rol) => {
- 
- 
   return async (dispatch) => {
     try {
       const response = (await axios.patch(`/admin/roluser/`, rol)).data;
@@ -26,14 +26,33 @@ export const apdateRoluser = (rol) => {
   };
 };
 
+
+
+export const getcarreraActiva = (username) => {
+  return async (dispatch) => {
+    try {
+      const response = (await axios.get(`/users/carreraactiva/${username}`))
+        .data;
+ console.log("unicaoooooooooooooooooooo",response)
+      dispatch({
+        type: GET_CARRERA_ACTIVA,
+        payload: response,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
 export const getUserByUsername = (username) => {
-  console.log("pruebaiddddddddddddddd", username);
+ 
 
   return async (dispatch) => {
     try {
       const response = (await axios.get(`/users/getUserByUsername/${username}`))
         .data;
-      console.log("prueba2222222222222RESPONSE", response);
+ 
       dispatch({
         type: GET_USER_LOGIN,
         payload: response,
@@ -50,7 +69,7 @@ export const postUser = (user) => {
     try {
       const response = await axios.post("/users", user);
       dispatch({ type: POST_USER, payload: response.data });
-      console.log("response postuser", response);
+     
       return response;
     } catch (error) {
       throw error;
@@ -74,14 +93,14 @@ export const loginUser = (user) => {
 };
 
 export const getUserById = (id) => {
-  console.log("el id de la actionnnn", id);
+
   return async (dispatch) => {
     try {
       const response = await axios.get("/users/", {
         id: id,
       });
       dispatch({ type: GET_USER, payload: response.data });
-      console.log("el responseeeee", response.data);
+     
       return response;
     } catch (error) {
       throw error;
@@ -102,7 +121,7 @@ export const getUserByIdParams = (id) => {
 };
 
 export const postCorredor = (corredor) => {
-  console.log("corredor action", corredor);
+ 
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/corredor", corredor);
@@ -115,7 +134,7 @@ export const postCorredor = (corredor) => {
 };
 
 export const cargaPuntos = (user) => {
-  console.log("usuario a cargar", user);
+
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/puntos", user);
@@ -128,7 +147,7 @@ export const cargaPuntos = (user) => {
 };
 
 export const crearCarrera = (carrera) => {
-  console.log("carrera action", carrera);
+
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/carrera", carrera);
@@ -154,6 +173,22 @@ export const getCorredores = () => {
       const response = await axios.get("/admin/corredor");
       dispatch({ type: GET_CORREDOR, payload: response.data });
       console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+};
+
+export const getCarrera = () => {
+  return async (dispatch) => {
+    try {
+      const response = (await axios.get("/admin/carrera")).data;
+      dispatch({
+         type: GET_CARRERA, 
+         payload: response });
+    
       return response;
     } catch (error) {
       console.log(error);
