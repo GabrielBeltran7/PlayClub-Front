@@ -10,7 +10,8 @@ import {
   GET_USER_LOGIN,
   GET_CORREDOR,
   GET_CARRERA,
-  GET_CARRERA_ACTIVA
+  GET_CARRERA_ACTIVA,
+  POST_APUESTA_WIN,
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -19,12 +20,12 @@ let inicialState = {
   corredor: [],
   puntos: [],
   carrera: [],
-  unicacarrera:[]
+  unicacarrera: [],
+  apuestaWin: [],
 };
 
 const rootReducer = (state = inicialState, action) => {
   switch (action.type) {
-
     case GET_CARRERA_ACTIVA:
       return {
         ...state,
@@ -79,10 +80,13 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         corredor: action.payload,
       };
+    case POST_APUESTA_WIN:
+      return {
+        ...state,
+        apuestaWin: action.payload,
+      };
 
-      
-
-      case GET_CARRERA:
+    case GET_CARRERA:
       return {
         ...state,
         carrera: action.payload,
