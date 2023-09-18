@@ -54,7 +54,6 @@ const Home = () => {
       [event.target.name]: event.target.value,
     });
   };
-
   const handleLogout = () => {
     localStorage.removeItem("username");
     dispatch(logoutUser());
