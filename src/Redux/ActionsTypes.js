@@ -9,3 +9,4 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_CORREDOR = "GET_CORREDOR";
 export const GET_CARRERA = "GET_CARRERA";
 export const GET_CARRERA_ACTIVA = "GET_CARRERA_ACTIVA";
+export const POST_APUESTA_WIN = "POST_APUESTA_WIN";
