@@ -221,7 +221,7 @@ export const postApuestaExacta = (apuesta) => {
 };
 
 export const postApuestaTrifecta = (apuesta) => {
-  console.log("apuestaaaaaaaaaaaaaaa", apuesta);
+  c; //onsole.log("apuestaaaaaaaaaaaaaaa", apuesta);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/apuestas/trifecta/`, apuesta);

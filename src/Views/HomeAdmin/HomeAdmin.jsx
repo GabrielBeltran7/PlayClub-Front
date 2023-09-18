@@ -15,8 +15,10 @@ import CrearCorredor from "../../Components/crearCorredor/CrearCorredor";
 import RecargarPuntos from "../../Components/RecargarPuntos/RecargarPuntos";
 import CrearCarrera from "../../Components/CrearCarrera/CrearCarrera";
 import AllCorredores from "../../Components/AllCorredores/AllCorredores";
+
 const { Header, Sider, Content } = Layout;
 const HomeAdmin = () => {
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
