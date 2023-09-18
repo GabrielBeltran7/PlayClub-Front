@@ -246,10 +246,10 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
+      console.log("errrrrrr", error);
       Swal.fire({
         icon: "error",
-        title: error.response.data.error,
+        title: "",
         text: "Adquiere más puntos para seguir",
         timerProgressBar: true,
         timer: 2500,
@@ -390,7 +390,7 @@ const Home = () => {
 
           <p>{win.puntosganados}</p>
           {usuario.id ? (
-            <button>Enviar apuesta</button>
+            <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -437,7 +437,7 @@ const Home = () => {
           )}
           <p>{exacta.puntosganados}</p>
           {usuario.id ? (
-            <button>Enviar apuesta</button>
+            <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -494,7 +494,7 @@ const Home = () => {
           )}
           <p>{trifecta.puntosganados}</p>
           {usuario.id ? (
-            <button>Enviar apuesta</button>
+            <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -562,7 +562,7 @@ const Home = () => {
           )}
           <p>{superfecta.puntosganados}</p>
           {usuario.id ? (
-            <button>Enviar apuesta</button>
+            <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
