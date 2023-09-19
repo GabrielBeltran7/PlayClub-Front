@@ -11,12 +11,14 @@ import {
   postApuestaExacta,
   postApuestaTrifecta,
   postApuestaSuperfecta,
+  getLinkcamaras,
 } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import Navbar from "../../Components/Navbar/Navbar";
 import Swal from "sweetalert2";
+import  YouTubePlayer  from "../../Components/YouTubePlayer/YouTubePlayer"
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -154,6 +156,12 @@ const Home = () => {
     localStorage.removeItem("username");
     dispatch(logoutUser());
   };
+  
+   //*--------------------- trae todos los los link de las camaras--------------------------------
+   useEffect(() => {
+    dispatch(getLinkcamaras());
+    
+  }, []);
   //*--------------------- peticiones carrera y corredores--------------------------------
   useEffect(() => {
     dispatch(getCarrera());
@@ -570,6 +578,8 @@ const Home = () => {
             </p>
           )}
         </form>
+
+        <YouTubePlayer/>
       </div>
     </div>
   );
