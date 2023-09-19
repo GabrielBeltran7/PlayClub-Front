@@ -14,6 +14,7 @@ import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import Navbar from "../../Components/Navbar/Navbar";
 import Swal from "sweetalert2";
+import  YouTubePlayer  from "../../Components/YouTubePlayer/YouTubePlayer"
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -361,6 +362,8 @@ const Home = () => {
             </p>
           )}
         </form>
+
+        <YouTubePlayer/>
       </div>
     </div>
   );
