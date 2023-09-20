@@ -333,7 +333,7 @@ const Home = () => {
           <div className={style.infoUsuario}>
             <Avatar
               size={{
-                xs: 24,
+                xs: 60,
                 sm: 32,
                 md: 40,
                 lg: 64,
@@ -353,7 +353,7 @@ const Home = () => {
               )}
             </p>
             <label>
-              {usuario.id ? <p>Creditos:{usuario.cantidadtotal}</p> : ""}{" "}
+              {usuario.id ? <p>Creditos: {usuario.cantidadtotal}</p> : ""}{" "}
             </label>
             <img
               src="https://cdn-icons-png.flaticon.com/128/566/566445.png"
@@ -371,11 +371,11 @@ const Home = () => {
           </div>
         </div>
 
-        <div>
+        <div className={style.contImageLogo}>
           <img
             src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
             alt=""
-            width="300"
+            width="350"
           />
         </div>
       </div>
@@ -640,6 +640,7 @@ const Home = () => {
           )}
         </form>
       </div>
+
       <YouTubePlayer />
     </div>
   );
