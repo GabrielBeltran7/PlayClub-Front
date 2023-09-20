@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
 import { Button, Input, Space, Table, Typography, Tag, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById, apdateRoluser} from "../../Redux/Actions";
+import { getUserById, apdateRoluser } from "../../Redux/Actions";
 import style from "./RecargarPuntos.module.css";
 const RecargarPuntos = () => {
   const [searchText, setSearchText] = useState("");
@@ -15,27 +15,26 @@ const RecargarPuntos = () => {
 
   const dispatch = useDispatch();
 
+  const [rol, setRol] = useState(false);
 
-const [rol, setRol ] = useState(false)
-
-  const handleChange = (record) => (event)=>{
-    dispatch(apdateRoluser({
-      username: record.username,
-      rol: event
-    }))
-    if(rol){
-     
-    setRol(false)
-    }else {
-      setRol(true)
+  const handleChange = (record) => (event) => {
+    dispatch(
+      apdateRoluser({
+        username: record.username,
+        rol: event,
+      })
+    );
+    if (rol) {
+      setRol(false);
+    } else {
+      setRol(true);
     }
   };
 
-    useEffect(() => {
-      dispatch(getUserById());
-   }, [rol]);
- 
- 
+  useEffect(() => {
+    dispatch(getUserById());
+  }, [dispatch]);
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -147,9 +146,7 @@ const [rol, setRol ] = useState(false)
         text
       ),
   });
-  
 
- 
   const columns = [
     {
       title: "Username",
@@ -195,7 +192,8 @@ const [rol, setRol ] = useState(false)
       dataIndex: "admin",
       key: "city",
       render: (text, record) => (
-        <Select onChange={handleChange(record)} 
+        <Select
+          onChange={handleChange(record)}
           defaultValue={
             record.admin ? "admin" : record.subadmin ? "subadmin" : "usuario"
           }

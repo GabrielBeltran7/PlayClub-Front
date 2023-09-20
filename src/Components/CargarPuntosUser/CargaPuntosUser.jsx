@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 const CargaPuntosUser = () => {
   const { id } = useParams();
   const userById = useSelector((state) => state.userId);
-  //console.log("userById", userById);
+  const user = useSelector((state) => state.user.username);
+  console.log("userById", user);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,7 +19,7 @@ const CargaPuntosUser = () => {
   const [carga, setCarga] = useState({
     id: id,
     UserId: id,
-    username: userById.username, // acá iría el usuario del que está logueado. //!Hay que cambiarlo
+    username: user,
     cantidad: "",
     precio: "",
   });
