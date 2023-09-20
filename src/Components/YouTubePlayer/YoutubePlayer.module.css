@@ -1,17 +1,24 @@
-.containerVideos {
-  width: 100%;
-  margin-top: 5rem;
-  height: 30rem;
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.containerVideos {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
   gap: 5rem;
+  margin-top: 5rem;
 }
 .botonVideos {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
   width: 50%;
   gap: 2rem;
 }
@@ -22,13 +29,12 @@
 }
 
 .botonVideos button {
-  padding: 1rem;
-  width: 30%;
   border-radius: 20px;
   border: none;
   box-shadow: 2px 2px 5px black;
   background-color: #f5f5dc;
   transition: 2s;
+  padding: 1rem;
 }
 .botonVideos button:hover {
   cursor: pointer;
@@ -38,7 +44,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
   transition: 2s;
   flex-direction: column;
 }
@@ -46,15 +51,26 @@
 .muestraVideo h3 {
   text-align: center;
 }
+.containerTitle {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5dc;
+  border-radius: 20px;
+  border: 10px solid #ffa500;
+  padding: 30px;
+}
 
 .title {
   text-align: center;
   font-size: 50px;
   margin: 0;
   padding: 0;
-  color: #ffa500;
+  color: black;
   font-style: italic;
   text-shadow: 2px 2px 5px black;
+  width: fit-content;
 }
 
 .videoName {

@@ -35,7 +35,9 @@ function App() {
 
   return (
     <div className={style.container}>
-      <h2 className={style.title}>Transimisones</h2>
+      <div className={style.containerTitle}>
+        <h2 className={style.title}>Transmisiones</h2>
+      </div>
       <div className={style.containerVideos}>
         <div className={style.botonVideos}>
           <>

@@ -380,24 +380,18 @@ const Home = () => {
         </div>
       </div>
       <div className={style.selectCarreraContainer}>
-        <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
-          <option value="">Seleccione Carrera</option>
-          {carrera.map((element) => (
-            <option key={element.id}>
-              {" "}
-              {element.nombrecarrera} {element.numero}{" "}
-            </option>
-          ))}
-          ,
-        </select>
         <div className={style.preview}>
-          <h2>
-            {carreraMostrar.nombrecarrera ? (
-              carreraMostrar.nombrecarrera
-            ) : (
-              <label>Seleccione una carrera</label>
-            )}
-          </h2>
+          <h2>Seleccione una Carrera</h2>
+          <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
+            <option value="">Carreras</option>
+            {carrera.map((element) => (
+              <option key={element.id}>
+                {" "}
+                {element.nombrecarrera} {element.numero}{" "}
+              </option>
+            ))}
+            ,
+          </select>
           <div className={style.bloque}>
             <img src={imagenes.win} alt="" width="30" />
             <label>WIN: {carreraMostrar.porcentajeWin}%</label>
