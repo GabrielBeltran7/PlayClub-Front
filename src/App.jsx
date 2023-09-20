@@ -8,8 +8,8 @@ import Home from "./Views/HomeUser/Home";
 import HomeAdmin from "./Views/HomeAdmin/HomeAdmin";
 import CargaPuntosUser from "./Components/CargarPuntosUser/CargaPuntosUser";
 import { useSelector } from "react-redux";
-axios.defaults.baseURL = "https://win123.onrender.com/";
-//axios.defaults.baseURL = "http://localhost:3001/";
+//axios.defaults.baseURL = "https://win123.onrender.com/";
+axios.defaults.baseURL = "http://localhost:3001/";
 function App() {
   const user = useSelector((state) => state.user);
   console.log("5555555555555555555555", user);

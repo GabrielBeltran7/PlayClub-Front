@@ -12,6 +12,7 @@ import {
   postApuestaTrifecta,
   postApuestaSuperfecta,
   getLinkcamaras,
+  getCarrerayCorredores
 } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
@@ -27,6 +28,8 @@ const Home = () => {
   const corredor = useSelector((state) => state.corredor);
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
+  const  carreraycorredores= useSelector((state) => state.carreraycorredores );
+  console.log("22222222222222222222222",carreraycorredores)
 
   const username = usuario ? usuario.username : null; // Cambiamos userId a username
 
@@ -160,7 +163,7 @@ const Home = () => {
    //*--------------------- trae todos los los link de las camaras--------------------------------
    useEffect(() => {
     dispatch(getLinkcamaras());
-    
+    dispatch(getCarrerayCorredores("MotoGP"));
   }, []);
   //*--------------------- peticiones carrera y corredores--------------------------------
   useEffect(() => {

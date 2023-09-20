@@ -12,10 +12,30 @@ import {
   GET_CARRERA,
   GET_CARRERA_ACTIVA,
   POST_APUESTA_WIN,
-  GET_LINK_CAMARAS
+  GET_LINK_CAMARAS,
+  GET_CARRERA_CORREDORES
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
+
+export const getCarrerayCorredores = (username) => {
+
+  return async (dispatch) => {
+    try {
+      const response = (await axios.get(`/users/carreraycorredores/${username}`))
+        .data;
+       
+    
+      dispatch({
+        type: GET_CARRERA_CORREDORES,
+        payload: response,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
 
 export const getLinkcamaras = () => {
   return async (dispatch) => {
