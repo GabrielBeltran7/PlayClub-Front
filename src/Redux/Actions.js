@@ -15,6 +15,7 @@ import {
   GET_LINK_CAMARAS,
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
+  POST_PUNTOS_SUB_A_USUARIO
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
@@ -81,6 +82,7 @@ export const getcarreraActiva = (username) => {
 };
 
 export const getUserByUsername = (username) => {
+
   return async (dispatch) => {
     try {
       const response = (await axios.get(`/users/getUserByUsername/${username}`))
@@ -166,11 +168,25 @@ export const postCorredor = (corredor) => {
     }
   };
 };
-
-export const cargaPuntos = (user) => {
+export const cargarPuntosSubadmin = (user) => {
+ 
   return async (dispatch) => {
     try {
-      const response = await axios.post("/admin/puntos", user);
+      const response = await axios.post("/admin/postpuntossubadminausuario", user);
+      console.log("POST PUNTOS DE SUB A USUARIOS", response)
+      dispatch({ type: POST_PUNTOS_SUB_A_USUARIO, payload: response.data });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+export const cargaPuntos = (user) => {
+ 
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("/admin/postpuntosadminasubadmin", user);
+      
       dispatch({ type: POST_PUNTOS, payload: response.data });
       return response;
     } catch (error) {
