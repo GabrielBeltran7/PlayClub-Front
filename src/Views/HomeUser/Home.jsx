@@ -12,6 +12,7 @@ import {
   postApuestaTrifecta,
   postApuestaSuperfecta,
   getLinkcamaras,
+  getCarrerayCorredores,
 } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
@@ -23,10 +24,14 @@ import YouTubePlayer from "../../Components/YouTubePlayer/YouTubePlayer";
 const Home = () => {
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.user);
-
-  const corredor = useSelector((state) => state.corredor);
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
+
+  console.log(usuario);
+
+  const carreraycorredores = useSelector((state) => state.carreraycorredores);
+
+  //console.log("22222222222222222222222", carreraycorredores);
   const [carreraMostrar, setCarreraMostrar] = useState({});
   const [carreraSeleccionada, setCarreraSeleccionada] = useState("");
 
@@ -86,6 +91,10 @@ const Home = () => {
     dispatch(getcarreraActiva(event.target.value));
     const selectedCarrera = event.target.value;
     setCarreraSeleccionada(selectedCarrera);
+    if (selectedCarrera !== "") {
+      dispatch(getCarrerayCorredores(event.target.value));
+    }
+
     setWin({
       ...win,
       id: usuario.id,
@@ -111,7 +120,7 @@ const Home = () => {
       [event.target.name]: event.target.value,
     });
   };
-  console.log("1111111111", carreraMostrar);
+
   useEffect(() => {
     if (carreraSeleccionada) {
       const selectedCarreraData = carrera.find(
@@ -203,7 +212,7 @@ const Home = () => {
     } else if (username) {
       // Si no hay un nombre de usuario almacenado localmente pero hay uno en el estado, guárdalo en el almacenamiento local
       localStorage.setItem("username", username); // Cambiamos userId a username
-      console.log("username", username);
+
       dispatch(getUserByUsername(username)); // Cambiamos la acción a getUserByUsername
     }
   }, [dispatch, username]); // Cambiamos userId a username
@@ -224,7 +233,6 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -251,7 +259,6 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -279,7 +286,6 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("errrrrrr", error);
       Swal.fire({
         icon: "error",
         title: "",
@@ -308,7 +314,6 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -323,7 +328,7 @@ const Home = () => {
     <div className={style.container}>
       {usuario.admin || usuario.subadmin ? (
         <div className={style.navbar}>
-          <Navbar />
+          <Navbar props={usuario.admin} />
         </div>
       ) : (
         <></>
@@ -382,16 +387,25 @@ const Home = () => {
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
           <h2>Seleccione una Carrera</h2>
-          <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
-            <option value="">Carreras</option>
-            {carrera.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombrecarrera} {element.numero}{" "}
-              </option>
-            ))}
-            ,
-          </select>
+          {usuario.id ? (
+            <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
+              <option value="">Carreras</option>
+              {carrera.map((element) => (
+                <option key={element.id}>
+                  {" "}
+                  {element.nombrecarrera} {element.numero}{" "}
+                </option>
+              ))}
+              ,
+            </select>
+          ) : (
+            <p>
+              {" "}
+              <a href="/login">inicie sesión</a> o{" "}
+              <a href="/register">Registrese</a>
+            </p>
+          )}
+
           <div className={style.bloque}>
             <img src={imagenes.win} alt="" width="30" />
             <label>WIN: {carreraMostrar.porcentajeWin}%</label>
@@ -413,15 +427,16 @@ const Home = () => {
           <h2>Win</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-
           <select name="puesto1" onChange={handleChangewin}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           {unicacarrera.id ? (
@@ -457,23 +472,27 @@ const Home = () => {
 
           <select name="puesto1" onChange={handleChangeExacta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           <label>Puesto 2</label>
           <select name="puesto2" onChange={handleChangeExacta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           {unicacarrera.id ? (
@@ -507,34 +526,40 @@ const Home = () => {
           <label>Puesto 1</label>
           <select name="puesto1" onChange={handleChangeTrifecta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           <label>Puesto 2</label>
           <select name="puesto2" onChange={handleChangeTrifecta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           <label>Puesto 3</label>
           <select name="puesto3" onChange={handleChangeTrifecta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           {unicacarrera.id ? (
@@ -568,45 +593,53 @@ const Home = () => {
           <label>Puesto 1</label>
           <select name="puesto1" onChange={handleChangeSuperfecta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           <label>Puesto 2</label>
           <select name="puesto2" onChange={handleChangeSuperfecta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           <label>Puesto 3</label>
           <select name="puesto3" onChange={handleChangeSuperfecta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           <label>Puesto 4</label>
           <select name="puesto4" onChange={handleChangeSuperfecta}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
-              <option key={element.id}>
-                {" "}
-                {element.nombre} {element.numero}{" "}
-              </option>
-            ))}
+            {Object.keys(carreraycorredores).length && carreraSeleccionada
+              ? carreraycorredores.Crearcorredors.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombre} {element.numero}{" "}
+                  </option>
+                ))
+              : ""}
             ,
           </select>
           {unicacarrera.id ? (

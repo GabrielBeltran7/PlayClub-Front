@@ -1,36 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  FlagOutlined,
-  AuditOutlined,
   DollarOutlined,
-  UserAddOutlined,
-  BookOutlined,
-  DashboardOutlined,
   HomeOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
-import style from "./HomeAdmin.module.css";
-import CrearCorredor from "../../Components/crearCorredor/CrearCorredor";
-import RecargarPuntos from "../../Components/RecargarPuntos/RecargarPuntos";
-import CrearCarrera from "../../Components/CrearCarrera/CrearCarrera";
-import AllCorredores from "../../Components/AllCorredores/AllCorredores";
-import { useSelector } from "react-redux";
-import { getUserByUsername } from "../../Redux/Actions";
+import style from "./HomeSubAdmin.module.css";
+import AllUsersSubAdmin from "../../Components/AllUsersSubAdmin/AllUsersSubAdmin";
 import { useNavigate } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
-const HomeAdmin = (props) => {
+const HomeSubAdmin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
-
-  const usuario = useSelector((state) => state.userLog);
-  useEffect(() => {
-    getUserByUsername();
-  }, []);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const navigate = useNavigate();
+
+  const handlehomeSubAdmin = () => {
+    navigate("/home");
+  };
 
   // Estado para rastrear el elemento seleccionado
   const [selectedItem, setSelectedItem] = useState("1");
@@ -47,26 +38,10 @@ const HomeAdmin = (props) => {
   const renderSelectedComponent = () => {
     switch (selectedItem) {
       case "1":
-        return <RecargarPuntos />;
-      case "2":
-        return <CrearCorredor />;
-      case "3":
-        return <InformeIndividual />;
-      case "4":
-        return <InformeGeneral />;
-      case "5":
-        return <CrearCarrera />;
-      case "6":
-        return <AllCorredores />;
+        return <AllUsersSubAdmin />;
       default:
         return null;
     }
-  };
-
-  const navigate = useNavigate();
-
-  const handlehomeSubAdmin = () => {
-    navigate("/home");
   };
 
   return (
@@ -87,31 +62,6 @@ const HomeAdmin = (props) => {
               },
               {
                 key: "2",
-                icon: <UserAddOutlined />,
-                label: "Crear Corredor",
-              },
-              {
-                key: "3",
-                icon: <AuditOutlined />,
-                label: "Informe Individual",
-              },
-              {
-                key: "4",
-                icon: <BookOutlined />,
-                label: "Informe General",
-              },
-              {
-                key: "5",
-                icon: <FlagOutlined />,
-                label: "Crear Carrera",
-              },
-              {
-                key: "6",
-                icon: <DashboardOutlined />,
-                label: "Corredores",
-              },
-              {
-                key: "7",
                 icon: <HomeOutlined />,
                 label: "Home",
                 onClick: () => handlehomeSubAdmin(),
@@ -153,4 +103,4 @@ const HomeAdmin = (props) => {
     </div>
   );
 };
-export default HomeAdmin;
+export default HomeSubAdmin;

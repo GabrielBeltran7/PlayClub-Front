@@ -121,6 +121,8 @@
   font-size: 20px;
   text-align: center;
   width: 10rem;
+  position: absolute;
+  bottom: 0;
 }
 
 .navbar {

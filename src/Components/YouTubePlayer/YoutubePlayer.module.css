@@ -86,9 +86,9 @@
 @media screen and (max-width: 550px) {
   .botonVideos button {
     width: 70%;
+    flex-direction: column;
   }
   .containerVideos {
-    flex-direction: column;
     min-height: 100vh;
     margin-top: 3rem;
     justify-content: space-evenly;

@@ -13,9 +13,29 @@ import {
   GET_CARRERA_ACTIVA,
   POST_APUESTA_WIN,
   GET_LINK_CAMARAS,
+  GET_CARRERA_CORREDORES,
+  LOGIN_SUCCESS,
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
+
+export const getCarrerayCorredores = (username) => {
+  return async (dispatch) => {
+    try {
+      const response = (
+        await axios.get(`/users/carreraycorredores/${username}`)
+      ).data;
+
+      dispatch({
+        type: GET_CARRERA_CORREDORES,
+        payload: response,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
 
 export const getLinkcamaras = () => {
   return async (dispatch) => {
@@ -70,6 +90,7 @@ export const getUserByUsername = (username) => {
         type: GET_USER_LOGIN,
         payload: response,
       });
+      console.log("getUserByUsername", response);
       return response;
     } catch (error) {
       throw error;
@@ -89,6 +110,10 @@ export const postUser = (user) => {
     }
   };
 };
+export const loginSuccess = (user) => ({
+  type: LOGIN_SUCCESS,
+  payload: user,
+});
 
 export const loginUser = (user) => {
   return async (dispatch) => {

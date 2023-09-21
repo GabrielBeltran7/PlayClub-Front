@@ -8,8 +8,9 @@ import {
   apdateRoluser,
   getUserByUsername,
 } from "../../Redux/Actions";
-import style from "./RecargarPuntos.module.css";
-const RecargarPuntos = () => {
+import style from "./AllUsersSubAdmin.module.css";
+
+const AllUsersSubAdmin = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -186,25 +187,6 @@ const RecargarPuntos = () => {
       key: "cantidadtotal",
       ...getColumnSearchProps("cantidadtotal"),
     },
-    {
-      title: "Permisos",
-      dataIndex: "admin",
-      key: "city",
-      render: (text, record) => (
-        <Select
-          onChange={handleChange(record)}
-          defaultValue={
-            record.admin ? "admin" : record.subadmin ? "subadmin" : "usuario"
-          }
-          style={{ width: 120 }}
-        >
-          <Select.Option value="Admin">Admin</Select.Option>
-          <Select.Option value="SubAdmin">Sub Admin</Select.Option>
-          <Select.Option value="Usuario">Usuario</Select.Option>
-          {/* Agrega otras opciones según tus necesidades */}
-        </Select>
-      ),
-    },
   ];
 
   return (
@@ -225,4 +207,4 @@ const RecargarPuntos = () => {
     </div>
   );
 };
-export default RecargarPuntos;
+export default AllUsersSubAdmin;

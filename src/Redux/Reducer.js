@@ -13,10 +13,12 @@ import {
   GET_CARRERA_ACTIVA,
   POST_APUESTA_WIN,
   GET_LINK_CAMARAS,
+  GET_CARRERA_CORREDORES,
+  LOGIN_SUCCESS,
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
-  user: [],
+  user: {},
   userId: [],
   corredor: [],
   puntos: [],
@@ -24,10 +26,25 @@ let inicialState = {
   unicacarrera: {},
   apuestaWin: [],
   linkcamaras: [],
+  carreraycorredores: [],
+  linkcamaras: [],
+  userLog: {},
 };
 
 const rootReducer = (state = inicialState, action) => {
   switch (action.type) {
+    case GET_CARRERA_CORREDORES:
+      return {
+        ...state,
+        carreraycorredores: action.payload,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        userLog: action.payload,
+        isAuthenticated: true,
+      };
+
     case GET_LINK_CAMARAS:
       return {
         ...state,
