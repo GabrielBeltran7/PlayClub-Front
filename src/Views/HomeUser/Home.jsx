@@ -19,7 +19,7 @@ import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import Navbar from "../../Components/Navbar/Navbar";
 import Swal from "sweetalert2";
-import  YouTubePlayer  from "../../Components/YouTubePlayer/YouTubePlayer"
+import YouTubePlayer from "../../Components/YouTubePlayer/YouTubePlayer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -28,8 +28,12 @@ const Home = () => {
   const corredor = useSelector((state) => state.corredor);
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
-  const  carreraycorredores= useSelector((state) => state.carreraycorredores );
+  
+  const  carreraycorredores = useSelector((state) => state.carreraycorredores );
+
   console.log("22222222222222222222222",carreraycorredores)
+  const [carreraMostrar, setCarreraMostrar] = useState({});
+  const [carreraSeleccionada, setCarreraSeleccionada] = useState("");
 
   const username = usuario ? usuario.username : null; // Cambiamos userId a username
 
@@ -72,9 +76,21 @@ const Home = () => {
     puntosapostados: "",
     puntosganados: "",
   });
+  //!---------------------------Imagenes preview---------------------------------------------------
+  const imagenes = {
+    win: "https://res.cloudinary.com/dou3yyisb/image/upload/v1694750064/PlayGame/win_ffepdt.png",
+    exacta:
+      "https://res.cloudinary.com/dou3yyisb/image/upload/v1694750064/PlayGame/exacta_vwby15.png",
+    trifecta:
+      "https://res.cloudinary.com/dou3yyisb/image/upload/v1694750064/PlayGame/trifecta_uqnslm.png",
+    superfecta:
+      "https://res.cloudinary.com/dou3yyisb/image/upload/v1694750064/PlayGame/superfecta_uezsse.png",
+  };
   //!---------------------Handle para cargar la carrera al estado---------------------
   const handlechangecarreraActiva = (event) => {
     dispatch(getcarreraActiva(event.target.value));
+    const selectedCarrera = event.target.value;
+    setCarreraSeleccionada(selectedCarrera);
     setWin({
       ...win,
       id: usuario.id,
@@ -100,6 +116,18 @@ const Home = () => {
       [event.target.name]: event.target.value,
     });
   };
+ 
+  useEffect(() => {
+    if (carreraSeleccionada) {
+      const selectedCarreraData = carrera.find(
+        (element) => element.nombrecarrera === carreraSeleccionada
+      );
+      setCarreraMostrar(selectedCarreraData || {});
+    } else {
+      // Si no se selecciona ninguna carrera, establece carreraMostrar como un objeto vacío
+      setCarreraMostrar({});
+    }
+  }, [carreraSeleccionada, carrera]);
   //!------------------------------------handlechange win-------------------------------
   const handleChangewin = (event) => {
     const pointsApost = event.target.value;
@@ -159,11 +187,11 @@ const Home = () => {
     localStorage.removeItem("username");
     dispatch(logoutUser());
   };
-  
-   //*--------------------- trae todos los los link de las camaras--------------------------------
-   useEffect(() => {
+
+  //*--------------------- trae todos los los link de las camaras--------------------------------
+  useEffect(() => {
     dispatch(getLinkcamaras());
-    dispatch(getCarrerayCorredores("MotoGP"));
+    dispatch(getCarrerayCorredores("extrema100"));
   }, []);
   //*--------------------- peticiones carrera y corredores--------------------------------
   useEffect(() => {
@@ -181,7 +209,7 @@ const Home = () => {
     } else if (username) {
       // Si no hay un nombre de usuario almacenado localmente pero hay uno en el estado, guárdalo en el almacenamiento local
       localStorage.setItem("username", username); // Cambiamos userId a username
-      console.log("username", username);
+      
       dispatch(getUserByUsername(username)); // Cambiamos la acción a getUserByUsername
     }
   }, [dispatch, username]); // Cambiamos userId a username
@@ -202,7 +230,7 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
+      
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -229,7 +257,7 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
+      
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -257,7 +285,7 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("errrrrrr", error);
+     
       Swal.fire({
         icon: "error",
         title: "",
@@ -286,7 +314,7 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
+     
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -311,7 +339,7 @@ const Home = () => {
           <div className={style.infoUsuario}>
             <Avatar
               size={{
-                xs: 24,
+                xs: 60,
                 sm: 32,
                 md: 40,
                 lg: 64,
@@ -331,7 +359,7 @@ const Home = () => {
               )}
             </p>
             <label>
-              {usuario.id ? <p>Creditos:{usuario.cantidadtotal}</p> : ""}{" "}
+              {usuario.id ? <p>Creditos: {usuario.cantidadtotal}</p> : ""}{" "}
             </label>
             <img
               src="https://cdn-icons-png.flaticon.com/128/566/566445.png"
@@ -349,28 +377,42 @@ const Home = () => {
           </div>
         </div>
 
-        <div>
+        <div className={style.contImageLogo}>
           <img
             src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
             alt=""
-            width="300"
+            width="350"
           />
         </div>
       </div>
-      <select
-        className={style.avisoNoLogin}
-        name="nombreapuesta"
-        onChange={handlechangecarreraActiva}
-      >
-        <option>Seleccione Carrera</option>
-        {carrera.map((element) => (
-          <option key={element.id}>
-            {" "}
-            {element.nombrecarrera} {element.numero}{" "}
-          </option>
-        ))}
-        ,
-      </select>
+      <div className={style.selectCarreraContainer}>
+        <div className={style.preview}>
+          <h2>Seleccione una Carrera</h2>
+          <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
+            <option value="">Carreras</option>
+            {carrera.map((element) => (
+              <option key={element.id}>
+                {" "}
+                {element.nombrecarrera} {element.numero}{" "}
+              </option>
+            ))}
+            ,
+          </select>
+          <div className={style.bloque}>
+            <img src={imagenes.win} alt="" width="30" />
+            <label>WIN: {carreraMostrar.porcentajeWin}%</label>
+            <img src={imagenes.exacta} alt="" width="30" />
+            <label>EXACTA: {carreraMostrar.porcentajeExacta}%</label>
+          </div>
+          <div className={style.bloque}>
+            <img src={imagenes.trifecta} alt="" width="30" />
+            <label>TRIFECTA: {carreraMostrar.porcentajeTrifecta}%</label>
+
+            <img src={imagenes.superfecta} alt="" width="30" />
+            <label>SUPERFECTA: {carreraMostrar.porcentajeSuperfecta}%</label>
+          </div>
+        </div>
+      </div>
       {/* //? ------------------------FormularioWIN--------------------------------- */}
       <div className={style.formContainer}>
         <form onSubmit={handleSubmitWin}>
@@ -379,8 +421,8 @@ const Home = () => {
           <label>Puesto 1</label>
 
           <select name="puesto1" onChange={handleChangewin}>
-            <option value="Select"></option>
-            {corredor.map((element) => (
+            <option value="">--Elije un corredor--</option>
+            {carreraycorredores && carreraycorredores.Crearcorredors.map((element) => (
               <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
@@ -395,11 +437,15 @@ const Home = () => {
               name="puntosapostados"
               onChange={handleChangewin}
             />
+          ) : usuario.id ? (
+            <label className={style.selectCarrera}>
+              Seleccione una carrera
+            </label>
           ) : (
-            "Seleccione una carrera"
+            ""
           )}
 
-          <p>{win.puntosganados}</p>
+          <p className={style.puntosGanados}>{win.puntosganados}</p>
           {usuario.id ? (
             <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -416,7 +462,7 @@ const Home = () => {
           <label>Puesto 1</label>
 
           <select name="puesto1" onChange={handleChangeExacta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -427,7 +473,7 @@ const Home = () => {
           </select>
           <label>Puesto 2</label>
           <select name="puesto2" onChange={handleChangeExacta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -443,10 +489,14 @@ const Home = () => {
               name="puntosapostados"
               onChange={handleChangeExacta}
             />
+          ) : usuario.id ? (
+            <label className={style.selectCarrera}>
+              Seleccione una carrera
+            </label>
           ) : (
-            "Seleccione una carrera"
+            ""
           )}
-          <p>{exacta.puntosganados}</p>
+          <p className={style.puntosGanados}>{exacta.puntosganados}</p>
           {usuario.id ? (
             <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -462,7 +512,7 @@ const Home = () => {
           <label>Corredores</label>
           <label>Puesto 1</label>
           <select name="puesto1" onChange={handleChangeTrifecta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -473,7 +523,7 @@ const Home = () => {
           </select>
           <label>Puesto 2</label>
           <select name="puesto2" onChange={handleChangeTrifecta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -484,7 +534,7 @@ const Home = () => {
           </select>
           <label>Puesto 3</label>
           <select name="puesto3" onChange={handleChangeTrifecta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -500,10 +550,14 @@ const Home = () => {
               name="puntosapostados"
               onChange={handleChangeTrifecta}
             />
+          ) : usuario.id ? (
+            <label className={style.selectCarrera}>
+              Seleccione una carrera
+            </label>
           ) : (
-            "Seleccione una carrera"
+            ""
           )}
-          <p>{trifecta.puntosganados}</p>
+          <p className={style.puntosGanados}>{trifecta.puntosganados}</p>
           {usuario.id ? (
             <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -519,7 +573,7 @@ const Home = () => {
           <label>Corredores</label>
           <label>Puesto 1</label>
           <select name="puesto1" onChange={handleChangeSuperfecta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -530,7 +584,7 @@ const Home = () => {
           </select>
           <label>Puesto 2</label>
           <select name="puesto2" onChange={handleChangeSuperfecta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -541,7 +595,7 @@ const Home = () => {
           </select>
           <label>Puesto 3</label>
           <select name="puesto3" onChange={handleChangeSuperfecta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -552,7 +606,7 @@ const Home = () => {
           </select>
           <label>Puesto 4</label>
           <select name="puesto4" onChange={handleChangeSuperfecta}>
-            <option value="select"></option>
+            <option value="">--Elije un corredor--</option>
             {corredor.map((element) => (
               <option key={element.id}>
                 {" "}
@@ -568,10 +622,14 @@ const Home = () => {
               name="puntosapostados"
               onChange={handleChangeSuperfecta}
             />
+          ) : usuario.id ? (
+            <label className={style.selectCarrera}>
+              Seleccione una carrera
+            </label>
           ) : (
-            "Seleccione una carrera"
+            ""
           )}
-          <p>{superfecta.puntosganados}</p>
+          <p className={style.puntosGanados}>{superfecta.puntosganados}</p>
           {usuario.id ? (
             <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -581,9 +639,9 @@ const Home = () => {
             </p>
           )}
         </form>
-
-        <YouTubePlayer/>
       </div>
+
+      <YouTubePlayer />
     </div>
   );
 };

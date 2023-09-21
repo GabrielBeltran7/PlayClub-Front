@@ -22,10 +22,11 @@ let inicialState = {
   corredor: [],
   puntos: [],
   carrera: [],
-  unicacarrera: [],
+  unicacarrera: {},
   apuestaWin: [],
   linkcamaras:[],
-  carreraycorredores:[]
+  carreraycorredores:[],
+  linkcamaras: [],
 };
 
 const rootReducer = (state = inicialState, action) => {

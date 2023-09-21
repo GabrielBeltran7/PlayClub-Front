@@ -9,6 +9,26 @@
   );
 }
 
+.selectCarreraContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 2rem auto;
+  gap: 20px;
+}
+
+.selectCarreraContainer select {
+  padding: 0.8rem;
+  border: 5px solid #ffa500;
+  background-color: #f5f5dc;
+  border-radius: 10px;
+  width: 20%;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
 .formContainer {
   display: flex;
   justify-content: space-evenly;
@@ -26,39 +46,71 @@
   background-color: beige;
   padding-bottom: 20px;
   padding: 30px;
-  border: 1px solid black;
   border-radius: 20px;
   gap: 10px;
   font-size: 18px;
+  height: 30rem;
+  width: 12rem;
+  position: relative;
+  box-shadow: 5px 5px 10px black;
 }
 
 .formContainer form input {
+  position: absolute;
+  bottom: 20%;
+}
+.formContainer form select {
   width: 90%;
+  border: 2px solid #ffa500;
+}
+
+.formContainer form button {
+  position: absolute;
+  bottom: 5%;
+}
+
+.puntosGanados {
+  position: absolute;
+  bottom: 10%;
+}
+
+.selectCarrera {
+  position: absolute;
+  bottom: 10%;
 }
 
 .containerInfoUser {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  gap: 20px;
+  width: 100%;
 }
 
 .contendorUser {
   background-color: orange;
   height: fit-content;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
   border-radius: 20px;
+  box-shadow: 2px 2px 5px;
+  width: 20%;
   padding: 1rem;
+}
+
+.contImageLogo {
+  display: flex;
+  align-items: center;
 }
 
 .infoUsuario {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  gap: 5px;
   font-weight: 600;
+  width: 100%;
 }
 
 .infoUsuario img {
@@ -67,6 +119,8 @@
 
 .avisoNoLogin {
   font-size: 20px;
+  text-align: center;
+  width: 10rem;
 }
 
 .navbar {
@@ -75,9 +129,41 @@
   align-items: center;
 }
 
+.preview {
+  background-color: #f5f5dc;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 20px;
+  border: 10px solid #ffa500;
+  box-shadow: 2px 2px 5px;
+}
+
+.preview h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.preview select {
+  width: 80%;
+  margin: 2rem;
+}
+
+.bloque {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
 /* ------------------------------------------------- */
 /* Media querys -- responsive*/
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 550px) {
   .formContainer {
     display: flex;
     justify-content: center;
@@ -88,8 +174,32 @@
   }
   .containerInfoUser {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  .selectCarreraContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
+  }
+  .selectCarreraContainer select {
+    width: 80%;
+  }
+  .preview {
+    padding: 0px;
+    width: 80%;
+    gap: 0;
+    font-size: 15px;
+    font-weight: 800;
+  }
+  .contendorUser {
+    width: 70%;
+  }
+  .infoUsuario {
+    width: 100%;
+    justify-content: space-evenly;
   }
 }

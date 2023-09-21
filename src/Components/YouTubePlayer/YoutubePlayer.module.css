@@ -1,0 +1,100 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.containerVideos {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  gap: 5rem;
+  margin-top: 5rem;
+}
+.botonVideos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  gap: 2rem;
+}
+
+.videoContainer {
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.botonVideos button {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 2px 2px 5px black;
+  background-color: #f5f5dc;
+  transition: 2s;
+  padding: 1rem;
+}
+.botonVideos button:hover {
+  cursor: pointer;
+}
+.muestraVideo {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 2s;
+  flex-direction: column;
+}
+
+.muestraVideo h3 {
+  text-align: center;
+}
+.containerTitle {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5dc;
+  border-radius: 20px;
+  border: 10px solid #ffa500;
+  padding: 30px;
+}
+
+.title {
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-style: italic;
+  text-shadow: 2px 2px 5px black;
+  width: fit-content;
+}
+
+.videoName {
+  font-size: 30px;
+  color: #ffa500;
+  font-weight: bold;
+}
+
+.container {
+  margin-top: 5rem;
+}
+
+@media screen and (max-width: 550px) {
+  .botonVideos button {
+    width: 70%;
+  }
+  .containerVideos {
+    flex-direction: column;
+    min-height: 100vh;
+    margin-top: 3rem;
+    justify-content: space-evenly;
+  }
+  .muestraVideo {
+    width: 90%;
+    margin-bottom: 2rem;
+  }
+}
