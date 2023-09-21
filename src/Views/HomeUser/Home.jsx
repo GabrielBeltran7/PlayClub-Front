@@ -12,6 +12,7 @@ import {
   postApuestaTrifecta,
   postApuestaSuperfecta,
   getLinkcamaras,
+  getCarrerayCorredores
 } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
@@ -27,6 +28,10 @@ const Home = () => {
   const corredor = useSelector((state) => state.corredor);
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
+  
+  const  carreraycorredores = useSelector((state) => state.carreraycorredores );
+
+  console.log("22222222222222222222222",carreraycorredores)
   const [carreraMostrar, setCarreraMostrar] = useState({});
   const [carreraSeleccionada, setCarreraSeleccionada] = useState("");
 
@@ -111,7 +116,7 @@ const Home = () => {
       [event.target.name]: event.target.value,
     });
   };
-  console.log("1111111111", carreraMostrar);
+ 
   useEffect(() => {
     if (carreraSeleccionada) {
       const selectedCarreraData = carrera.find(
@@ -186,6 +191,7 @@ const Home = () => {
   //*--------------------- trae todos los los link de las camaras--------------------------------
   useEffect(() => {
     dispatch(getLinkcamaras());
+    dispatch(getCarrerayCorredores("extrema100"));
   }, []);
   //*--------------------- peticiones carrera y corredores--------------------------------
   useEffect(() => {
@@ -203,7 +209,7 @@ const Home = () => {
     } else if (username) {
       // Si no hay un nombre de usuario almacenado localmente pero hay uno en el estado, guárdalo en el almacenamiento local
       localStorage.setItem("username", username); // Cambiamos userId a username
-      console.log("username", username);
+      
       dispatch(getUserByUsername(username)); // Cambiamos la acción a getUserByUsername
     }
   }, [dispatch, username]); // Cambiamos userId a username
@@ -224,7 +230,7 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
+      
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -251,7 +257,7 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
+      
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -279,7 +285,7 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("errrrrrr", error);
+     
       Swal.fire({
         icon: "error",
         title: "",
@@ -308,7 +314,7 @@ const Home = () => {
         dispatch(getUserByUsername(username));
       }
     } catch (error) {
-      console.log("11111111111111111", error.response.data.error);
+     
       Swal.fire({
         icon: "error",
         title: error.response.data.error,
@@ -416,7 +422,7 @@ const Home = () => {
 
           <select name="puesto1" onChange={handleChangewin}>
             <option value="">--Elije un corredor--</option>
-            {corredor.map((element) => (
+            {carreraycorredores && carreraycorredores.Crearcorredors.map((element) => (
               <option key={element.id}>
                 {" "}
                 {element.nombre} {element.numero}{" "}
