@@ -8,6 +8,7 @@ import {
   UserAddOutlined,
   BookOutlined,
   DashboardOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
 import style from "./HomeAdmin.module.css";
@@ -17,13 +18,15 @@ import CrearCarrera from "../../Components/CrearCarrera/CrearCarrera";
 import AllCorredores from "../../Components/AllCorredores/AllCorredores";
 import { useSelector } from "react-redux";
 import { getUserByUsername } from "../../Redux/Actions";
+import { useNavigate } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 const HomeAdmin = (props) => {
-  console.log("propppps", props);
   const [collapsed, setCollapsed] = useState(false);
+
+  const usuario = useSelector((state) => state.userLog);
   useEffect(() => {
-    getUserByUsername(props.username);
+    getUserByUsername();
   }, []);
   const {
     token: { colorBgContainer },
@@ -59,8 +62,12 @@ const HomeAdmin = (props) => {
         return null;
     }
   };
-  const user = useSelector((state) => state.user);
-  console.log(user);
+
+  const navigate = useNavigate();
+
+  const handlehomeSubAdmin = () => {
+    navigate("/home");
+  };
 
   return (
     <div className={style.container}>
@@ -102,6 +109,12 @@ const HomeAdmin = (props) => {
                 key: "6",
                 icon: <DashboardOutlined />,
                 label: "Corredores",
+              },
+              {
+                key: "7",
+                icon: <HomeOutlined />,
+                label: "Home",
+                onClick: () => handlehomeSubAdmin(),
               },
             ]}
           />

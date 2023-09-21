@@ -1,6 +1,6 @@
 import style from "./Login.module.css";
 import React, { useState } from "react";
-import { loginUser } from "../../Redux/Actions";
+import { loginUser, loginSuccess } from "../../Redux/Actions";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -50,6 +50,8 @@ const Login = () => {
       const response = await dispatch(loginUser(usuario));
       if (response) {
         const userData = response.data;
+        console.log(userData);
+        dispatch(loginSuccess(userData));
         setUserLogged(userData);
         Swal.fire({
           icon: "success",

@@ -1,12 +1,21 @@
 import style from "./CrearCorredor.module.css";
-import { useDispatch } from "react-redux";
-import { postCorredor } from "../../Redux/Actions";
-import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  postCorredor,
+  getCarrera,
+  getcarreraActiva,
+} from "../../Redux/Actions";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 const CrearCorredor = () => {
   const dispatch = useDispatch();
+  const carrera = useSelector((state) => state.carrera);
+  const unicacarrera = useSelector((state) => state.unicacarrera);
+  console.log("unicacarrera", unicacarrera);
   const [corredor, setCorredor] = useState({
+    id: unicacarrera.id,
+    CrearcarreraId: unicacarrera.id,
     nombre: "",
     numero: "",
     descripcion: "",
@@ -14,6 +23,7 @@ const CrearCorredor = () => {
     imagen2: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
     imagen3: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
   });
+  console.log("carrerrrrrrrrrrrrr", unicacarrera);
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!corredor.nombre || !corredor.numero || !corredor.descripcion) {
@@ -35,25 +45,37 @@ const CrearCorredor = () => {
       numero: "",
       descripcion: "",
       imagen1: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
-      imagen2: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
-      imagen3: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
     });
   };
 
-  console.log("corredor", corredor);
-
   const handleChange = (event) => {
+    dispatch(getcarreraActiva(event.target.value));
     setCorredor({
       ...corredor,
+      id: unicacarrera.id,
+      CrearcarreraId: unicacarrera.id,
       [event.target.name]: event.target.value,
     });
   };
-
+  useEffect(() => {
+    dispatch(getCarrera());
+  }, []);
+  console.log(corredor);
   return (
     <div className={style.container}>
       <h1 className={style.title}>Agregar Corredor</h1>
       <div className={style.containerForm}>
         <form className={style.formulario} onSubmit={handleSubmit}>
+          <label>Seleccione la carrera</label>
+          <select name="carrera" onChange={handleChange}>
+            <option value="">Seleccione la carrera</option>
+            {carrera.map((element) => (
+              <option key={element.id}>
+                {" "}
+                {element.nombrecarrera} {element.numero}{" "}
+              </option>
+            ))}
+          </select>
           <label>Ingresar nombre corredor</label>
           <input
             type="text"
