@@ -2,39 +2,39 @@ import style from "./CargaPuntosUser.module.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useRef, useState, useEffect } from "react";
-import { getUserByIdParams, cargaPuntos } from "../../Redux/Actions";
+import { getUserByIdParams, cargaPuntos, cargarPuntosSubadmin } from "../../Redux/Actions";
 import Swal from "sweetalert2";
 
 const CargaPuntosUser = () => {
   const { id } = useParams();
   const userById = useSelector((state) => state.userId);
-  const user = useSelector((state) => state.user.username);
-  console.log("userById", user);
 
+  const user = useSelector((state) => state.user);
+  const username = useSelector((state) => state.user.username);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserByIdParams(id));
   }, []);
 
   const [carga, setCarga] = useState({
-    id: id,
-    UserId: id,
-    username: user,
-    cantidad: "",
-    precio: "",
+    id: user.id,
+    UserId:id ,
+    username: username,
+    cantidad: 0,
+    precio: 0,
   });
 
   useEffect(() => {
     setCarga({
       ...carga,
-      username: userById.username,
+      username: username,
     });
   }, [userById]);
 
   const handleChange = (event) => {
     setCarga({
       ...carga,
-      username: userById.username,
+      username: username,
       [event.target.name]: event.target.value,
     });
   };
@@ -51,7 +51,12 @@ const CargaPuntosUser = () => {
       confirmButtonText: "Cargar Puntos",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(cargaPuntos(carga));
+        if(user.admin){
+          dispatch(cargaPuntos(carga));
+        }else{
+          dispatch(cargarPuntosSubadmin(carga));
+        }
+       
         setCarga({
           ...carga,
           cantidad: "",
@@ -65,7 +70,7 @@ const CargaPuntosUser = () => {
       }
     });
   };
-  console.log("cargaaa", carga);
+
 
   return (
     <div className={style.container}>

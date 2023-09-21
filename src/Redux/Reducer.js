@@ -15,6 +15,7 @@ import {
   GET_LINK_CAMARAS,
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
+  POST_PUNTOS_SUB_A_USUARIO 
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -95,6 +96,14 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         puntos: action.payload,
       };
+
+      case POST_PUNTOS_SUB_A_USUARIO:
+        return {
+          ...state,
+          puntos: action.payload,
+        };
+        
+
     case POST_CARRERA:
       return {
         ...state,
