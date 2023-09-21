@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,21 +10,16 @@ import {
   DashboardOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
-import style from "./HomeAdmin.module.css";
+import style from "./HomeSubAdmin.module.css";
+
 import CrearCorredor from "../../Components/crearCorredor/CrearCorredor";
 import RecargarPuntos from "../../Components/RecargarPuntos/RecargarPuntos";
 import CrearCarrera from "../../Components/CrearCarrera/CrearCarrera";
 import AllCorredores from "../../Components/AllCorredores/AllCorredores";
-import { useSelector } from "react-redux";
-import { getUserByUsername } from "../../Redux/Actions";
 
 const { Header, Sider, Content } = Layout;
-const HomeAdmin = (props) => {
-  console.log("propppps", props);
+const HomeSubAdmin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
-  useEffect(() => {
-    getUserByUsername(props.username);
-  }, []);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -59,8 +54,6 @@ const HomeAdmin = (props) => {
         return null;
     }
   };
-  const user = useSelector((state) => state.user);
-  console.log(user);
 
   return (
     <div className={style.container}>
@@ -140,4 +133,4 @@ const HomeAdmin = (props) => {
     </div>
   );
 };
-export default HomeAdmin;
+export default HomeSubAdmin;

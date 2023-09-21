@@ -16,7 +16,7 @@ import {
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
-  user: [],
+  user: {},
   userId: [],
   corredor: [],
   puntos: [],

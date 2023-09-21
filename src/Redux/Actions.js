@@ -70,6 +70,7 @@ export const getUserByUsername = (username) => {
         type: GET_USER_LOGIN,
         payload: response,
       });
+      console.log("getUserByUsername", response);
       return response;
     } catch (error) {
       throw error;

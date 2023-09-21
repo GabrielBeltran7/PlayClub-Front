@@ -3,7 +3,11 @@ import React, { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
 import { Button, Input, Space, Table, Typography, Tag, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById, apdateRoluser } from "../../Redux/Actions";
+import {
+  getUserById,
+  apdateRoluser,
+  getUserByUsername,
+} from "../../Redux/Actions";
 import style from "./RecargarPuntos.module.css";
 const RecargarPuntos = () => {
   const [searchText, setSearchText] = useState("");
@@ -11,7 +15,7 @@ const RecargarPuntos = () => {
   const searchInput = useRef(null);
 
   const allUsers = useSelector((state) => state.userId);
-  console.log("allusersssss", allUsers);
+  // console.log("allusersssss", allUsers);
 
   const dispatch = useDispatch();
 
@@ -170,14 +174,9 @@ const RecargarPuntos = () => {
       dataIndex: "admin",
       key: "role",
       render: (text, record) => (
-        console.log(record),
-        (
-          <Tag
-            color={record.admin ? "red" : record.subadmin ? "green" : "blue"}
-          >
-            {record.admin ? "Admin" : record.subadmin ? "SubAdmin" : "Usuario"}
-          </Tag>
-        )
+        <Tag color={record.admin ? "red" : record.subadmin ? "green" : "blue"}>
+          {record.admin ? "Admin" : record.subadmin ? "SubAdmin" : "Usuario"}
+        </Tag>
       ),
     },
 
@@ -207,6 +206,7 @@ const RecargarPuntos = () => {
       ),
     },
   ];
+
   return (
     <div>
       <Table
