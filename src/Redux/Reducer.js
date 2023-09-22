@@ -17,7 +17,8 @@ import {
   LOGIN_SUCCESS,
   POST_PUNTOS_SUB_A_USUARIO,
   CARGAR_BONOS_USUARIO,
-  POST_LINK_DIRECTOS
+  POST_LINK_DIRECTOS,
+  CARGAR_PUNTOS_ADMIN
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -106,6 +107,11 @@ const rootReducer = (state = inicialState, action) => {
         puntos: action.payload,
       };
 
+      case CARGAR_PUNTOS_ADMIN:
+        return {
+          ...state,
+          puntos: action.payload,
+        };
       case POST_PUNTOS_SUB_A_USUARIO:
         return {
           ...state,

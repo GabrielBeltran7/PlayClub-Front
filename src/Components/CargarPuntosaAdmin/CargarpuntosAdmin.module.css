@@ -1,0 +1,60 @@
+.container {
+  background: rgb(5, 65, 158);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 65, 158, 1) 30%,
+    rgba(2, 21, 51, 1) 50%,
+    rgba(5, 65, 158, 1) 66%
+  );
+  min-height: 100vh;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 50px;
+  color: yellow;
+  padding: 50px;
+}
+
+.formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  width: fit-content;
+  padding: 50px;
+  gap: 20px;
+  border-radius: 20px;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.formulario label {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.formulario input {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.contImage {
+  width: 40rem;
+  animation: rotar 5s linear infinite;
+}
+
+@keyframes rotar {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}

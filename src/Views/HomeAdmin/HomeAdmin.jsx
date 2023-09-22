@@ -21,6 +21,7 @@ import { getUserByUsername } from "../../Redux/Actions";
 import { useNavigate, useParams } from "react-router-dom";
 import BonoAdmin from "../../Components/BonoAdmin/BonoAdmin"
 import LinkDirectos from "../../Components/LinkDirectos/LinkDirectos";
+import CargarpuntosAdmin from "../../Components/CargarPuntosaAdmin/CargarpuntosAdmin";
 
 
 const { Header, Sider, Content } = Layout;
@@ -75,8 +76,9 @@ const HomeAdmin = () => {
       case "9":
         return <LinkDirectos user={user}/>;
 
-
-
+      case "10":
+       return <CargarpuntosAdmin user={user}/>;
+  
       default:
         return null;
     }
@@ -146,6 +148,12 @@ const HomeAdmin = () => {
                 key: "9",
                 icon: <HomeOutlined />,
                 label: "LinkDirectos",
+                
+              },
+              {
+                key: "10",
+                icon: <HomeOutlined />,
+                label: "CargarPuntosAdmin",
                 
               },
             ]}

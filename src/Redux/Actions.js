@@ -17,7 +17,8 @@ import {
   LOGIN_SUCCESS,
   POST_PUNTOS_SUB_A_USUARIO,
   CARGAR_BONOS_USUARIO,
-  POST_LINK_DIRECTOS
+  POST_LINK_DIRECTOS,
+  CARGAR_PUNTOS_ADMIN
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
@@ -95,6 +96,23 @@ export const getUserByUsername = (username) => {
         payload: response.data,
       });
       console.log("getUserByUsername", response);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+
+
+export const cargarpuntosaAdmin = (puntosAdmin) => {
+  console.log("puntosFRONTTTTTTTTTT", puntosAdmin)
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("admin/cargarpuntosaadministrador", puntosAdmin);
+      console.log("PUNTOSBACKKKKKKKKK", response)
+      dispatch({ type: CARGAR_PUNTOS_ADMIN, payload: response.data });
+
       return response;
     } catch (error) {
       throw error;
