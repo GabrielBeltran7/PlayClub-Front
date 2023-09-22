@@ -15,11 +15,13 @@ import {
   GET_LINK_CAMARAS,
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
-  POST_PUNTOS_SUB_A_USUARIO 
+  POST_PUNTOS_SUB_A_USUARIO,
+  CARGAR_BONOS_USUARIO,
+  POST_LINK_DIRECTOS
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
-  user: {},
+  user: [],
   userId: [],
   corredor: [],
   puntos: [],
@@ -28,7 +30,7 @@ let inicialState = {
   apuestaWin: [],
   linkcamaras: [],
   carreraycorredores: [],
-  linkcamaras: [],
+  // linkcamaras: [],
   userLog: {},
 };
 
@@ -51,6 +53,13 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         linkcamaras: action.payload,
       };
+
+      case POST_LINK_DIRECTOS:
+      return {
+        ...state,
+        linkcamaras: action.payload,
+      };
+
 
     case GET_CARRERA_ACTIVA:
       return {
@@ -103,6 +112,12 @@ const rootReducer = (state = inicialState, action) => {
           puntos: action.payload,
         };
         
+        
+        case CARGAR_BONOS_USUARIO:
+          return {
+            ...state,
+            puntos: action.payload,
+          };
 
     case POST_CARRERA:
       return {

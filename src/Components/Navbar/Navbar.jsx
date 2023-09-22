@@ -1,13 +1,16 @@
 import style from "./Navbar.module.css";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const usuario = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
   return (
     <nav className={style.nav}>
-      {usuario.admin ? (
-        <a href="/homeadmin">Dashboard</a>
+      {user.admin ? (
+        
+        <Link to={`/homeadmin/${user.username}`}>Dashboard</Link>
+
       ) : (
         <a href="/home/subadmin/">Dashboarda</a>
       )}

@@ -16,18 +16,28 @@ import CrearCorredor from "../../Components/crearCorredor/CrearCorredor";
 import RecargarPuntos from "../../Components/RecargarPuntos/RecargarPuntos";
 import CrearCarrera from "../../Components/CrearCarrera/CrearCarrera";
 import AllCorredores from "../../Components/AllCorredores/AllCorredores";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserByUsername } from "../../Redux/Actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import BonoAdmin from "../../Components/BonoAdmin/BonoAdmin"
+import LinkDirectos from "../../Components/LinkDirectos/LinkDirectos";
+
 
 const { Header, Sider, Content } = Layout;
-const HomeAdmin = (props) => {
+const HomeAdmin = () => {
+  const { username } = useParams();
+  const dispatch =useDispatch()
+  
+  const user = useSelector((state) => state.user);
+ 
+
   const [collapsed, setCollapsed] = useState(false);
 
-  const usuario = useSelector((state) => state.userLog);
+  
+  
   useEffect(() => {
-    getUserByUsername();
-  }, []);
+    dispatch(getUserByUsername(username));
+  }, [username]);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -58,6 +68,15 @@ const HomeAdmin = (props) => {
         return <CrearCarrera />;
       case "6":
         return <AllCorredores />;
+
+      case "8":
+        return <BonoAdmin user={user}/>;
+      
+      case "9":
+        return <LinkDirectos user={user}/>;
+
+
+
       default:
         return null;
     }
@@ -71,6 +90,7 @@ const HomeAdmin = (props) => {
 
   return (
     <div className={style.container}>
+       
       <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />
@@ -115,6 +135,18 @@ const HomeAdmin = (props) => {
                 icon: <HomeOutlined />,
                 label: "Home",
                 onClick: () => handlehomeSubAdmin(),
+              },
+              {
+                key: "8",
+                icon: <HomeOutlined />,
+                label: "Bonos",
+                
+              },
+              {
+                key: "9",
+                icon: <HomeOutlined />,
+                label: "LinkDirectos",
+                
               },
             ]}
           />

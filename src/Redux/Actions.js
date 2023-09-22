@@ -15,7 +15,9 @@ import {
   GET_LINK_CAMARAS,
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
-  POST_PUNTOS_SUB_A_USUARIO
+  POST_PUNTOS_SUB_A_USUARIO,
+  CARGAR_BONOS_USUARIO,
+  POST_LINK_DIRECTOS
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
@@ -85,14 +87,29 @@ export const getUserByUsername = (username) => {
 
   return async (dispatch) => {
     try {
-      const response = (await axios.get(`/users/getUserByUsername/${username}`))
-        .data;
+      const response = await axios.get(`/users/getUserByUsername/${username}`)
+        ;
 
       dispatch({
         type: GET_USER_LOGIN,
-        payload: response,
+        payload: response.data,
       });
       console.log("getUserByUsername", response);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+
+export const crearLinkDirectos = (linkdirectos) => {
+  console.log("linkdirectossssssss", linkdirectos)
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("/admin/postlinkcamaras", linkdirectos);
+      dispatch({ type: POST_LINK_DIRECTOS, payload: response.data });
+
       return response;
     } catch (error) {
       throw error;
@@ -168,12 +185,29 @@ export const postCorredor = (corredor) => {
     }
   };
 };
+
+export const cargaBonosaUsuarios = (user) => {
+  console.log("CARGAR_BONOS_USUARIO", user)
+ 
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("/admin/agregarpuntosausuarios", user);
+      console.log("CARGAR_BONOS_USUARIO", response)
+      dispatch({ type: CARGAR_BONOS_USUARIO, payload: response.data });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+
 export const cargarPuntosSubadmin = (user) => {
  
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/postpuntossubadminausuario", user);
-      console.log("POST PUNTOS DE SUB A USUARIOS", response)
+      
       dispatch({ type: POST_PUNTOS_SUB_A_USUARIO, payload: response.data });
       return response;
     } catch (error) {

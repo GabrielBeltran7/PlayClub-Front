@@ -9,25 +9,25 @@ import HomeAdmin from "./Views/HomeAdmin/HomeAdmin";
 import HomeSubAdmin from "./Views/HomeSubAdmin/HomeSubAdmin";
 import CargaPuntosUser from "./Components/CargarPuntosUser/CargaPuntosUser";
 import { useSelector } from "react-redux";
-//axios.defaults.baseURL = "https://win123.onrender.com/";
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://win123.onrender.com/";
+//axios.defaults.baseURL = "http://localhost:3001/";
 function App() {
   const user = useSelector((state) => state.user);
-  console.log("5555555555555555555555", user);
-
+ 
   return (
     <div className="App">
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/homeadmin/" element={<HomeAdmin props={user} />} />
+        <Route path={`/homeadmin/:username`} element={<HomeAdmin />} />
+        {/* <Route path="/homeadmin/" element={<HomeAdmin  />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/cargapuntos/:id"
           element={user.admin || user.subadmin ? <CargaPuntosUser /> : <Home />}
         />
-        <Route path="/home/subadmin/" element={<HomeSubAdmin props={user} />} />
+        <Route path="/home/subadmin/" element={<HomeSubAdmin  />} />
       </Routes>
     </div>
   );
