@@ -163,6 +163,17 @@
   gap: 20px;
 }
 
+.MisApuestas {
+  width: 100%;
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 10rem;
+}
+
 /* ------------------------------------------------- */
 /* Media querys -- responsive*/
 @media screen and (max-width: 550px) {

@@ -116,6 +116,11 @@ const HomeAdmin = (props) => {
                 label: "Home",
                 onClick: () => handlehomeSubAdmin(),
               },
+              {
+                key: "8",
+                icon: <HomeOutlined />,
+                label: "Bono",
+              },
             ]}
           />
         </Sider>

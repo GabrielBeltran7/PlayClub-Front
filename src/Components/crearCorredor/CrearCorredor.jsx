@@ -20,8 +20,6 @@ const CrearCorredor = () => {
     numero: "",
     descripcion: "",
     imagen1: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
-    imagen2: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
-    imagen3: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
   });
   console.log("carrerrrrrrrrrrrrr", unicacarrera);
   const handleSubmit = (event) => {

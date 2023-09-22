@@ -15,6 +15,7 @@ import {
   GET_LINK_CAMARAS,
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
+  GET_MIS_APUESTAS,
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
@@ -273,6 +274,19 @@ export const postApuestaSuperfecta = (apuesta) => {
       const response = await axios.post(`/apuestas/superfecta/`, apuesta);
       dispatch({ type: POST_APUESTA_WIN, payload: response });
 
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const getMisApuestas = (username) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/users/getmisapuestas/${username}`);
+      dispatch({ type: GET_MIS_APUESTAS, payload: response.data });
+      console.log("responseeeeeeeeeee", response.data);
       return response;
     } catch (error) {
       throw error;

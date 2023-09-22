@@ -15,6 +15,7 @@ import {
   GET_LINK_CAMARAS,
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
+  GET_MIS_APUESTAS,
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -29,6 +30,7 @@ let inicialState = {
   carreraycorredores: [],
   linkcamaras: [],
   userLog: {},
+  misApuestas: [],
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -45,6 +47,11 @@ const rootReducer = (state = inicialState, action) => {
         isAuthenticated: true,
       };
 
+    case GET_MIS_APUESTAS:
+      return {
+        ...state,
+        misApuestas: action.payload,
+      };
     case GET_LINK_CAMARAS:
       return {
         ...state,
