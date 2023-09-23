@@ -19,14 +19,15 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/homeadmin/" element={<HomeAdmin props={user} />} />
+        <Route path={`/homeadmin/:username`} element={<HomeAdmin />} />
+        {/* <Route path="/homeadmin/" element={<HomeAdmin  />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/cargapuntos/:id"
           element={user.admin || user.subadmin ? <CargaPuntosUser /> : <Home />}
         />
-        <Route path="/home/subadmin/" element={<HomeSubAdmin props={user} />} />
+        <Route path="/home/subadmin/" element={<HomeSubAdmin />} />
       </Routes>
     </div>
   );

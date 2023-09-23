@@ -78,7 +78,11 @@ const Login = () => {
     <div className={style.container}>
       <div className={style.registrate}>
         <h1>
-          Inicia sesion en <span className={style.span}>WIN123</span>
+          Inicia sesion en{" "}
+          <span className={style.span}>
+            <span className={style.win}>WIN</span>
+            <span className={style.numeros}>123</span>
+          </span>
         </h1>
         <p>
           ¿No tienes cuenta? <a href="/register">Registrar</a>

@@ -9,6 +9,9 @@ import {
   BookOutlined,
   DashboardOutlined,
   HomeOutlined,
+  TrophyOutlined,
+  VideoCameraOutlined,
+  GoldOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
 import style from "./HomeAdmin.module.css";
@@ -16,18 +19,26 @@ import CrearCorredor from "../../Components/crearCorredor/CrearCorredor";
 import RecargarPuntos from "../../Components/RecargarPuntos/RecargarPuntos";
 import CrearCarrera from "../../Components/CrearCarrera/CrearCarrera";
 import AllCorredores from "../../Components/AllCorredores/AllCorredores";
-import { useSelector } from "react-redux";
+import PublicarGanadoresAdmin from "../../Components/PublicarGanadoresAdmin/PublicarGanadoresAdmin";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserByUsername } from "../../Redux/Actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import BonoAdmin from "../../Components/BonoAdmin/BonoAdmin";
+import LinkDirectos from "../../Components/LinkDirectos/LinkDirectos";
+import CargarpuntosAdmin from "../../Components/CargarPuntosaAdmin/CargarpuntosAdmin";
 
 const { Header, Sider, Content } = Layout;
-const HomeAdmin = (props) => {
+const HomeAdmin = () => {
+  const { username } = useParams();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+
   const [collapsed, setCollapsed] = useState(false);
 
-  const usuario = useSelector((state) => state.userLog);
   useEffect(() => {
-    getUserByUsername();
-  }, []);
+    dispatch(getUserByUsername(username));
+  }, [username]);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -55,9 +66,21 @@ const HomeAdmin = (props) => {
       case "4":
         return <InformeGeneral />;
       case "5":
-        return <CrearCarrera />;
+        return <CrearCarrera user={user} />;
       case "6":
         return <AllCorredores />;
+
+      case "8":
+        return <BonoAdmin user={user} />;
+
+      case "9":
+        return <LinkDirectos user={user} />;
+
+      case "10":
+        return <CargarpuntosAdmin user={user} />;
+      case "11":
+        return <PublicarGanadoresAdmin user={user} />;
+
       default:
         return null;
     }
@@ -118,8 +141,23 @@ const HomeAdmin = (props) => {
               },
               {
                 key: "8",
+                icon: <GoldOutlined />,
+                label: "Bonos",
+              },
+              {
+                key: "9",
+                icon: <VideoCameraOutlined />,
+                label: "LinkDirectos",
+              },
+              {
+                key: "10",
                 icon: <HomeOutlined />,
-                label: "Bono",
+                label: "CargarPuntosAdmin",
+              },
+              {
+                key: "11",
+                icon: <TrophyOutlined />,
+                label: "Ganadores",
               },
             ]}
           />

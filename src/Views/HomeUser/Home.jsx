@@ -22,6 +22,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Swal from "sweetalert2";
 import YouTubePlayer from "../../Components/YouTubePlayer/YouTubePlayer";
 import ViewMisApuestas from "../../Components/ViewMisApuestas/ViewMisApuestas";
+import Ganadores from "../../Components/GanadoresCarrera/GanadoresCarrera";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -328,6 +329,7 @@ const Home = () => {
       });
     }
   };
+  console.log(usuario.imagen);
 
   return (
     <div className={style.container}>
@@ -678,6 +680,9 @@ const Home = () => {
             </p>
           )}
         </form>
+        <div>
+          <Ganadores />
+        </div>
       </div>
 
       <YouTubePlayer />

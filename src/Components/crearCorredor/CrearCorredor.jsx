@@ -12,7 +12,6 @@ const CrearCorredor = () => {
   const dispatch = useDispatch();
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
-  console.log("unicacarrera", unicacarrera);
   const [corredor, setCorredor] = useState({
     id: unicacarrera.id,
     CrearcarreraId: unicacarrera.id,

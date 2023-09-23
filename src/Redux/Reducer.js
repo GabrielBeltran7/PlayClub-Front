@@ -16,10 +16,15 @@ import {
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
   GET_MIS_APUESTAS,
+  POST_PUNTOS_SUB_A_USUARIO,
+  CARGAR_BONOS_USUARIO,
+  POST_LINK_DIRECTOS,
+  CARGAR_PUNTOS_ADMIN,
+  POST_GANADORES,
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
-  user: {},
+  user: [],
   userId: [],
   corredor: [],
   puntos: [],
@@ -28,9 +33,10 @@ let inicialState = {
   apuestaWin: [],
   linkcamaras: [],
   carreraycorredores: [],
-  linkcamaras: [],
+  // linkcamaras: [],
   userLog: {},
   misApuestas: [],
+  ganadores: [],
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -53,6 +59,12 @@ const rootReducer = (state = inicialState, action) => {
         misApuestas: action.payload,
       };
     case GET_LINK_CAMARAS:
+      return {
+        ...state,
+        linkcamaras: action.payload,
+      };
+
+    case POST_LINK_DIRECTOS:
       return {
         ...state,
         linkcamaras: action.payload,
@@ -102,6 +114,24 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         puntos: action.payload,
       };
+
+    case CARGAR_PUNTOS_ADMIN:
+      return {
+        ...state,
+        puntos: action.payload,
+      };
+    case POST_PUNTOS_SUB_A_USUARIO:
+      return {
+        ...state,
+        puntos: action.payload,
+      };
+
+    case CARGAR_BONOS_USUARIO:
+      return {
+        ...state,
+        puntos: action.payload,
+      };
+
     case POST_CARRERA:
       return {
         ...state,
@@ -122,6 +152,11 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         carrera: action.payload,
+      };
+    case POST_GANADORES:
+      return {
+        ...state,
+        ganadores: action.payload,
       };
   }
   return state;

@@ -26,7 +26,7 @@ const ViewMisApuestas = () => {
   }, [usuario]);
 
   return (
-    <div className={style.prueba}>
+    <div>
       <ApuestaSection
         title="Apuestas WIN"
         apuestas={misApuestas.win}

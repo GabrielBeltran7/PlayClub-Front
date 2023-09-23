@@ -1,25 +1,23 @@
-import style from "./BonoAdmin.module.css";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import React, { useRef, useState, useEffect } from "react";
-import {  cargaBonosaUsuarios, getUserByUsername } from "../../Redux/Actions";
+import style from "./CargarpuntosAdmin.module.css";
+
+import { useDispatch,  } from "react-redux";
+import React, { useState  } from "react";
+import {  cargarpuntosaAdmin } from "../../Redux/Actions";
 import Swal from "sweetalert2";
 
-const BonoAdmin = ({user}) => {
-
+const CargarpuntosAdmin = ({user}) => {
+const username = user.username
 
   const dispatch = useDispatch();
- 
 
-
-  const [bonos, setBonos] = useState({
-    username: user.username,
+  const [puntosAdmin, setpuntosAdmin] = useState({
+    username: username,
     cantidad:""
   });
-
+  console.log("777777777777777777777",puntosAdmin.username)
   const handleChange = (event) => {
-    setBonos({
-      ...bonos,
+    setpuntosAdmin({
+      ...puntosAdmin,
       [event.target.name]: event.target.value,
     });
   };
@@ -27,8 +25,8 @@ const BonoAdmin = ({user}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     Swal.fire({
-      title: `¿Estas seguro de cargar ${bonos.cantidad} puntos a cada USUARIO?`,
-      text: `Estas por cargar ${bonos.cantidad} puntos a cada uno de  tus usuarios`,
+      title: `¿Estas por cargar ${puntosAdmin.cantidad} puntos a ${puntosAdmin.username}?`,
+      text: `Estas seguro de cargar ${puntosAdmin.cantidad} Puntos a ${puntosAdmin.username}?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -36,9 +34,10 @@ const BonoAdmin = ({user}) => {
       confirmButtonText: "Cargar Puntos",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(cargaBonosaUsuarios(bonos));
-        setBonos({
-          ...bonos,
+        dispatch(cargarpuntosaAdmin(puntosAdmin));
+        setpuntosAdmin({
+          ...puntosAdmin,
+         
           cantidad: "",
           
         });
@@ -53,7 +52,7 @@ const BonoAdmin = ({user}) => {
   return (
     <div className={style.container}>
       <div></div>
-      <h1 className={style.title}>Bonos para todos</h1>
+      <h1 className={style.title}>Cargar Puntos  Admin</h1>
       <div className={style.formContainer}>
         <div className={style.contImage}>
           <img
@@ -65,18 +64,18 @@ const BonoAdmin = ({user}) => {
         <form className={style.formulario} onSubmit={handleSubmit}>
           <label></label>
           
-          <label>Ingrese cantidad para cada Usuario</label>
+          <label>Ingrese cantidad para cargar</label>
           <input
             type="number"
             name="cantidad"
             onChange={handleChange}
-            value={bonos.cantidad}
+            value={puntosAdmin.cantidad}
             min="0"
             pattern="^[0-9]+"
           />
          
-          {bonos.cantidad <= 0  ? (
-            <button disabled>Cargar Puntos</button>
+          {puntosAdmin.cantidad <= 0  ? (
+            <button disabled>Digite cantidad</button>
           ) : (
             <button>Cargar Puntos</button>
           )}
@@ -93,4 +92,4 @@ const BonoAdmin = ({user}) => {
   );
 };
 
-export default BonoAdmin;
+export default CargarpuntosAdmin;

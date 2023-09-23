@@ -19,7 +19,10 @@ const AllUsersSubAdmin = () => {
   // console.log("allusersssss", allUsers);
 
   const dispatch = useDispatch();
-
+  const allUsersNormal = allUsers.filter(
+    (user) => user.admin === false && user.subadmin === false
+  );
+  console.log(allUsersNormal);
   const [rol, setRol] = useState(false);
 
   const handleChange = (record) => (event) => {
@@ -193,7 +196,7 @@ const AllUsersSubAdmin = () => {
     <div>
       <Table
         columns={columns}
-        dataSource={allUsers.map((user) => ({ ...user, key: user.id }))}
+        dataSource={allUsersNormal.map((user) => ({ ...user, key: user.id }))}
       />
       <div>
         <div className={style.containerAviso}>

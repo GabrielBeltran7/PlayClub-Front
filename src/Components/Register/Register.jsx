@@ -10,11 +10,12 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
+  const [selectedImage, setSelectedImage] = useState(null);
   const [usuario, setUsuario] = useState({
     username: "",
     email: "",
     password: "",
-    imagen: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
+    imagen: "",
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +27,36 @@ const Register = () => {
     });
   };
 
-  const handleChangeImage = (info) => {};
+  const handleChangeImage = async (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setSelectedImage(selectedFile);
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      formData.append("upload_preset", "Playclub");
+      try {
+        const response = await fetch(
+          "https://api.cloudinary.com/v1_1/dou3yyisb/image/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setImageUrl(data.secure_url);
+          setUsuario({
+            ...usuario,
+            imagen: data.secure_url,
+          });
+        } else {
+          console.error("Error al cargar la imagen");
+        }
+      } catch (error) {
+        console.error("Error al cargar la imagen", error);
+      }
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,7 +71,6 @@ const Register = () => {
         navigate("/login");
       }
     } catch (error) {
-      console.log("errrrrrr", error);
       if (error) {
         const errorAviso = error.response.data.error;
         Swal.fire({
@@ -52,6 +81,13 @@ const Register = () => {
           timer: 5000,
         });
       }
+    }
+  };
+  const previewImage = () => {
+    if (selectedImage) {
+      return (
+        <img src={URL.createObjectURL(selectedImage)} className={style.img} />
+      );
     }
   };
 
@@ -109,6 +145,16 @@ const Register = () => {
             />
           </div>
           <br />
+          <div className={style.containerImage}>
+            <input
+              className={style.profileImage}
+              type="file"
+              name="imagen"
+              onChange={handleChangeImage}
+              accept="image/*"
+            />
+            {previewImage()}
+          </div>
           <div className={style.termCondic}>
             <input type="checkbox" />
             <p>

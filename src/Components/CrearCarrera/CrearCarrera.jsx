@@ -4,9 +4,9 @@ import { crearCarrera } from "../../Redux/Actions";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-const CrearCarrera = () => {
+const CrearCarrera = ({ user }) => {
   const [carrera, setCarrera] = useState({
-    username: "Gabriel",
+    username: user.username,
     nombrecarrera: "",
     porcentajeWin: "",
     porcentajeExacta: "",
@@ -54,7 +54,7 @@ const CrearCarrera = () => {
         text: "Carrera cargada correctamente",
       });
       setCarrera({
-        username: "Gabriel",
+        username: user.username,
         nombrecarrera: "",
         porcentajeWin: "",
         porcentajeExacta: "",
@@ -63,6 +63,7 @@ const CrearCarrera = () => {
       });
     }
   };
+  console.log(carrera);
 
   return (
     <div className={style.container}>
