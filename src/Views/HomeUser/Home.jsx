@@ -13,6 +13,7 @@ import {
   postApuestaSuperfecta,
   getLinkcamaras,
   getCarrerayCorredores,
+  getMisApuestas,
 } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
@@ -20,6 +21,8 @@ import { Avatar } from "antd";
 import Navbar from "../../Components/Navbar/Navbar";
 import Swal from "sweetalert2";
 import YouTubePlayer from "../../Components/YouTubePlayer/YouTubePlayer";
+import ViewMisApuestas from "../../Components/ViewMisApuestas/ViewMisApuestas";
+import Ganadores from "../../Components/GanadoresCarrera/GanadoresCarrera";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -27,15 +30,18 @@ const Home = () => {
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
 
-  console.log(usuario);
+  //console.log(usuario);
 
   const carreraycorredores = useSelector((state) => state.carreraycorredores);
 
-  //console.log("22222222222222222222222", carreraycorredores);
+  console.log("22222222222222222222222", carreraycorredores);
   const [carreraMostrar, setCarreraMostrar] = useState({});
   const [carreraSeleccionada, setCarreraSeleccionada] = useState("");
 
   const username = usuario ? usuario.username : null; // Cambiamos userId a username
+  useEffect(() => {
+    getMisApuestas(usuario.username);
+  }, []);
 
   const [win, setWin] = useState({
     id: usuario.id,
@@ -323,6 +329,7 @@ const Home = () => {
       });
     }
   };
+  console.log(usuario.imagen);
 
   return (
     <div className={style.container}>
@@ -384,20 +391,25 @@ const Home = () => {
           />
         </div>
       </div>
+
+      <ViewMisApuestas props={usuario.username} />
+
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
           <h2>Seleccione una Carrera</h2>
           {usuario.id ? (
-            <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
-              <option value="">Carreras</option>
-              {carrera.map((element) => (
-                <option key={element.id}>
-                  {" "}
-                  {element.nombrecarrera} {element.numero}{" "}
-                </option>
-              ))}
-              ,
-            </select>
+            <>
+              <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
+                <option value="">Carreras</option>
+                {carrera.map((element) => (
+                  <option key={element.id}>
+                    {" "}
+                    {element.nombrecarrera} {element.numero}{" "}
+                  </option>
+                ))}
+                ,
+              </select>
+            </>
           ) : (
             <p>
               {" "}
@@ -427,7 +439,7 @@ const Home = () => {
           <h2>Win</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select name="puesto1" onChange={handleChangewin}>
+          <select name="puesto1" onChange={handleChangewin} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -470,7 +482,7 @@ const Home = () => {
           <label>Corredores</label>
           <label>Puesto 1</label>
 
-          <select name="puesto1" onChange={handleChangeExacta}>
+          <select name="puesto1" onChange={handleChangeExacta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -483,7 +495,7 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="puesto2" onChange={handleChangeExacta}>
+          <select name="puesto2" onChange={handleChangeExacta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -511,7 +523,7 @@ const Home = () => {
           )}
           <p className={style.puntosGanados}>{exacta.puntosganados}</p>
           {usuario.id ? (
-            <button disabled={!win.puntosapostados}>Enviar apuesta</button>
+            <button disabled={!exacta.puntosapostados}>Enviar apuesta</button>
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -524,7 +536,7 @@ const Home = () => {
           <h2>Trifecta</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select name="puesto1" onChange={handleChangeTrifecta}>
+          <select name="puesto1" onChange={handleChangeTrifecta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -537,7 +549,7 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="puesto2" onChange={handleChangeTrifecta}>
+          <select name="puesto2" onChange={handleChangeTrifecta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -550,7 +562,7 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 3</label>
-          <select name="puesto3" onChange={handleChangeTrifecta}>
+          <select name="puesto3" onChange={handleChangeTrifecta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -578,7 +590,7 @@ const Home = () => {
           )}
           <p className={style.puntosGanados}>{trifecta.puntosganados}</p>
           {usuario.id ? (
-            <button disabled={!win.puntosapostados}>Enviar apuesta</button>
+            <button disabled={!trifecta.puntosapostados}>Enviar apuesta</button>
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -591,7 +603,7 @@ const Home = () => {
           <h2>Superfecta</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select name="puesto1" onChange={handleChangeSuperfecta}>
+          <select name="puesto1" onChange={handleChangeSuperfecta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -604,7 +616,7 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="puesto2" onChange={handleChangeSuperfecta}>
+          <select name="puesto2" onChange={handleChangeSuperfecta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -617,7 +629,7 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 3</label>
-          <select name="puesto3" onChange={handleChangeSuperfecta}>
+          <select name="puesto3" onChange={handleChangeSuperfecta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -630,7 +642,7 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 4</label>
-          <select name="puesto4" onChange={handleChangeSuperfecta}>
+          <select name="puesto4" onChange={handleChangeSuperfecta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
@@ -658,7 +670,9 @@ const Home = () => {
           )}
           <p className={style.puntosGanados}>{superfecta.puntosganados}</p>
           {usuario.id ? (
-            <button disabled={!win.puntosapostados}>Enviar apuesta</button>
+            <button disabled={!superfecta.puntosapostados}>
+              Enviar apuesta
+            </button>
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -666,6 +680,9 @@ const Home = () => {
             </p>
           )}
         </form>
+        <div>
+          <Ganadores />
+        </div>
       </div>
 
       <YouTubePlayer />

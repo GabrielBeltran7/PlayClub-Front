@@ -12,7 +12,6 @@ const CrearCorredor = () => {
   const dispatch = useDispatch();
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
-  console.log("unicacarrera", unicacarrera);
   const [corredor, setCorredor] = useState({
     id: unicacarrera.id,
     CrearcarreraId: unicacarrera.id,
@@ -20,8 +19,6 @@ const CrearCorredor = () => {
     numero: "",
     descripcion: "",
     imagen1: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
-    imagen2: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
-    imagen3: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
   });
   console.log("carrerrrrrrrrrrrrr", unicacarrera);
   const handleSubmit = (event) => {

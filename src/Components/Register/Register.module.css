@@ -90,6 +90,16 @@
 .logo img {
   width: 100%;
 }
+.containerImage {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.img {
+  width: 20%;
+  border-radius: 50%;
+}
 
 @media screen and (max-width: 500px) {
   .registrate h1 {

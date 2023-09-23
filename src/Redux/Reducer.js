@@ -15,10 +15,12 @@ import {
   GET_LINK_CAMARAS,
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
+  GET_MIS_APUESTAS,
   POST_PUNTOS_SUB_A_USUARIO,
   CARGAR_BONOS_USUARIO,
   POST_LINK_DIRECTOS,
-  CARGAR_PUNTOS_ADMIN
+  CARGAR_PUNTOS_ADMIN,
+  POST_GANADORES,
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -33,6 +35,8 @@ let inicialState = {
   carreraycorredores: [],
   // linkcamaras: [],
   userLog: {},
+  misApuestas: [],
+  ganadores: [],
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -49,18 +53,22 @@ const rootReducer = (state = inicialState, action) => {
         isAuthenticated: true,
       };
 
+    case GET_MIS_APUESTAS:
+      return {
+        ...state,
+        misApuestas: action.payload,
+      };
     case GET_LINK_CAMARAS:
       return {
         ...state,
         linkcamaras: action.payload,
       };
 
-      case POST_LINK_DIRECTOS:
+    case POST_LINK_DIRECTOS:
       return {
         ...state,
         linkcamaras: action.payload,
       };
-
 
     case GET_CARRERA_ACTIVA:
       return {
@@ -107,23 +115,22 @@ const rootReducer = (state = inicialState, action) => {
         puntos: action.payload,
       };
 
-      case CARGAR_PUNTOS_ADMIN:
-        return {
-          ...state,
-          puntos: action.payload,
-        };
-      case POST_PUNTOS_SUB_A_USUARIO:
-        return {
-          ...state,
-          puntos: action.payload,
-        };
-        
-        
-        case CARGAR_BONOS_USUARIO:
-          return {
-            ...state,
-            puntos: action.payload,
-          };
+    case CARGAR_PUNTOS_ADMIN:
+      return {
+        ...state,
+        puntos: action.payload,
+      };
+    case POST_PUNTOS_SUB_A_USUARIO:
+      return {
+        ...state,
+        puntos: action.payload,
+      };
+
+    case CARGAR_BONOS_USUARIO:
+      return {
+        ...state,
+        puntos: action.payload,
+      };
 
     case POST_CARRERA:
       return {
@@ -145,6 +152,11 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         carrera: action.payload,
+      };
+    case POST_GANADORES:
+      return {
+        ...state,
+        ganadores: action.payload,
       };
   }
   return state;

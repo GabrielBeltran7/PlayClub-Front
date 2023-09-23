@@ -13,7 +13,7 @@ axios.defaults.baseURL = "https://win123.onrender.com/";
 //axios.defaults.baseURL = "http://localhost:3001/";
 function App() {
   const user = useSelector((state) => state.user);
- 
+
   return (
     <div className="App">
       <Routes>
@@ -27,7 +27,7 @@ function App() {
           path="/cargapuntos/:id"
           element={user.admin || user.subadmin ? <CargaPuntosUser /> : <Home />}
         />
-        <Route path="/home/subadmin/" element={<HomeSubAdmin  />} />
+        <Route path="/home/subadmin/" element={<HomeSubAdmin />} />
       </Routes>
     </div>
   );

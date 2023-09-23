@@ -15,10 +15,12 @@ import {
   GET_LINK_CAMARAS,
   GET_CARRERA_CORREDORES,
   LOGIN_SUCCESS,
+  GET_MIS_APUESTAS,
   POST_PUNTOS_SUB_A_USUARIO,
   CARGAR_BONOS_USUARIO,
   POST_LINK_DIRECTOS,
-  CARGAR_PUNTOS_ADMIN
+  CARGAR_PUNTOS_ADMIN,
+  POST_GANADORES,
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
@@ -85,12 +87,9 @@ export const getcarreraActiva = (username) => {
 };
 
 export const getUserByUsername = (username) => {
-
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/users/getUserByUsername/${username}`)
-        ;
-
+      const response = await axios.get(`/users/getUserByUsername/${username}`);
       dispatch({
         type: GET_USER_LOGIN,
         payload: response.data,
@@ -103,14 +102,15 @@ export const getUserByUsername = (username) => {
   };
 };
 
-
-
 export const cargarpuntosaAdmin = (puntosAdmin) => {
-  console.log("puntosFRONTTTTTTTTTT", puntosAdmin)
+  console.log("puntosFRONTTTTTTTTTT", puntosAdmin);
   return async (dispatch) => {
     try {
-      const response = await axios.post("admin/cargarpuntosaadministrador", puntosAdmin);
-      console.log("PUNTOSBACKKKKKKKKK", response)
+      const response = await axios.post(
+        "admin/cargarpuntosaadministrador",
+        puntosAdmin
+      );
+      console.log("PUNTOSBACKKKKKKKKK", response);
       dispatch({ type: CARGAR_PUNTOS_ADMIN, payload: response.data });
 
       return response;
@@ -120,9 +120,8 @@ export const cargarpuntosaAdmin = (puntosAdmin) => {
   };
 };
 
-
 export const crearLinkDirectos = (linkdirectos) => {
-  console.log("linkdirectossssssss", linkdirectos)
+  console.log("linkdirectossssssss", linkdirectos);
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/postlinkcamaras", linkdirectos);
@@ -136,6 +135,7 @@ export const crearLinkDirectos = (linkdirectos) => {
 };
 
 export const postUser = (user) => {
+  console.log("action post user", user);
   return async (dispatch) => {
     try {
       const response = await axios.post("/users", user);
@@ -205,12 +205,12 @@ export const postCorredor = (corredor) => {
 };
 
 export const cargaBonosaUsuarios = (user) => {
-  console.log("CARGAR_BONOS_USUARIO", user)
- 
+  console.log("CARGAR_BONOS_USUARIO", user);
+
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/agregarpuntosausuarios", user);
-      console.log("CARGAR_BONOS_USUARIO", response)
+      console.log("CARGAR_BONOS_USUARIO", response);
       dispatch({ type: CARGAR_BONOS_USUARIO, payload: response.data });
       return response;
     } catch (error) {
@@ -219,13 +219,14 @@ export const cargaBonosaUsuarios = (user) => {
   };
 };
 
-
 export const cargarPuntosSubadmin = (user) => {
- 
   return async (dispatch) => {
     try {
-      const response = await axios.post("/admin/postpuntossubadminausuario", user);
-      
+      const response = await axios.post(
+        "/admin/postpuntossubadminausuario",
+        user
+      );
+
       dispatch({ type: POST_PUNTOS_SUB_A_USUARIO, payload: response.data });
       return response;
     } catch (error) {
@@ -234,11 +235,13 @@ export const cargarPuntosSubadmin = (user) => {
   };
 };
 export const cargaPuntos = (user) => {
- 
   return async (dispatch) => {
     try {
-      const response = await axios.post("/admin/postpuntosadminasubadmin", user);
-      
+      const response = await axios.post(
+        "/admin/postpuntosadminasubadmin",
+        user
+      );
+
       dispatch({ type: POST_PUNTOS, payload: response.data });
       return response;
     } catch (error) {
@@ -341,6 +344,43 @@ export const postApuestaSuperfecta = (apuesta) => {
       const response = await axios.post(`/apuestas/superfecta/`, apuesta);
       dispatch({ type: POST_APUESTA_WIN, payload: response });
 
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const getMisApuestas = (username) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/users/getmisapuestas/${username}`);
+      dispatch({ type: GET_MIS_APUESTAS, payload: response.data });
+      console.log("responseeeeeeeeeee", response.data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const postGanadores = (ganadores) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("/admin/ganadores", ganadores);
+      dispatch({ type: POST_GANADORES, payload: response.data });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const getGanadores = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("/users/ganadores");
+      dispatch({ type: POST_GANADORES, payload: response.data });
       return response;
     } catch (error) {
       throw error;

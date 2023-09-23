@@ -37,10 +37,6 @@
   color: orange;
 }
 
-.span {
-  text-shadow: 2px 2px 5px white;
-}
-
 .containerForm {
   display: flex;
   justify-content: space-evenly;
@@ -78,6 +74,9 @@
 
 .logo img {
   width: 100%;
+}
+.span {
+  text-shadow: 2px 2px 5px white;
 }
 
 @media screen and (max-width: 500px) {
