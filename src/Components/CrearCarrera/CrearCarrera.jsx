@@ -40,7 +40,8 @@ const CrearCarrera = ({ user }) => {
       !carrera.porcentajeWin ||
       !carrera.porcentajeExacta ||
       !carrera.porcentajeTrifecta ||
-      !carrera.porcentajeSuperfecta
+      !carrera.porcentajeSuperfecta ||
+      !carrera.fechadecarrera
     ) {
       Swal.fire({
         icon: "error",
@@ -61,6 +62,7 @@ const CrearCarrera = ({ user }) => {
         porcentajeExacta: "",
         porcentajeTrifecta: "",
         porcentajeSuperfecta: "",
+        fechadecarrera: "",
       });
     }
   };
@@ -123,6 +125,14 @@ const CrearCarrera = ({ user }) => {
             onChange={handleChange}
             value={carrera.fechadecarrera}
           />
+          <label> Fecha de Carrera </label>
+          <input
+            type="date"
+            placeholder="% de ganancia SUPERFECTA"
+            name="fechadecarrera"
+            onChange={handleChange}
+            value={carrera.porcentajeSuperfecta}
+          />
           <button>Crear carrera</button>
         </form>
         <div className={style.preview}>
@@ -147,6 +157,7 @@ const CrearCarrera = ({ user }) => {
 
             <img src={imagenes.superfecta} alt="" width="30" />
             <label>SUPERFECTA: {carrera.porcentajeSuperfecta}%</label>
+            <label>fecha carrera: {carrera.fechadecarrera}</label>
           </div>
         </div>
       </div>
