@@ -6,7 +6,7 @@
     rgba(2, 21, 51, 1) 50%,
     rgba(5, 65, 158, 1) 66%
   );
-  min-height: 90vh;
+  min-height: 100vh;
   text-align: center;
 }
 
@@ -16,9 +16,9 @@
   align-items: center;
   flex-direction: column;
   color: black;
-  gap: 10px;
+  gap: 15px;
   background-color: white;
-  width: fit-content;
+  width: 30%;
   padding: 30px;
   border-radius: 20px;
   font-weight: 600;
@@ -33,7 +33,7 @@
 
 .preview {
   background-color: white;
-  width: fit-content;
+  width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,7 +42,13 @@
   border-radius: 20px;
   font-weight: 600;
   font-size: 20px;
+  text-align: center;
 }
+
+.preview h2 {
+  text-align: center;
+}
+
 .bloque {
   display: flex;
   justify-content: space-between;
@@ -54,4 +60,13 @@
   color: white;
   font-size: 40px;
   padding: 10px;
+}
+
+.input {
+  width: 95%;
+}
+
+.titlePreview p {
+  width: 100%;
+  text-align: center;
 }

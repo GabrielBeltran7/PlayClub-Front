@@ -16,7 +16,7 @@ const PublicarGanadoresAdmin = ({ user }) => {
   const dispatch = useDispatch();
 
   const [ganadores, setGanadores] = useState({
-    id:"",
+    id: "",
     nombreCarrera: "",
     username: user.username,
     primerPuesto: "",
@@ -30,7 +30,6 @@ const PublicarGanadoresAdmin = ({ user }) => {
   }, []);
 
   const handleChange = (event) => {
-
     const selectedCarrera = event.target.value;
     dispatch(getcarreraActiva(selectedCarrera));
     if (selectedCarrera !== "") {
@@ -38,7 +37,7 @@ const PublicarGanadoresAdmin = ({ user }) => {
     }
     setGanadores({
       ...ganadores,
-        id:unicacarrera.id,
+      id: unicacarrera.id,
       [event.target.name]: event.target.value,
     });
   };

@@ -49,7 +49,7 @@
   width: 25rem;
   font-size: 20px;
   font-weight: 700;
-  height: 33rem;
+  min-height: 40rem;
 }
 
 .previewCorredor p {
@@ -57,4 +57,9 @@
   height: 5rem;
   text-align: center;
   overflow-y: scroll;
+}
+
+.img {
+  width: 40%;
+  border-radius: 20%;
 }

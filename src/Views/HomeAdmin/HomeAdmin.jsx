@@ -26,6 +26,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import BonoAdmin from "../../Components/BonoAdmin/BonoAdmin";
 import LinkDirectos from "../../Components/LinkDirectos/LinkDirectos";
 import CargarpuntosAdmin from "../../Components/CargarPuntosaAdmin/CargarpuntosAdmin";
+import InformeApuestas from "../../Components/InformeApuestas/InformeApuestas";
 
 const { Header, Sider, Content } = Layout;
 const HomeAdmin = () => {
@@ -80,6 +81,8 @@ const HomeAdmin = () => {
         return <CargarpuntosAdmin user={user} />;
       case "11":
         return <PublicarGanadoresAdmin user={user} />;
+      case "12":
+        return <InformeApuestas />;
 
       default:
         return null;
@@ -158,6 +161,11 @@ const HomeAdmin = () => {
                 key: "11",
                 icon: <TrophyOutlined />,
                 label: "Ganadores",
+              },
+              {
+                key: "12",
+                icon: <TrophyOutlined />,
+                label: "Informe Apuestas",
               },
             ]}
           />

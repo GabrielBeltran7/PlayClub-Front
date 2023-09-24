@@ -12,7 +12,7 @@ const CrearCarrera = ({ user }) => {
     porcentajeExacta: "",
     porcentajeTrifecta: "",
     porcentajeSuperfecta: "",
-    fechadecarrera:""
+    fechadecarrera: "",
   });
 
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const CrearCarrera = ({ user }) => {
       !carrera.porcentajeWin ||
       !carrera.porcentajeExacta ||
       !carrera.porcentajeTrifecta ||
-      !carrera.porcentajeSuperfecta||
+      !carrera.porcentajeSuperfecta ||
       !carrera.fechadecarrera
     ) {
       Swal.fire({
@@ -52,7 +52,7 @@ const CrearCarrera = ({ user }) => {
       dispatch(crearCarrera(carrera));
       Swal.fire({
         icon: "success",
-        title: "Corredor Añadido",
+        title: "Carrera creada correctamente",
         text: "Carrera cargada correctamente",
       });
       setCarrera({
@@ -62,7 +62,7 @@ const CrearCarrera = ({ user }) => {
         porcentajeExacta: "",
         porcentajeTrifecta: "",
         porcentajeSuperfecta: "",
-        fechadecarrera:""
+        fechadecarrera: "",
       });
     }
   };
@@ -80,6 +80,7 @@ const CrearCarrera = ({ user }) => {
             name="nombrecarrera"
             onChange={handleChange}
             value={carrera.nombrecarrera}
+            className={style.input}
           />
           <label> % Ganancia WIN</label>
           <input
@@ -88,6 +89,7 @@ const CrearCarrera = ({ user }) => {
             name="porcentajeWin"
             onChange={handleChange}
             value={carrera.porcentajeWin}
+            className={style.input}
           />
           <label> % Ganancia EXACTA</label>
           <input
@@ -96,6 +98,7 @@ const CrearCarrera = ({ user }) => {
             name="porcentajeExacta"
             onChange={handleChange}
             value={carrera.porcentajeExacta}
+            className={style.input}
           />
           <label> % Ganancia TRIFECTA</label>
           <input
@@ -104,6 +107,7 @@ const CrearCarrera = ({ user }) => {
             name="porcentajeTrifecta"
             onChange={handleChange}
             value={carrera.porcentajeTrifecta}
+            className={style.input}
           />
           <label> % Ganancia SUPERFECTA</label>
           <input
@@ -112,22 +116,26 @@ const CrearCarrera = ({ user }) => {
             name="porcentajeSuperfecta"
             onChange={handleChange}
             value={carrera.porcentajeSuperfecta}
+            className={style.input}
           />
-           <label> Fecha de Carrera </label>
+          <label> Fecha de Carrera </label>
           <input
             type="date"
-            placeholder="% de ganancia SUPERFECTA"
             name="fechadecarrera"
             onChange={handleChange}
-            value={carrera.porcentajeSuperfecta}
+            value={carrera.fechadecarrera}
           />
           <button>Crear carrera</button>
         </form>
         <div className={style.preview}>
-          <h2>
-            {carrera.nombrecarrera
-              ? carrera.nombrecarrera
-              : "INGRESE UN NOMBRE PARA LA CARRERA"}
+          <h2 className={style.titlePreview}>
+            {carrera.nombrecarrera ? (
+              carrera.nombrecarrera
+            ) : (
+              <p className={style.titlePreview}>
+                INGRESE UN NOMBRE PARA LA CARRERA
+              </p>
+            )}
           </h2>
           <div className={style.bloque}>
             <img src={imagenes.win} alt="" width="30" />

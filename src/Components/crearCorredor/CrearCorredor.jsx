@@ -12,13 +12,14 @@ const CrearCorredor = () => {
   const dispatch = useDispatch();
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [corredor, setCorredor] = useState({
     id: unicacarrera.id,
     CrearcarreraId: unicacarrera.id,
     nombre: "",
     numero: "",
     descripcion: "",
-    imagen1: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
+    imagen1: "",
   });
   console.log("carrerrrrrrrrrrrrr", unicacarrera);
   const handleSubmit = (event) => {
@@ -41,8 +42,38 @@ const CrearCorredor = () => {
       nombre: "",
       numero: "",
       descripcion: "",
-      imagen1: "https://cdn-icons-png.flaticon.com/128/213/213923.png",
+      imagen1: "",
     });
+  };
+  const handleChangeImage = async (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setSelectedImage(selectedFile);
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      formData.append("upload_preset", "Playclub");
+      try {
+        const response = await fetch(
+          "https://api.cloudinary.com/v1_1/dou3yyisb/image/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setImageUrl(data.secure_url);
+          setCorredor({
+            ...corredor,
+            imagen1: data.secure_url,
+          });
+        } else {
+          console.error("Error al cargar la imagen");
+        }
+      } catch (error) {
+        console.error("Error al cargar la imagen", error);
+      }
+    }
   };
 
   const handleChange = (event) => {
@@ -58,6 +89,15 @@ const CrearCorredor = () => {
     dispatch(getCarrera());
   }, []);
   console.log(corredor);
+
+  const previewImage = () => {
+    if (selectedImage) {
+      return (
+        <img src={URL.createObjectURL(selectedImage)} className={style.img} />
+      );
+    }
+  };
+
   return (
     <div className={style.container}>
       <h1 className={style.title}>Agregar Corredor</h1>
@@ -98,17 +138,22 @@ const CrearCorredor = () => {
             onChange={handleChange}
             value={corredor.descripcion}
           />
+
+          <input
+            className={style.profileImage}
+            type="file"
+            name="imagen"
+            onChange={handleChangeImage}
+            accept="image/*"
+          />
+
           <button>Agregar</button>
         </form>
         <div className={style.previewCorredor}>
           <h2>{corredor.nombre}</h2>
           <p>{corredor.numero}</p>
           <p>{corredor.descripcion}</p>
-          <div>
-            <img src={corredor.imagen1} alt="" width="80rem" />
-            <img src={corredor.imagen2} alt="" width="80rem" />
-            <img src={corredor.imagen3} alt="" width="80rem" />
-          </div>
+          {previewImage()}
         </div>
       </div>
     </div>

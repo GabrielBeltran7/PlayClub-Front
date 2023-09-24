@@ -81,7 +81,7 @@
 
 .containerInfoUser {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   gap: 20px;
   width: 100%;
@@ -127,8 +127,10 @@
 
 .navbar {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: end;
+  align-items: start;
+  width: 100%;
+  gap: 5rem;
 }
 
 .preview {
@@ -191,6 +193,9 @@
     align-items: center;
     flex-direction: column-reverse;
   }
+  .containerInfoUser img {
+    width: 100%;
+  }
   .selectCarreraContainer {
     width: 100%;
     display: flex;
@@ -214,5 +219,10 @@
   .infoUsuario {
     width: 100%;
     justify-content: space-evenly;
+  }
+  .navbar {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
