@@ -18,6 +18,7 @@ const PublicarGanadoresAdmin = ({ user }) => {
   const [ganadores, setGanadores] = useState({
     username: user.username,
     nombreCarrera: unicacarrera.nombrecarrera,
+    id: unicacarrera.id,
     primerPuesto: "",
     segundoPuesto: "",
     tercerPuesto: "",

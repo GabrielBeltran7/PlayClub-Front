@@ -23,12 +23,17 @@ import Swal from "sweetalert2";
 import YouTubePlayer from "../../Components/YouTubePlayer/YouTubePlayer";
 import ViewMisApuestas from "../../Components/ViewMisApuestas/ViewMisApuestas";
 import Ganadores from "../../Components/GanadoresCarrera/GanadoresCarrera";
+import MenuDesplegable from "../../Components/MenuDesplegableApuestas/MenuDesplegable";
 
 const Home = () => {
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.user);
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   //console.log(usuario);
 
@@ -336,10 +341,12 @@ const Home = () => {
       {usuario.admin || usuario.subadmin ? (
         <div className={style.navbar}>
           <Navbar props={usuario.admin} />
+          <ViewMisApuestas />
         </div>
       ) : (
         <></>
       )}
+
       <div className={style.containerInfoUser}>
         <div className={style.contendorUser}>
           <div className={style.infoUsuario}>
@@ -387,12 +394,10 @@ const Home = () => {
           <img
             src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
             alt=""
-            width="350"
+            width="500"
           />
         </div>
       </div>
-
-      <ViewMisApuestas props={usuario.username} />
 
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
