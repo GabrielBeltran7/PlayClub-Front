@@ -16,8 +16,9 @@ const PublicarGanadoresAdmin = ({ user }) => {
   const dispatch = useDispatch();
 
   const [ganadores, setGanadores] = useState({
+    id:"",
+    nombreCarrera: "",
     username: user.username,
-    nombreCarrera: unicacarrera.nombrecarrera,
     primerPuesto: "",
     segundoPuesto: "",
     tercerPuesto: "",
@@ -29,6 +30,7 @@ const PublicarGanadoresAdmin = ({ user }) => {
   }, []);
 
   const handleChange = (event) => {
+
     const selectedCarrera = event.target.value;
     dispatch(getcarreraActiva(selectedCarrera));
     if (selectedCarrera !== "") {
@@ -36,7 +38,7 @@ const PublicarGanadoresAdmin = ({ user }) => {
     }
     setGanadores({
       ...ganadores,
-      nombreCarrera: carreraycorredores.nombrecarrera,
+        id:unicacarrera.id,
       [event.target.name]: event.target.value,
     });
   };
@@ -71,7 +73,7 @@ const PublicarGanadoresAdmin = ({ user }) => {
       <h1 className={style.title}>Cargar Ganadores</h1>
       <div className={style.contenedorTodo}>
         <form className={style.form} onSubmit={handleSubmit}>
-          <select name="nombrecarrera" onChange={handleChange}>
+          <select name="nombreCarrera" onChange={handleChange}>
             <option value="">Seleccione la carrera</option>
             {carrera.map((element) => (
               <option key={element.id}>

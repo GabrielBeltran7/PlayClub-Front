@@ -365,9 +365,11 @@ export const getMisApuestas = (username) => {
 };
 
 export const postGanadores = (ganadores) => {
+  console.log("crearganadoresssss",  ganadores )
   return async (dispatch) => {
     try {
-      const response = await axios.post("/admin/ganadores", ganadores);
+      const response = await axios.post("/admin/carrerayganadores", ganadores);
+      console.log("respuesta back",  response )
       dispatch({ type: POST_GANADORES, payload: response.data });
       return response;
     } catch (error) {
