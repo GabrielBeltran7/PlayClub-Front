@@ -11,6 +11,23 @@
     rgba(2, 21, 51, 1) 50%,
     rgba(5, 65, 158, 1) 66%
   );
+}.botonganadores {
+  padding: 15px 30px;
+  border-radius: 50px;
+  color: #fff;
+  background-color: #41ae45;
+  border: 2px solid #ffa500;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+}
+
+.botonganadores:hover {
+  background-color: #f70505; /* Cambio de color al pasar el mouse */
+  transform: scale(1.05); /* Efecto de escala al pasar el mouse */
 }
 
 .selectCarreraContainer {

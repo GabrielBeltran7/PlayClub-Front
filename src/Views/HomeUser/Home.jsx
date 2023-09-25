@@ -405,7 +405,7 @@ const Home = () => {
           </div>
           
         </div>
-        <button onClick={redirigirAInicio}>Ganadores</button>
+        <button className={style.botonganadores} onClick={redirigirAInicio}>Ganadores</button>
 
         <div className={style.contImageLogo}>
           <img
