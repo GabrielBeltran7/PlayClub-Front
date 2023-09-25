@@ -26,22 +26,22 @@ import {
   GET_GANADORES
 } from "./ActionsTypes";
 import axios from "axios";
-// import swal from "sweetalert2";
+import Swal from "sweetalert2";
 
-export const getRecargarPuntos =()=>{
-return async (dispatch)=>{
-  try {
-    const response = await axios.get("/Admin/getrecargarpuntos/")
-    dispatch({
-     type: GET_RECARGAR_PUNTOS,
-     payload: response.data
-    })
-    return response;
-  } catch (error) {
-    throw error;
-  }
-}
-}
+export const getRecargarPuntos = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("/Admin/getrecargarpuntos/");
+      dispatch({
+        type: GET_RECARGAR_PUNTOS,
+        payload: response.data,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
 
 export const getCarrerayCorredores = (username) => {
   return async (dispatch) => {
@@ -133,7 +133,12 @@ export const cargarpuntosaAdmin = (puntosAdmin) => {
 
       return response;
     } catch (error) {
-      throw error;
+      Swal.fire({
+        icon: "error",
+        title: "No eres un Administador Autorizado",
+        timerProgressBar: true,
+        timer: 1500,
+      });
     }
   };
 };
@@ -207,6 +212,7 @@ export const getUserByIdParams = (id) => {
     } catch (error) {
       throw error;
     }
+    bono;
   };
 };
 
@@ -232,6 +238,14 @@ export const cargaBonosaUsuarios = (user) => {
       dispatch({ type: CARGAR_BONOS_USUARIO, payload: response.data });
       return response;
     } catch (error) {
+      console.log(error);
+      const avisoError = error.response.data.error;
+      Swal.fire({
+        icon: "error",
+        title: avisoError,
+        timerProgressBar: true,
+        timer: 3500,
+      });
       throw error;
     }
   };
@@ -248,7 +262,14 @@ export const cargarPuntosSubadmin = (user) => {
       dispatch({ type: POST_PUNTOS_SUB_A_USUARIO, payload: response.data });
       return response;
     } catch (error) {
-      throw error;
+      const errorAviso = error.response;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorAviso,
+        timerProgressBar: true,
+        timer: 1500,
+      });
     }
   };
 };
@@ -449,7 +470,6 @@ export const getAllApuestas = () => {
 };
 
 export const actDesactCarrera = (carrera) => {
-  
   return async (dispatch) => {
     try {
       const response = await axios.patch(

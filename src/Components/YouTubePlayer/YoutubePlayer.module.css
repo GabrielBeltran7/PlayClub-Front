@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Great+Vibes&family=Inter&family=Kaushan+Script&family=Roboto+Condensed&family=Roboto:ital,wght@1,500&display=swap");
 .container {
   display: flex;
   justify-content: center;
@@ -16,7 +17,7 @@
 }
 .botonVideos {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
   gap: 2rem;
@@ -31,9 +32,16 @@
   border-radius: 20px;
   border: none;
   box-shadow: 2px 2px 5px black;
-  background-color: #f5f5dc;
+  background-color: #ffa500;
   transition: 2s;
   padding: 1rem;
+  font-weight: 800;
+  font-family: "Dancing Script", cursive;
+  font-family: "Great Vibes", cursive;
+  font-family: "Inter", sans-serif;
+  font-family: "Kaushan Script", cursive;
+  font-family: "Roboto", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
 }
 .botonVideos button:hover {
   cursor: pointer;
@@ -57,7 +65,7 @@
   align-items: center;
   background-color: #f5f5dc;
   border-radius: 20px;
-  border: 10px solid #ffa500;
+  border: 10px solid #41ae45;
   padding: 30px;
 }
 
@@ -67,8 +75,6 @@
   margin: 0;
   padding: 0;
   color: black;
-  font-style: italic;
-  text-shadow: 2px 2px 5px black;
   width: fit-content;
 }
 

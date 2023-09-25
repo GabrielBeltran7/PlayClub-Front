@@ -63,10 +63,6 @@ const HomeAdmin = () => {
         return <RecargarPuntos />;
       case "2":
         return <CrearCorredor />;
-      case "3":
-        return <InformeIndividual />;
-      case "4":
-        return <InformeGeneral />;
       case "5":
         return <CrearCarrera user={user} />;
       case "6":
@@ -114,36 +110,22 @@ const HomeAdmin = () => {
                 label: "Usuarios",
               },
               {
-                key: "2",
-                icon: <UserAddOutlined />,
-                label: "Crear Corredor",
-              },
-              {
-                key: "3",
-                icon: <AuditOutlined />,
-                label: "Informe Individual",
-              },
-              {
-                key: "4",
-                icon: <BookOutlined />,
-                label: "Informe General",
-              },
-              {
                 key: "5",
                 icon: <FlagOutlined />,
                 label: "Crear Carrera",
               },
               {
+                key: "2",
+                icon: <UserAddOutlined />,
+                label: "Crear Corredor",
+              },
+
+              {
                 key: "6",
                 icon: <DashboardOutlined />,
                 label: "Corredores",
               },
-              {
-                key: "7",
-                icon: <HomeOutlined />,
-                label: "Home",
-                onClick: () => handlehomeSubAdmin(),
-              },
+
               {
                 key: "8",
                 icon: <GoldOutlined />,
@@ -173,6 +155,12 @@ const HomeAdmin = () => {
                 key: "13",
                 icon: <TrophyOutlined />,
                 label: "Todas las carreras",
+              },
+              {
+                key: "7",
+                icon: <HomeOutlined />,
+                label: "Home",
+                onClick: () => handlehomeSubAdmin(),
               },
             ]}
           />

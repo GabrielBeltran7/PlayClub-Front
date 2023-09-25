@@ -2,19 +2,15 @@ import style from "./BonoAdmin.module.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useRef, useState, useEffect } from "react";
-import {  cargaBonosaUsuarios, getUserByUsername } from "../../Redux/Actions";
+import { cargaBonosaUsuarios, getUserByUsername } from "../../Redux/Actions";
 import Swal from "sweetalert2";
 
-const BonoAdmin = ({user}) => {
-
-
+const BonoAdmin = ({ user }) => {
   const dispatch = useDispatch();
- 
-
 
   const [bonos, setBonos] = useState({
     username: user.username,
-    cantidad:""
+    cantidad: "",
   });
 
   const handleChange = (event) => {
@@ -26,33 +22,51 @@ const BonoAdmin = ({user}) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    Swal.fire({
-      title: `¿Estas seguro de cargar ${bonos.cantidad} puntos a cada USUARIO?`,
-      text: `Estas por cargar ${bonos.cantidad} puntos a cada uno de  tus usuarios`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Cargar Puntos",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(cargaBonosaUsuarios(bonos));
-        setBonos({
-          ...bonos,
-          cantidad: "",
-          
-        });
-        Swal.fire(
-          "Transaccion completa!",
-          "Los puntos se cargaron correctamente",
-          "success"
-        );
-      }
-    });
+    try {
+      Swal.fire({
+        title: `¿Estas seguro de cargar ${bonos.cantidad} puntos a cada USUARIO?`,
+        text: `Estas por cargar ${bonos.cantidad} puntos a cada uno de  tus usuarios`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Cargar Puntos",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await dispatch(cargaBonosaUsuarios(bonos));
+          setBonos({
+            ...bonos,
+            cantidad: "",
+          });
+          console.log(response);
+          if (response) {
+            Swal.fire(
+              "Transaccion completa!",
+              "Los puntos se cargaron correctamente",
+              "success"
+            );
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "No eres un Administador Autorizado",
+              timerProgressBar: true,
+              timer: 1500,
+            });
+          }
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "No eres un Administador Autorizado",
+        timerProgressBar: true,
+        timer: 1500,
+      });
+    }
   };
   return (
     <div className={style.container}>
-      <div></div>
       <h1 className={style.title}>Bonos para todos</h1>
       <div className={style.formContainer}>
         <div className={style.contImage}>
@@ -64,7 +78,7 @@ const BonoAdmin = ({user}) => {
         </div>
         <form className={style.formulario} onSubmit={handleSubmit}>
           <label></label>
-          
+
           <label>Ingrese cantidad para cada Usuario</label>
           <input
             type="number"
@@ -74,8 +88,8 @@ const BonoAdmin = ({user}) => {
             min="0"
             pattern="^[0-9]+"
           />
-         
-          {bonos.cantidad <= 0  ? (
+
+          {bonos.cantidad <= 0 ? (
             <button disabled>Cargar Puntos</button>
           ) : (
             <button>Cargar Puntos</button>
