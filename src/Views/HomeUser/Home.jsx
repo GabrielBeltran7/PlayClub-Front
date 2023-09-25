@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
 import Whatsapp from "../../Components/Whatsapp/Whatsapp";
 
 const Home = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.user);
   const carrera = useSelector((state) => state.carrera);
@@ -342,18 +342,20 @@ const Home = () => {
   const carreraFilter = carrera.filter((c) => c.actydescarrera === true);
 
   const redirigirAInicio = () => {
-    navigate('/GanadoresCarrera'); 
+    navigate("/GanadoresCarrera");
   };
   return (
     <div className={style.container}>
-      {usuario.admin || usuario.subadmin ? (
-        <div className={style.navbar}>
-          <Navbar props={usuario.admin} />
-          <ViewMisApuestas />
-        </div>
-      ) : (
-        <></>
-      )}
+      <div className={style.navbarMisApuestas}>
+        {usuario.admin || usuario.subadmin ? (
+          <div className={style.navbar}>
+            <Navbar props={usuario.admin} />
+          </div>
+        ) : (
+          <></>
+        )}
+        <ViewMisApuestas />
+      </div>
       <div className={style.containerInfoUser}>
         <div className={style.contendorUser}>
           <div className={style.infoUsuario}>
@@ -403,9 +405,10 @@ const Home = () => {
               ""
             )}
           </div>
-          
         </div>
-        <button className={style.botonganadores} onClick={redirigirAInicio}>Ganadores</button>
+        <button className={style.botonganadores} onClick={redirigirAInicio}>
+          Ganadores
+        </button>
 
         <div className={style.contImageLogo}>
           <img
