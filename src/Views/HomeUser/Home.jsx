@@ -23,7 +23,7 @@ import Swal from "sweetalert2";
 import YouTubePlayer from "../../Components/YouTubePlayer/YouTubePlayer";
 import ViewMisApuestas from "../../Components/ViewMisApuestas/ViewMisApuestas";
 import Ganadores from "../../Components/GanadoresCarrera/GanadoresCarrera";
-import MenuDesplegable from "../../Components/MenuDesplegableApuestas/MenuDesplegable";
+import Whatsapp from "../../Components/Whatsapp/Whatsapp";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -348,7 +348,6 @@ const Home = () => {
       ) : (
         <></>
       )}
-
       <div className={style.containerInfoUser}>
         <div className={style.contendorUser}>
           <div className={style.infoUsuario}>
@@ -363,25 +362,33 @@ const Home = () => {
               }}
               src={usuario.imagen ? usuario.imagen : <AntDesignOutlined />}
             />
-            <p>
-              {usuario.username ? (
-                usuario.username
-              ) : (
-                <p>
-                  <a href="/login">Inicia sesion</a> o
-                  <a href="/register"> registrate</a>
-                </p>
-              )}
-            </p>
-            <label>
-              {usuario.id ? <p>Creditos: {usuario.cantidadtotal}</p> : ""}{" "}
-            </label>
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/566/566445.png"
-              alt=""
-              width="20"
-              height="50"
-            />
+            <div className={style.userCreditos}>
+              <p>
+                {usuario.username ? (
+                  usuario.username
+                ) : (
+                  <p>
+                    <a href="/login">Inicia sesion</a> o
+                    <a href="/register"> registrate</a>
+                  </p>
+                )}
+              </p>
+              <label className={style.creditosIMG}>
+                {usuario.id ? (
+                  <p>
+                    Creditos: {usuario.cantidadtotal}{" "}
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/128/566/566445.png"
+                      alt=""
+                      width="20"
+                      height="50"
+                    />
+                  </p>
+                ) : (
+                  ""
+                )}{" "}
+              </label>
+            </div>
           </div>
           <div>
             {usuario.id ? (
@@ -400,7 +407,6 @@ const Home = () => {
           />
         </div>
       </div>
-
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
           <h2>Seleccione una Carrera</h2>
@@ -687,12 +693,11 @@ const Home = () => {
             </p>
           )}
         </form>
-        <div>
-          <Ganadores />
-        </div>
       </div>
-
       <YouTubePlayer />
+      <div className={style.whatsapp}>
+        <Whatsapp />
+      </div>
     </div>
   );
 };
