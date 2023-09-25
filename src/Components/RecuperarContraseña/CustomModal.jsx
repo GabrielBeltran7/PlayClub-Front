@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './customModal.module.css'; // Importa los estilos CSS
+import {recuperPassword} from "../../Redux/Actions"
 import { useDispatch } from 'react-redux';
+import Swal from "sweetalert2";
 
 function CustomModal(props) {
   const { show, handleClose, children } = props;
@@ -20,18 +22,22 @@ function CustomModal(props) {
     
     // Validación de correo electrónico
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    setIsValidEmail(emailPattern.test(value));
+    setIsValidEmail(emailPattern.test(event.target.value));
   };
 
   const handleModalSubmit = () => {
     // Verificar si el email ingresado es válido antes de cerrar el modal
     if (isValidEmail) {
       // Realizar alguna acción con el valor de inputValue si es válido
-    //   dispatch(recuperpassword(inputValue))
-      console.log("Pruebaaaa",inputValue)
+      dispatch(recuperPassword(inputValue))
     } else {
       // El email no es válido, puedes mostrar un mensaje de error o realizar alguna acción adicional
-      alert('Por favor, ingresa un correo electrónico válido.');
+      Swal.fire({
+        icon: "error",
+        title: "Correo Invalido",
+        timerProgressBar: true,
+        timer: 2000,
+      });
     }
   };
 
