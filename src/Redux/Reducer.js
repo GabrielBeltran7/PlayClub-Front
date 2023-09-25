@@ -22,6 +22,7 @@ import {
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
   ALL_APUESTAS,
+  GET_RECARGAR_PUNTOS,
   ACT_DESACT_CARRERA,
 } from "./ActionsTypes";
 let inicialState = {
@@ -40,6 +41,7 @@ let inicialState = {
   misApuestas: [],
   ganadores: [],
   allApuestas: [],
+  recargarpuntos:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -60,6 +62,12 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         misApuestas: action.payload,
+      };
+
+      case GET_RECARGAR_PUNTOS:
+      return {
+        ...state,
+        recargarpuntos: action.payload,
       };
     case GET_LINK_CAMARAS:
       return {

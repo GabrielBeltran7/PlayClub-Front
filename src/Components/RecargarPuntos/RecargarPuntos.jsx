@@ -3,23 +3,48 @@ import React, { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
 import { Button, Input, Space, Table, Typography, Tag, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import * as XLSX from 'xlsx';
+import moment from "moment";
+// 
+
 import {
   getUserById,
   apdateRoluser,
-  getUserByUsername,
+  
 } from "../../Redux/Actions";
 import style from "./RecargarPuntos.module.css";
+
 const RecargarPuntos = () => {
+
+ 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
 
   const allUsers = useSelector((state) => state.userId);
-  // console.log("allusersssss", allUsers);
-
+  // render: (date) => moment(date).format("YYYY-MM-DD HH:mm:ss"),
+if(allUsers){
+  allUsers.forEach((user) => {
+    // Formatea la fecha en el formato deseado
+    user.createdAt = moment (user.createdAt).format("YYYY-MM-DD HH:mm:ss")
+    user.updatedAt = moment (user.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+  });
+}
   const dispatch = useDispatch();
 
   const [rol, setRol] = useState(false);
+
+
+  const exportToExcel = () => {
+    const ws = XLSX.utils.json_to_sheet(allUsers);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'User');
+   
+
+    // Guardar el archivo de Excel
+    XLSX.writeFile(wb, 'users.xlsx');
+  };
+
 
   const handleChange = (record) => (event) => {
     dispatch(
@@ -62,6 +87,8 @@ const RecargarPuntos = () => {
         }}
         onKeyDown={(e) => e.stopPropagation()}
       >
+              
+
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
@@ -209,10 +236,15 @@ const RecargarPuntos = () => {
 
   return (
     <div>
+      <div className={style.botonexcel}>
+      <button onClick={exportToExcel}>Exportar a excel 📑</button>
+      </div>
+      
       <Table
         columns={columns}
         dataSource={allUsers.map((user) => ({ ...user, key: user.id }))}
       />
+      
       <div>
         <div className={style.containerAviso}>
           <label className={style.aviso}>

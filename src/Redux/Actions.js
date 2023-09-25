@@ -27,6 +27,21 @@ import {
 import axios from "axios";
 // import swal from "sweetalert2";
 
+export const getRecargarPuntos =()=>{
+return async (dispatch)=>{
+  try {
+    const response = await axios.get("/Admin/getrecargarpuntos/")
+    dispatch({
+     type: GET_RECARGAR_PUNTOS,
+     payload: response.data
+    })
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+}
+
 export const getCarrerayCorredores = (username) => {
   return async (dispatch) => {
     try {
@@ -405,19 +420,13 @@ export const getAllApuestas = () => {
 };
 
 export const actDesactCarrera = (carrera) => {
-  console.log("575757757575", carrera);
+  
   return async (dispatch) => {
     try {
       const response = await axios.patch(
         "/admin/activarodesactivarcarrera",
         carrera
       );
-      // dispatch({
-      //   type: ACT_DESACT_CARRERA,
-      //   payload: response.data,
-      // });
-      getCarrera();
-
       console.log("act desact carrera", response);
       return response;
     } catch (error) {
