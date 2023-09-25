@@ -421,7 +421,7 @@ const Home = () => {
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
           <h2>Seleccione una Carrera</h2>
-          {usuario.id ? (
+          {usuario.id && usuario.username !=="Admin" ? (
             <>
               <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
                 <option value="">Carreras</option>
@@ -435,11 +435,18 @@ const Home = () => {
               </select>
             </>
           ) : (
-            <p>
+             usuario.username ==="Admin" ? "Administrador no puede apostar" :   <>
+             <p>
               {" "}
+              
               <a href="/login">inicie sesión</a> o{" "}
               <a href="/register">Registrese</a>
-            </p>
+            </p></> 
+          
+          
+          
+          
+           
           )}
 
           <div className={style.bloque}>
@@ -489,8 +496,8 @@ const Home = () => {
           ) : (
             ""
           )}
-
-          <p className={style.puntosGanados}>{win.puntosganados}</p>
+            
+          <p className={style.puntosGanados}>{win.puntosganados? win.puntosganados: ""}</p>
           {usuario.id ? (
             <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -545,7 +552,7 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{exacta.puntosganados}</p>
+          <p className={style.puntosGanados}>{exacta.puntosganados? exacta.puntosganados:""}</p>
           {usuario.id ? (
             <button disabled={!exacta.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -612,7 +619,7 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{trifecta.puntosganados}</p>
+          <p className={style.puntosGanados}>{trifecta.puntosganados? trifecta.puntosganados :""}</p>
           {usuario.id ? (
             <button disabled={!trifecta.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -692,7 +699,7 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{superfecta.puntosganados}</p>
+          <p className={style.puntosGanados}>{superfecta.puntosganados? superfecta.puntosganados :""}</p>
           {usuario.id ? (
             <button disabled={!superfecta.puntosapostados}>
               Enviar apuesta

@@ -12,7 +12,7 @@ const InformePuntos = () => {
   const searchInput = useRef(null);
   const dispatch = useDispatch();
   const getPuntos = useSelector((state) => state.recargarpuntos);
-  console.log("989898989", getPuntos[0].User.username);
+
   useEffect(() => {
     dispatch(getRecargarPuntos());
   }, []);
