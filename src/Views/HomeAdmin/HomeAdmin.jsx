@@ -27,6 +27,7 @@ import BonoAdmin from "../../Components/BonoAdmin/BonoAdmin";
 import LinkDirectos from "../../Components/LinkDirectos/LinkDirectos";
 import CargarpuntosAdmin from "../../Components/CargarPuntosaAdmin/CargarpuntosAdmin";
 import InformeApuestas from "../../Components/InformeApuestas/InformeApuestas";
+import AllCarreras from "../../Components/AllCarreras/AllCarreras";
 
 const { Header, Sider, Content } = Layout;
 const HomeAdmin = () => {
@@ -83,7 +84,8 @@ const HomeAdmin = () => {
         return <PublicarGanadoresAdmin user={user} />;
       case "12":
         return <InformeApuestas />;
-
+      case "13":
+        return <AllCarreras />;
       default:
         return null;
     }
@@ -166,6 +168,11 @@ const HomeAdmin = () => {
                 key: "12",
                 icon: <TrophyOutlined />,
                 label: "Informe Apuestas",
+              },
+              {
+                key: "13",
+                icon: <TrophyOutlined />,
+                label: "Todas las carreras",
               },
             ]}
           />

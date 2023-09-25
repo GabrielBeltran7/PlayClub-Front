@@ -1,0 +1,19 @@
+.ActDesact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ActDesact button {
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.containerButton {
+  display: flex;
+  justify-content: end;
+  margin-right: 2rem;
+}

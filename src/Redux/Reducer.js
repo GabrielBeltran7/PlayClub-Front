@@ -22,6 +22,7 @@ import {
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
   ALL_APUESTAS,
+  ACT_DESACT_CARRERA,
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
