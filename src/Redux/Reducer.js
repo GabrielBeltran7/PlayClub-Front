@@ -24,6 +24,7 @@ import {
   ALL_APUESTAS,
   GET_RECARGAR_PUNTOS,
   ACT_DESACT_CARRERA,
+  GET_GANADORES
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -169,6 +170,12 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         ganadores: action.payload,
       };
+
+      case GET_GANADORES:
+        return {
+          ...state,
+          ganadores: action.payload,
+        };
 
     case ALL_APUESTAS:
       return {

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Great+Vibes&family=Inter&family=Kaushan+Script&family=Roboto:ital,wght@1,500&display=swap");
 .prueba {
   text-align: center;
   display: flex;
@@ -9,16 +10,24 @@
 
 .prueba button {
   background-color: #f5f5dc;
-  border: 2px solid #ffa500;
+  border: 2px solid red;
   border-radius: 5px;
   box-shadow: 2px 2px 5px black;
+  font-weight: 800;
+  z-index: 1;
 }
 
 .apuesta {
-  border: 1px solid white;
+  border: 5px solid #ffa500;
   width: fit-content;
-  background-color: black;
+  color: white;
+  background-color: rgb(80, 80, 80);
   position: relative;
+  font-family: "Dancing Script", cursive;
+  font-family: "Great Vibes", cursive;
+  font-family: "Inter", sans-serif;
+  font-family: "Kaushan Script", cursive;
+  font-family: "Roboto", sans-serif;
 }
 
 .probandou {

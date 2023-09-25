@@ -72,9 +72,6 @@ function App() {
               videoToShow ? style.videoContainer : ""
             }`}
           >
-            <h3 className={style.videoName}>
-              {videoToShow && titleCamera(name)}
-            </h3>
             {videoToShow && (
               <ReactPlayer
                 controls

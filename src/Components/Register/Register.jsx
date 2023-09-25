@@ -146,6 +146,8 @@ const Register = () => {
           </div>
           <br />
           <div className={style.containerImage}>
+            <label >Selecciona una Imagen</label><br />
+            
             <input
               className={style.profileImage}
               type="file"

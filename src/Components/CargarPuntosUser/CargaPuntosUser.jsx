@@ -2,7 +2,11 @@ import style from "./CargaPuntosUser.module.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useRef, useState, useEffect } from "react";
-import { getUserByIdParams, cargaPuntos, cargarPuntosSubadmin } from "../../Redux/Actions";
+import {
+  getUserByIdParams,
+  cargaPuntos,
+  cargarPuntosSubadmin,
+} from "../../Redux/Actions";
 import Swal from "sweetalert2";
 
 const CargaPuntosUser = () => {
@@ -18,7 +22,7 @@ const CargaPuntosUser = () => {
 
   const [carga, setCarga] = useState({
     id: user.id,
-    UserId:id ,
+    UserId: id,
     username: username,
     cantidad: 0,
     precio: 0,
@@ -49,28 +53,52 @@ const CargaPuntosUser = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Cargar Puntos",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        if(user.admin){
-          dispatch(cargaPuntos(carga));
-        }else{
-          dispatch(cargarPuntosSubadmin(carga));
+        if (user.admin) {
+          const response = await dispatch(cargaPuntos(carga));
+          console.log("responses ad,ommmmmmmm", response);
+          if (response) {
+            Swal.fire(
+              "Transaccion Completada!",
+              "Los puntos se cargaron Correctamente",
+              "success"
+            );
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Error al intentar cargar puntos",
+              timerProgressBar: true,
+              timer: 1500,
+            });
+          }
+        } else {
+          const response = await dispatch(cargarPuntosSubadmin(carga));
+          console.log("responses subadminnn", response);
+          if (response !== undefined) {
+            Swal.fire(
+              "Transaccion completa!",
+              "Los puntos se cargaron Correctamente",
+              "success"
+            );
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Error al intentar cargar puntos",
+              timerProgressBar: true,
+              timer: 1500,
+            });
+          }
         }
-       
+
         setCarga({
           ...carga,
           cantidad: "",
           precio: "",
         });
-        Swal.fire(
-          "Transaccion completa!",
-          "Los puntos se cargaron correctamente",
-          "success"
-        );
       }
     });
   };
-
 
   return (
     <div className={style.container}>
