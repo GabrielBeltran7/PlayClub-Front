@@ -1,0 +1,16 @@
+.container {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: end;
+  margin: 10px;
+}
+
+.buttonContainer button {
+  background-color: #f5f5dc;
+  font-size: 20px;
+  border: 2px solid #ffa500;
+}

@@ -118,20 +118,12 @@ const CrearCarrera = ({ user }) => {
             value={carrera.porcentajeSuperfecta}
             className={style.input}
           />
-          <label>Fecha de inicio de carrera</label>
+          <label> Fecha de Carrera </label>
           <input
             type="date"
             name="fechadecarrera"
             onChange={handleChange}
             value={carrera.fechadecarrera}
-          />
-          <label> Fecha de Carrera </label>
-          <input
-            type="date"
-            placeholder="% de ganancia SUPERFECTA"
-            name="fechadecarrera"
-            onChange={handleChange}
-            value={carrera.porcentajeSuperfecta}
           />
           <button>Crear carrera</button>
         </form>

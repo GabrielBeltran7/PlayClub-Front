@@ -21,6 +21,7 @@ import {
   POST_LINK_DIRECTOS,
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
+  ALL_APUESTAS,
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
@@ -37,6 +38,7 @@ let inicialState = {
   userLog: {},
   misApuestas: [],
   ganadores: [],
+  allApuestas: [],
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -157,6 +159,12 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         ganadores: action.payload,
+      };
+
+    case ALL_APUESTAS:
+      return {
+        ...state,
+        allApuestas: action.payload,
       };
   }
   return state;

@@ -21,6 +21,7 @@ import {
   POST_LINK_DIRECTOS,
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
+  ALL_APUESTAS,
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
@@ -365,11 +366,11 @@ export const getMisApuestas = (username) => {
 };
 
 export const postGanadores = (ganadores) => {
-  console.log("crearganadoresssss",  ganadores )
+  console.log("crearganadoresssss", ganadores);
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/carrerayganadores", ganadores);
-      console.log("respuesta back",  response )
+      console.log("respuesta back", response);
       dispatch({ type: POST_GANADORES, payload: response.data });
       return response;
     } catch (error) {
@@ -383,6 +384,18 @@ export const getGanadores = () => {
     try {
       const response = await axios.get("/users/ganadores");
       dispatch({ type: POST_GANADORES, payload: response.data });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const getAllApuestas = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("/apuestas/apuestas");
+      dispatch({ type: ALL_APUESTAS, payload: response.data });
       return response;
     } catch (error) {
       throw error;
