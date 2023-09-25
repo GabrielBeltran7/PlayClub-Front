@@ -24,8 +24,10 @@ import YouTubePlayer from "../../Components/YouTubePlayer/YouTubePlayer";
 import ViewMisApuestas from "../../Components/ViewMisApuestas/ViewMisApuestas";
 import Ganadores from "../../Components/GanadoresCarrera/GanadoresCarrera";
 import MenuDesplegable from "../../Components/MenuDesplegableApuestas/MenuDesplegable";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.user);
   const carrera = useSelector((state) => state.carrera);
@@ -338,6 +340,9 @@ const Home = () => {
 
   const carreraFilter = carrera.filter((c) => c.actydescarrera === true);
 
+  const redirigirAInicio = () => {
+    navigate('/GanadoresCarrera'); // Redirige a la ruta de inicio (cambia '/' por la ruta correcta si es diferente)
+  };
   return (
     <div className={style.container}>
       {usuario.admin || usuario.subadmin ? (
@@ -390,7 +395,9 @@ const Home = () => {
               ""
             )}
           </div>
+          
         </div>
+        <button onClick={redirigirAInicio}>Ganadores</button>
 
         <div className={style.contImageLogo}>
           <img

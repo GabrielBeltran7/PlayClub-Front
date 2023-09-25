@@ -23,6 +23,7 @@ import {
   POST_GANADORES,
   ALL_APUESTAS,
   ACT_DESACT_CARRERA,
+  GET_GANADORES
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
@@ -395,17 +396,45 @@ export const postGanadores = (ganadores) => {
   };
 };
 
-export const getGanadores = () => {
+export const getGanadores = (ganadoress) => {
+  
   return async (dispatch) => {
     try {
-      const response = await axios.get("/users/ganadores");
-      dispatch({ type: POST_GANADORES, payload: response.data });
+     
+      const response = await axios.get(`/users/ganadores/${ganadoress.nombrecarrera}`, {
+        nombrecarrera:ganadoress.nombrecarrera
+      });
+      console.log("getganadores",response)
+      dispatch({ type: GET_GANADORES, payload: response.data });
       return response;
     } catch (error) {
       throw error;
     }
   };
 };
+
+
+// export const getGanadores = (ganadores) => {
+//   return async (dispatch) => {
+//     try {
+//       console.log("getganadores", ganadores);
+
+//       const response = await axios.request({
+//         method: 'GET',
+//         url: '/users/ganadores/',
+//         data: ganadores, // Datos a enviar en el cuerpo (body) de la solicitud GET
+//       });
+
+//       dispatch({ type: GET_GANADORES, payload: response.data });
+//       return response;
+//     } catch (error) {
+//       throw error;
+//     }
+//   };
+// };
+
+
+
 
 export const getAllApuestas = () => {
   return async (dispatch) => {
