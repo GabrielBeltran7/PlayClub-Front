@@ -1,0 +1,95 @@
+/* Estilos para el fondo de la página */
+body {
+  background-color: #007bff; /* Cambia el color de fondo de la página a azul (#007bff) o el que desees */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilos para el modal */
+.custom-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-modal.show {
+  display: flex;
+}
+
+/* Estilos para el contenido del modal en dispositivos web */
+.modal-content {
+  background-color: #fff; /* Cambia el color de fondo del modal al que desees */
+  color: #000; /* Cambia el color del texto a negro o el que desees */
+  padding: 2vw; /* Ajusta el padding en unidades de viewport width (vw) */
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgb(230, 223, 27); /* Agrega un borde de 2px con el color especificado */
+  max-width: 40%; /* Ajusta el ancho máximo en porcentaje */
+}
+
+/* Estilos para el contenido del modal en dispositivos móviles */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 15vw; /* Ajusta el padding en unidades de viewport width (vw) para dispositivos móviles */
+    max-width: 150%; /* Ajusta el ancho máximo en porcentaje para dispositivos móviles */
+  }
+}
+
+/* Estilos para el botón de cierre */
+.close-button {
+  position: absolute;
+  top: 1vw; /* Ajusta la posición en viewport width (vw) */
+  right: 1vw; /* Ajusta la posición en viewport width (vw) */
+  font-size: 2vw; /* Ajusta el tamaño de fuente en viewport width (vw) */
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Estilos para el título */
+.modal-title {
+  font-size: 2.5vw; /* Ajusta el tamaño de fuente en viewport width (vw) */
+  margin-bottom: 1vw; /* Ajusta el margen en viewport width (vw) */
+}
+
+/* Estilos para la descripción */
+.modal-description {
+  font-size: 1.3vw; /* Ajusta el tamaño de fuente en viewport width (vw) */
+  margin-bottom: 1.8vw; /* Ajusta el margen en viewport width (vw) */
+}
+
+/* Estilos para el campo de entrada de texto */
+.modal-input {
+  width: 80%;
+  padding: 1.5vw; /* Ajusta el padding en viewport width (vw) */
+  margin-bottom: 1.5vw; /* Ajusta el margen en viewport width (vw) */
+  border: 2px solid rgb(230, 223, 27); /* Agrega un borde de 2px con el color especificado */
+  border-radius: 4px;
+  font-size: 1.3vw; /* Ajusta el tamaño de fuente en viewport width (vw) */
+}
+
+/* Estilos para el botón */
+.modal-button {
+  background-color: #007bff; /* Cambia el color de fondo del botón al que desees */
+  color: #fff; /* Cambia el color del texto del botón a blanco o el que desees */
+  padding: 1.5vw 3vw; /* Ajusta el padding en viewport width (vw) */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.3vw; /* Ajusta el tamaño de fuente en viewport width (vw) */
+}
+
+.modal-button:hover {
+  background-color: #0056b3; /* Cambia el color de fondo al hacer hover al que desees */
+  color: #fff; /* Cambia el color del texto del botón al hacer hover al que desees */
+}

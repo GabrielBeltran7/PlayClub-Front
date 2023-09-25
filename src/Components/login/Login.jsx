@@ -73,7 +73,9 @@ const Login = () => {
       });
     }
   };
-
+  const redirigirACustomModal = () => {
+    navigate('/CustomModal'); 
+  };
   return (
     <div className={style.container}>
       <div className={style.registrate}>
@@ -116,7 +118,9 @@ const Login = () => {
             />
           </div>
           <button className={style.button}>Iniciar sesión</button>
+         
         </form>
+        <button onClick={redirigirACustomModal} className={style.button}> Olvidate tu contraseña</button>
         <div className={style.logo}>
           <img
             src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"

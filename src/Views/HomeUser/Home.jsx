@@ -342,7 +342,7 @@ const Home = () => {
   const carreraFilter = carrera.filter((c) => c.actydescarrera === true);
 
   const redirigirAInicio = () => {
-    navigate('/GanadoresCarrera'); // Redirige a la ruta de inicio (cambia '/' por la ruta correcta si es diferente)
+    navigate('/GanadoresCarrera'); 
   };
   return (
     <div className={style.container}>

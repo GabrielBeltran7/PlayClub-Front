@@ -23,7 +23,8 @@ import {
   POST_GANADORES,
   ALL_APUESTAS,
   ACT_DESACT_CARRERA,
-  GET_GANADORES
+  GET_GANADORES,
+  GET_RECARGAR_PUNTOS
 } from "./ActionsTypes";
 import axios from "axios";
 import Swal from "sweetalert2";
