@@ -53,6 +53,9 @@
 }
 
 .inputs {
+  border-radius: 20px;
+  padding: 0.7rem;
+  background-color: rgb(8, 214, 8);
   display: flex;
   gap: 5px;
   border-bottom: 1px solid black;

@@ -336,6 +336,8 @@ const Home = () => {
   };
   console.log(usuario.imagen);
 
+  const carreraFilter = carrera.filter((c) => c.actydescarrera === true);
+
   return (
     <div className={style.container}>
       {usuario.admin || usuario.subadmin ? (
@@ -406,7 +408,7 @@ const Home = () => {
             <>
               <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
                 <option value="">Carreras</option>
-                {carrera.map((element) => (
+                {carreraFilter.map((element) => (
                   <option key={element.id}>
                     {" "}
                     {element.nombrecarrera} {element.numero}{" "}

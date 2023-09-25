@@ -22,9 +22,25 @@ import {
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
   ALL_APUESTAS,
+  ACT_DESACT_CARRERA,
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
+
+export const getRecargarPuntos =()=>{
+return async (dispatch)=>{
+  try {
+    const response = await axios.get("/Admin/getrecargarpuntos/")
+    dispatch({
+     type: GET_RECARGAR_PUNTOS,
+     payload: response.data
+    })
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+}
 
 export const getCarrerayCorredores = (username) => {
   return async (dispatch) => {
@@ -396,6 +412,22 @@ export const getAllApuestas = () => {
     try {
       const response = await axios.get("/apuestas/apuestas");
       dispatch({ type: ALL_APUESTAS, payload: response.data });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const actDesactCarrera = (carrera) => {
+  
+  return async (dispatch) => {
+    try {
+      const response = await axios.patch(
+        "/admin/activarodesactivarcarrera",
+        carrera
+      );
+      console.log("act desact carrera", response);
       return response;
     } catch (error) {
       throw error;
