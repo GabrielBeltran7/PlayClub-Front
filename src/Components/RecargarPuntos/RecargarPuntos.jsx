@@ -4,11 +4,13 @@ import Highlighter from "react-highlight-words";
 import { Button, Input, Space, Table, Typography, Tag, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from 'xlsx';
+import moment from "moment";
+// 
 
 import {
   getUserById,
   apdateRoluser,
-  getUserByUsername,
+  
 } from "../../Redux/Actions";
 import style from "./RecargarPuntos.module.css";
 
@@ -20,8 +22,14 @@ const RecargarPuntos = () => {
   const searchInput = useRef(null);
 
   const allUsers = useSelector((state) => state.userId);
- 
-
+  // render: (date) => moment(date).format("YYYY-MM-DD HH:mm:ss"),
+if(allUsers){
+  allUsers.forEach((user) => {
+    // Formatea la fecha en el formato deseado
+    user.createdAt = moment (user.createdAt).format("YYYY-MM-DD HH:mm:ss")
+    user.updatedAt = moment (user.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+  });
+}
   const dispatch = useDispatch();
 
   const [rol, setRol] = useState(false);
@@ -229,7 +237,7 @@ const RecargarPuntos = () => {
   return (
     <div>
       <div className={style.botonexcel}>
-      <button onClick={exportToExcel}>Exportar a Excel</button>
+      <button onClick={exportToExcel}>Exportar a excel 📑</button>
       </div>
       
       <Table

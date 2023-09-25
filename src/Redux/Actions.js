@@ -22,9 +22,25 @@ import {
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
   ALL_APUESTAS,
+  GET_RECARGAR_PUNTOS
 } from "./ActionsTypes";
 import axios from "axios";
 // import swal from "sweetalert2";
+
+export const getRecargarPuntos =()=>{
+return async (dispatch)=>{
+  try {
+    const response = await axios.get("/Admin/getrecargarpuntos/")
+    dispatch({
+     type: GET_RECARGAR_PUNTOS,
+     payload: response.data
+    })
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+}
 
 export const getCarrerayCorredores = (username) => {
   return async (dispatch) => {
