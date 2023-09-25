@@ -22,7 +22,8 @@ import {
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
   ALL_APUESTAS,
-  GET_RECARGAR_PUNTOS
+  GET_RECARGAR_PUNTOS,
+  ACT_DESACT_CARRERA,
 } from "./ActionsTypes";
 let inicialState = {
   isAuthenticated: false,
