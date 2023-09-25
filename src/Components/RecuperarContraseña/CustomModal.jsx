@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './customModal.module.css'; // Importa los estilos CSS
+import styles from "./CustomModal.module.css"
 import {recuperPassword} from "../../Redux/Actions"
 import { useDispatch } from 'react-redux';
 import Swal from "sweetalert2";
