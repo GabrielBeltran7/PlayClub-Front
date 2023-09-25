@@ -1,54 +1,55 @@
-/* GanadoresCarrera.module.css */
-
 /* Estilos para la página */
 .page {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centrar horizontalmente */
-    justify-content: center; /* Centrar verticalmente */
-    height: 100vh; /* Altura de la página al 100% de la ventana */
-    background: rgb(5, 65, 158);
-  }
-  
-  /* Estilos para el formulario */
-  .form {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .label {
-    font-size: 24px; /* Tamaño de fuente más grande */
-    margin-bottom: 10px;
-    color: #fff; /* Texto blanco */
-    font-weight: bold; /* Texto en negrita */
-  }
-  
-  .select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  /* Estilos para las tarjetas de resultados */
-  .primeracarta,
-  .segundacarta,
-  .terceracarta,
-  .cuartacarta {
-    margin-bottom: 20px;
-    border: 2px solid #FFD700; /* Borde amarillo fosforescente */
-    border-radius: 10px; /* Borde más redondeado */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    background: #fff; /* Fondo blanco */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar horizontalmente */
+  justify-content: center; /* Centrar verticalmente */
+  min-height: 100vh; /* Altura mínima de la página al 100% de la ventana */
+  background: rgb(5, 65, 158);
+  padding: 20px; /* Espaciado interior para dispositivos pequeños */
+}
 
-  .primeracarta p,
-  .segundacarta p,
-  .terceracarta p,
-  .cuartacarta p {
-    font-size: 16px;
-    color: #333; /* Texto negro */
-  }
+/* Estilos para el formulario */
+.form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 24px; /* Tamaño de fuente más grande */
+  margin-bottom: 10px;
+  color: #fff; /* Texto blanco */
+  font-weight: bold; /* Texto en negrita */
+}
+
+.select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para las tarjetas de resultados */
+.primeracarta,
+.segundacarta,
+.terceracarta,
+.cuartacarta {
+  margin-bottom: 20px;
+  border: 2px solid #FFD700; /* Borde amarillo fosforescente */
+  border-radius: 10px; /* Borde más redondeado */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ancho al 100% para dispositivos pequeños */
+  max-width: 300px; /* Ancho máximo para dispositivos grandes */
+  background: #fff; /* Fondo blanco */
+  padding: 20px; /* Espaciado interior para dispositivos pequeños */
+}
+
+.primeracarta p,
+.segundacarta p,
+.terceracarta p,
+.cuartacarta p {
+  font-size: 16px;
+  color: #333; /* Texto negro */
+}
