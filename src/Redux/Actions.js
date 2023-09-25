@@ -23,11 +23,39 @@ import {
   POST_GANADORES,
   ALL_APUESTAS,
   ACT_DESACT_CARRERA,
-  GET_GANADORES
+  GET_GANADORES,
+  GET_RECARGAR_PUNTOS
 } from "./ActionsTypes";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+export const recuperPassword = (password) => {
+  console.log("password", password);
+  return async (dispatch) => {
+    try {
+      const response = await axios.post( "/users/recuperarpassword",password);
+      if(response){
+        Swal.fire({
+          icon: "success",
+          title: "Correo enviado con Exito.",
+          text: `Revisa tu correo`,
+          timerProgressBar: true,
+          timer: 1500,
+        });
+      }
+
+      return response;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "No se pudo Enviar el correo Intenta mas tarde o",
+        text: `Revisa que este bien`,
+        timerProgressBar: true,
+        timer: 2500,
+      });
+    }
+  };
+};
 export const getRecargarPuntos = () => {
   return async (dispatch) => {
     try {

@@ -10,7 +10,7 @@ const AllCorredores = () => {
     dispatch(getCorredores());
   }, [dispatch]);
 
-  const allCorredoresFilter = allCorredores.filter(
+  const allCorredoresFilter = allCorredores && allCorredores.filter(
     (corredor) => corredor.activo === true
   );
 

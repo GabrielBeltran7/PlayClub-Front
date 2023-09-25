@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
 import Whatsapp from "../../Components/Whatsapp/Whatsapp";
 
 const Home = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.user);
   const carrera = useSelector((state) => state.carrera);
@@ -342,18 +342,20 @@ const Home = () => {
   const carreraFilter = carrera.filter((c) => c.actydescarrera === true);
 
   const redirigirAInicio = () => {
-    navigate('/GanadoresCarrera'); // Redirige a la ruta de inicio (cambia '/' por la ruta correcta si es diferente)
+    navigate("/GanadoresCarrera");
   };
   return (
     <div className={style.container}>
-      {usuario.admin || usuario.subadmin ? (
-        <div className={style.navbar}>
-          <Navbar props={usuario.admin} />
-          <ViewMisApuestas />
-        </div>
-      ) : (
-        <></>
-      )}
+      <div className={style.navbarMisApuestas}>
+        {usuario.admin || usuario.subadmin ? (
+          <div className={style.navbar}>
+            <Navbar props={usuario.admin} />
+          </div>
+        ) : (
+          <></>
+        )}
+        <ViewMisApuestas />
+      </div>
       <div className={style.containerInfoUser}>
         <div className={style.contendorUser}>
           <div className={style.infoUsuario}>
@@ -403,9 +405,10 @@ const Home = () => {
               ""
             )}
           </div>
-          
         </div>
-        <button className={style.botonganadores} onClick={redirigirAInicio}>Ganadores</button>
+        <button className={style.botonganadores} onClick={redirigirAInicio}>
+          Ganadores
+        </button>
 
         <div className={style.contImageLogo}>
           <img
@@ -418,7 +421,7 @@ const Home = () => {
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
           <h2>Seleccione una Carrera</h2>
-          {usuario.id ? (
+          {usuario.id && usuario.username !=="Admin" ? (
             <>
               <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
                 <option value="">Carreras</option>
@@ -432,11 +435,18 @@ const Home = () => {
               </select>
             </>
           ) : (
-            <p>
+             usuario.username ==="Admin" ? "Administrador no puede apostar" :   <>
+             <p>
               {" "}
+              
               <a href="/login">inicie sesión</a> o{" "}
               <a href="/register">Registrese</a>
-            </p>
+            </p></> 
+          
+          
+          
+          
+           
           )}
 
           <div className={style.bloque}>
@@ -486,8 +496,8 @@ const Home = () => {
           ) : (
             ""
           )}
-
-          <p className={style.puntosGanados}>{win.puntosganados}</p>
+            
+          <p className={style.puntosGanados}>{win.puntosganados? win.puntosganados: ""}</p>
           {usuario.id ? (
             <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -542,7 +552,7 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{exacta.puntosganados}</p>
+          <p className={style.puntosGanados}>{exacta.puntosganados? exacta.puntosganados:""}</p>
           {usuario.id ? (
             <button disabled={!exacta.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -609,7 +619,7 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{trifecta.puntosganados}</p>
+          <p className={style.puntosGanados}>{trifecta.puntosganados? trifecta.puntosganados :""}</p>
           {usuario.id ? (
             <button disabled={!trifecta.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -689,7 +699,7 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{superfecta.puntosganados}</p>
+          <p className={style.puntosGanados}>{superfecta.puntosganados? superfecta.puntosganados :""}</p>
           {usuario.id ? (
             <button disabled={!superfecta.puntosapostados}>
               Enviar apuesta

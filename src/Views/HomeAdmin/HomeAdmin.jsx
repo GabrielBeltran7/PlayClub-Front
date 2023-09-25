@@ -28,6 +28,7 @@ import LinkDirectos from "../../Components/LinkDirectos/LinkDirectos";
 import CargarpuntosAdmin from "../../Components/CargarPuntosaAdmin/CargarpuntosAdmin";
 import InformeApuestas from "../../Components/InformeApuestas/InformeApuestas";
 import AllCarreras from "../../Components/AllCarreras/AllCarreras";
+import InformePuntos from "../../Components/InformePuntos/InformePuntos";
 
 const { Header, Sider, Content } = Layout;
 const HomeAdmin = () => {
@@ -82,6 +83,8 @@ const HomeAdmin = () => {
         return <InformeApuestas />;
       case "13":
         return <AllCarreras />;
+      case "14":
+        return <InformePuntos />;
       default:
         return null;
     }
@@ -150,6 +153,11 @@ const HomeAdmin = () => {
                 key: "12",
                 icon: <TrophyOutlined />,
                 label: "Informe Apuestas",
+              },
+              {
+                key: "14",
+                icon: <TrophyOutlined />,
+                label: "Informe Puntos",
               },
               {
                 key: "13",
