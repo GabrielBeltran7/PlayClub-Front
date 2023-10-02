@@ -17,14 +17,17 @@ import {
 } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
+import iconoeditarusuario from "../../assets/editarusuario.png";
+import "sweetalert2/dist/sweetalert2.css";
+
+import { Avatar, Button } from "antd";
 import Navbar from "../../Components/Navbar/Navbar";
 import Swal from "sweetalert2";
 import YouTubePlayer from "../../Components/YouTubePlayer/YouTubePlayer";
 import ViewMisApuestas from "../../Components/ViewMisApuestas/ViewMisApuestas";
 import Ganadores from "../../Components/GanadoresCarrera/GanadoresCarrera";
 import MenuDesplegable from "../../Components/MenuDesplegableApuestas/MenuDesplegable";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Whatsapp from "../../Components/Whatsapp/Whatsapp";
 
 const Home = () => {
@@ -38,11 +41,7 @@ const Home = () => {
     setIsOpen(!isOpen);
   };
 
-  //console.log(usuario);
-
   const carreraycorredores = useSelector((state) => state.carreraycorredores);
-
-  console.log("22222222222222222222222", carreraycorredores);
   const [carreraMostrar, setCarreraMostrar] = useState({});
   const [carreraSeleccionada, setCarreraSeleccionada] = useState("");
 
@@ -213,6 +212,7 @@ const Home = () => {
   //*--------------------- peticiones carrera y corredores--------------------------------
   useEffect(() => {
     dispatch(getCarrera());
+
     dispatch(getCorredores());
   }, []);
   //*------------------------mmantener logueado-------------------------------------
@@ -230,6 +230,7 @@ const Home = () => {
       dispatch(getUserByUsername(username)); // Cambiamos la acción a getUserByUsername
     }
   }, [dispatch, username]); // Cambiamos userId a username
+
   //!-----------------------------submit win-------------------------
   const handleSubmitWin = async (event) => {
     event.preventDefault();
@@ -337,13 +338,17 @@ const Home = () => {
       });
     }
   };
-  console.log(usuario);
 
   const carreraFilter = carrera.filter((c) => c.actydescarrera === true);
 
   const redirigirAInicio = () => {
     navigate("/GanadoresCarrera");
   };
+
+  const redirigirActualizarPerfil = () => {
+    navigate("/actualizarperfil");
+  };
+
   return (
     <div className={style.container}>
       <div className={style.navbarMisApuestas}>
@@ -380,6 +385,12 @@ const Home = () => {
                     <a href="/register"> registrate</a>
                   </p>
                 )}
+                <Link to={`/actualizarperfil/${usuario.username}`}>
+                  <button disabled={!usuario.username}>
+                    {" "}
+                    <img src={iconoeditarusuario} alt="Icono Editar Usuario" />
+                  </button>
+                </Link>
               </p>
               <label className={style.creditosIMG}>
                 {usuario.id ? (
