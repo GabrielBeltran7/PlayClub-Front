@@ -54,9 +54,6 @@ const HomeAdmin = () => {
     setSelectedItem(key);
   };
 
-  const imagenRace =
-    "https://res.cloudinary.com/dou3yyisb/image/upload/v1694751058/PlayGame/race_lgienn.png";
-
   // Función para renderizar el componente correspondiente en función del elemento seleccionado
   const renderSelectedComponent = () => {
     switch (selectedItem) {

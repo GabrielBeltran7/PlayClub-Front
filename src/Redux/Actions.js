@@ -22,19 +22,78 @@ import {
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
   ALL_APUESTAS,
-  ACT_DESACT_CARRERA,
+  
   GET_GANADORES,
-  GET_RECARGAR_PUNTOS
+  GET_RECARGAR_PUNTOS,
 } from "./ActionsTypes";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import Swal from "sweetalert2";
 
+
+export const actualizarPasswordUsuario =(actualizarpassword)=>{
+  
+  return async (dispatch)=>{
+    try {
+      const response = await axios.post("/users/actualizarpaswordusuario", actualizarpassword)
+      Swal.fire({
+        icon: "success",
+        title: "Contraseña  actualizada con exito.",
+        timerProgressBar: true,
+        timer: 2500,
+      });
+      
+    } catch (error) {
+      const respuestaerror =(error.response.data.error)
+      Swal.fire({
+        icon: "error",
+        title: respuestaerror,
+        timerProgressBar: true,
+        timer: 2500,
+      });
+
+    }
+  }
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////
+export const actualizarPerfilUsuario = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.patch(
+        "users//actualizarperfilusuario",
+        data
+      );
+      if (response) {
+        getUserByUsername();
+        Swal.fire({
+          icon: "success",
+          title: "Perfil actualizado con exito.",
+          timerProgressBar: true,
+          timer: 2500,
+        });
+      }
+    } catch (error) {
+   
+       
+      Swal.fire({
+        icon: "error",
+        title: "Error al actualizar el peril",
+        text: `revisa que el correo este bien`,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+    }
+  };
+};
 export const recuperPassword = (password) => {
   console.log("password", password);
   return async (dispatch) => {
     try {
-      const response = await axios.post( "/users/recuperarpassword",password);
-      if(response){
+      const response = await axios.post("/users/recuperarpassword", password);
+      if (response) {
         Swal.fire({
           icon: "success",
           title: "Correo enviado con Exito.",
@@ -446,14 +505,15 @@ export const postGanadores = (ganadores) => {
 };
 
 export const getGanadores = (ganadoress) => {
-  
   return async (dispatch) => {
     try {
-     
-      const response = await axios.get(`/users/ganadores/${ganadoress.nombrecarrera}`, {
-        nombrecarrera:ganadoress.nombrecarrera
-      });
-      console.log("getganadores",response)
+      const response = await axios.get(
+        `/users/ganadores/${ganadoress.nombrecarrera}`,
+        {
+          nombrecarrera: ganadoress.nombrecarrera,
+        }
+      );
+      console.log("getganadores", response);
       dispatch({ type: GET_GANADORES, payload: response.data });
       return response;
     } catch (error) {
@@ -461,7 +521,6 @@ export const getGanadores = (ganadoress) => {
     }
   };
 };
-
 
 // export const getGanadores = (ganadores) => {
 //   return async (dispatch) => {
@@ -481,9 +540,6 @@ export const getGanadores = (ganadoress) => {
 //     }
 //   };
 // };
-
-
-
 
 export const getAllApuestas = () => {
   return async (dispatch) => {
