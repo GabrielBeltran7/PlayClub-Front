@@ -36,7 +36,6 @@ const CargarpuntosAdmin = ({ user }) => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const response = await dispatch(cargarpuntosaAdmin(puntosAdmin));
-          console.log("responseeeeeeeeee", response);
           setpuntosAdmin({
             ...puntosAdmin,
             cantidad: "",
