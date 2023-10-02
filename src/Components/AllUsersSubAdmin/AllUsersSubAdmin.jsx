@@ -19,10 +19,7 @@ const AllUsersSubAdmin = () => {
   // console.log("allusersssss", allUsers);
 
   const dispatch = useDispatch();
-  const allUsersNormal = allUsers.filter(
-    (user) => user.admin === false && user.subadmin === false
-  );
-  console.log(allUsersNormal);
+  const allUsersNormal = allUsers.filter((user) => user.admin === false);
   const [rol, setRol] = useState(false);
 
   const handleChange = (record) => (event) => {

@@ -55,9 +55,6 @@ export const actualizarPasswordUsuario =(actualizarpassword)=>{
   }
 }
 
-
-
-
 ///////////////////////////////////////////////////////////////////
 export const actualizarPerfilUsuario = (data) => {
   return async (dispatch) => {
@@ -76,11 +73,12 @@ export const actualizarPerfilUsuario = (data) => {
         });
       }
     } catch (error) {
-   
-       
+      const respuestaerror =(error.response.data.mensaje
+        )
+     
       Swal.fire({
         icon: "error",
-        title: "Error al actualizar el peril",
+        title: respuestaerror,
         text: `revisa que el correo este bien`,
         timerProgressBar: true,
         timer: 3000,
@@ -208,7 +206,7 @@ export const getUserByUsername = (username) => {
 };
 
 export const cargarpuntosaAdmin = (puntosAdmin) => {
-  console.log("puntosFRONTTTTTTTTTT", puntosAdmin);
+
   return async (dispatch) => {
     try {
       const response = await axios.post(

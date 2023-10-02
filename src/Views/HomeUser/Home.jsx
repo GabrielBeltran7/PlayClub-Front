@@ -14,12 +14,11 @@ import {
   getLinkcamaras,
   getCarrerayCorredores,
   getMisApuestas,
-
 } from "../../Redux/Actions";
 import React from "react";
 import { AntDesignOutlined } from "@ant-design/icons";
-import iconoeditarusuario  from "../../assets/editarusuario.png"
-import 'sweetalert2/dist/sweetalert2.css';
+import iconoeditarusuario from "../../assets/editarusuario.png";
+import "sweetalert2/dist/sweetalert2.css";
 
 import { Avatar, Button } from "antd";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -32,7 +31,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Whatsapp from "../../Components/Whatsapp/Whatsapp";
 
 const Home = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.user);
@@ -46,8 +44,6 @@ const Home = () => {
   const carreraycorredores = useSelector((state) => state.carreraycorredores);
   const [carreraMostrar, setCarreraMostrar] = useState({});
   const [carreraSeleccionada, setCarreraSeleccionada] = useState("");
-
-
 
   const username = usuario ? usuario.username : null; // Cambiamos userId a username
   useEffect(() => {
@@ -216,7 +212,7 @@ const Home = () => {
   //*--------------------- peticiones carrera y corredores--------------------------------
   useEffect(() => {
     dispatch(getCarrera());
-  
+
     dispatch(getCorredores());
   }, []);
   //*------------------------mmantener logueado-------------------------------------
@@ -230,17 +226,10 @@ const Home = () => {
     } else if (username) {
       // Si no hay un nombre de usuario almacenado localmente pero hay uno en el estado, guárdalo en el almacenamiento local
       localStorage.setItem("username", username); // Cambiamos userId a username
-    
 
       dispatch(getUserByUsername(username)); // Cambiamos la acción a getUserByUsername
- 
-     
-    
     }
   }, [dispatch, username]); // Cambiamos userId a username
-
-
-  
 
   //!-----------------------------submit win-------------------------
   const handleSubmitWin = async (event) => {
@@ -349,7 +338,6 @@ const Home = () => {
       });
     }
   };
- 
 
   const carreraFilter = carrera.filter((c) => c.actydescarrera === true);
 
@@ -389,18 +377,20 @@ const Home = () => {
             />
             <div className={style.userCreditos}>
               <p>
-                {usuario.username  ? (
-                  usuario.username 
+                {usuario.username ? (
+                  usuario.username
                 ) : (
                   <p>
                     <a href="/login">Inicia sesion</a> o
                     <a href="/register"> registrate</a>
                   </p>
                 )}
-                  <Link to={`/actualizarperfil/${usuario.username}`}>
-                 <button  disabled={!usuario.username} > <img src={iconoeditarusuario} alt="Icono Editar Usuario" /></button>
-                 </Link> 
-             
+                <Link to={`/actualizarperfil/${usuario.username}`}>
+                  <button disabled={!usuario.username}>
+                    {" "}
+                    <img src={iconoeditarusuario} alt="Icono Editar Usuario" />
+                  </button>
+                </Link>
               </p>
               <label className={style.creditosIMG}>
                 {usuario.id ? (
@@ -442,7 +432,7 @@ const Home = () => {
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
           <h2>Seleccione una Carrera</h2>
-          {usuario.id && usuario.username !=="Admin" ? (
+          {usuario.id && usuario.username !== "Admin" ? (
             <>
               <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
                 <option value="">Carreras</option>
@@ -455,19 +445,16 @@ const Home = () => {
                 ,
               </select>
             </>
+          ) : usuario.username === "Admin" || usuario.username === "Angel" ? (
+            "Administrador no puede apostar"
           ) : (
-             usuario.username ==="Admin" ? "Administrador no puede apostar" :   <>
-             <p>
-              {" "}
-              
-              <a href="/login">inicie sesión</a> o{" "}
-              <a href="/register">Registrese</a>
-            </p></> 
-          
-          
-          
-          
-           
+            <>
+              <p>
+                {" "}
+                <a href="/login">inicie sesión</a> o{" "}
+                <a href="/register">Registrese</a>
+              </p>
+            </>
           )}
 
           <div className={style.bloque}>
@@ -517,8 +504,10 @@ const Home = () => {
           ) : (
             ""
           )}
-            
-          <p className={style.puntosGanados}>{win.puntosganados? win.puntosganados: ""}</p>
+
+          <p className={style.puntosGanados}>
+            {win.puntosganados ? win.puntosganados : ""}
+          </p>
           {usuario.id ? (
             <button disabled={!win.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -573,7 +562,9 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{exacta.puntosganados? exacta.puntosganados:""}</p>
+          <p className={style.puntosGanados}>
+            {exacta.puntosganados ? exacta.puntosganados : ""}
+          </p>
           {usuario.id ? (
             <button disabled={!exacta.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -640,7 +631,9 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{trifecta.puntosganados? trifecta.puntosganados :""}</p>
+          <p className={style.puntosGanados}>
+            {trifecta.puntosganados ? trifecta.puntosganados : ""}
+          </p>
           {usuario.id ? (
             <button disabled={!trifecta.puntosapostados}>Enviar apuesta</button>
           ) : (
@@ -720,7 +713,9 @@ const Home = () => {
           ) : (
             ""
           )}
-          <p className={style.puntosGanados}>{superfecta.puntosganados? superfecta.puntosganados :""}</p>
+          <p className={style.puntosGanados}>
+            {superfecta.puntosganados ? superfecta.puntosganados : ""}
+          </p>
           {usuario.id ? (
             <button disabled={!superfecta.puntosapostados}>
               Enviar apuesta
