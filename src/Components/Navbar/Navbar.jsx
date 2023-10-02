@@ -9,10 +9,11 @@ const Navbar = () => {
     <nav className={style.nav}>
       {user.admin ? (
         
-        <Link to={`/homeadmin/${user.username}`}>Dashboard</Link>
+        <Link to={`/homeadmin/${user.username}`}>Dashboard Admin</Link>
 
       ) : (
-        <a href="/home/subadmin/">Dashboarda</a>
+        
+        <Link to={`/home/subadmin/${user.username}`}>Dashboard SubAdmin</Link>
       )}
     </nav>
   );

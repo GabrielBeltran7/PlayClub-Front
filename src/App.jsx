@@ -12,8 +12,8 @@ import GanadoresCarrera from "./Components/GanadoresCarrera/GanadoresCarrera";
 import CustomModal from "./Components/RecuperarContraseña/CustomModal";
 import ActualizarPerfilUsuario from "./Components/ActualizarPerfilUsuario/ActualizarPerfilUsuario";
 import { useSelector } from "react-redux";
-axios.defaults.baseURL = "https://win123.onrender.com/";
-//axios.defaults.baseURL = "http://localhost:3001/";
+//axios.defaults.baseURL = "https://win123.onrender.com/";
+axios.defaults.baseURL = "http://localhost:3001/";
 function App() {
   const user = useSelector((state) => state.user);
 
@@ -33,7 +33,7 @@ function App() {
           path="/cargapuntos/:id"
           element={user.admin || user.subadmin ? <CargaPuntosUser /> : <Home />}
         />
-        <Route path="/home/subadmin/" element={<HomeSubAdmin />} />
+        <Route path="/home/subadmin/:username" element={<HomeSubAdmin />} />
       </Routes>
     </div>
   );
