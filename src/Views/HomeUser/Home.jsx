@@ -732,6 +732,8 @@ const Home = () => {
       <div className={style.whatsapp}>
         <Whatsapp />
       </div>
+      <label className={style.pala}>Desarrollado por Palasof Service Colombia</label>
+
     </div>
   );
 };
