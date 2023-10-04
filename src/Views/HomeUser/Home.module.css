@@ -11,7 +11,10 @@
     rgba(2, 21, 51, 1) 50%,
     rgba(5, 65, 158, 1) 66%
   );
+}.pala {
+  color: white;
 }
+
 .botonganadores {
   padding: 15px 30px;
   border-radius: 50px;
