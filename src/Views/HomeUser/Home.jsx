@@ -366,8 +366,8 @@ const Home = () => {
           <div className={style.infoUsuario}>
             <Avatar
               size={{
-                xs: 60,
-                sm: 32,
+                xs: 80,
+                sm: 90,
                 md: 40,
                 lg: 64,
                 xl: 80,
@@ -386,7 +386,10 @@ const Home = () => {
                   </p>
                 )}
                 <Link to={`/actualizarperfil/${usuario.username}`}>
-                  <button disabled={!usuario.username}>
+                  <button
+                    disabled={!usuario.username}
+                    className={style.buttonPerfil}
+                  >
                     {" "}
                     <img src={iconoeditarusuario} alt="Icono Editar Usuario" />
                   </button>
@@ -417,9 +420,6 @@ const Home = () => {
             )}
           </div>
         </div>
-        <button className={style.botonganadores} onClick={redirigirAInicio}>
-          Ganadores
-        </button>
 
         <div className={style.contImageLogo}>
           <img
@@ -429,10 +429,13 @@ const Home = () => {
           />
         </div>
       </div>
+
+      <Ganadores />
+
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
           <h2>Seleccione una Carrera</h2>
-          {usuario.id && usuario.username !== "Admin" ? (
+          {usuario.id && usuario.subadmin !== true ? (
             <>
               <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
                 <option value="">Carreras</option>
@@ -445,8 +448,8 @@ const Home = () => {
                 ,
               </select>
             </>
-          ) : usuario.username === "Admin" || usuario.username === "Angel" ? (
-            "Administrador no puede apostar"
+          ) : usuario.subadmin ? (
+            "El subadministrador no puede apostar"
           ) : (
             <>
               <p>

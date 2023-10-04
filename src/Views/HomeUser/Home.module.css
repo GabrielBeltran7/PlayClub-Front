@@ -104,6 +104,8 @@
 .puntosGanados {
   position: absolute;
   bottom: 15%;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .selectCarrera {
@@ -184,7 +186,7 @@
   padding: 30px;
   border-radius: 20px;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 50px;
   border: 10px solid #119b1cc9;
 
   box-shadow: 2px 2px 5px;
@@ -213,6 +215,8 @@
   font-family: "Roboto", sans-serif;
   font-family: "Roboto Condensed", sans-serif;
   font-family: "Roboto Mono", monospace;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .MisApuestas {
@@ -232,7 +236,40 @@
   right: 10px;
 }
 
+.buttonPerfil {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 /* ------------------------------------------------- */
+@media screen and (max-width: 790px) {
+  .formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-direction: column;
+    width: 100vw;
+  }
+  .containerInfoUser {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  .contendorUser {
+    width: 70%;
+  }
+  .infoUsuario {
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  .infoUsuario img {
+    width: 100%;
+  }
+}
+
 /* Media querys -- responsive*/
 @media screen and (max-width: 550px) {
   .formContainer {
@@ -302,5 +339,6 @@
   }
   .navbarMisApuestas {
     flex-direction: column;
+    position: static;
   }
 }

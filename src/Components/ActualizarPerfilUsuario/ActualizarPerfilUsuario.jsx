@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import styles from "./ActualizarPerfilUsuario.module.css";
-import { getUserByUsername, actualizarPerfilUsuario, actualizarPasswordUsuario } from "../../Redux/Actions";
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  getUserByUsername,
+  actualizarPerfilUsuario,
+  actualizarPasswordUsuario,
+} from "../../Redux/Actions";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function ActualizarPerfilUsuario() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { username } = useParams();
-  const usuario = useSelector((state) => state.user)
+  const usuario = useSelector((state) => state.user);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    dispatch(getUserByUsername(username))
-  }, [dispatch, username])
+    dispatch(getUserByUsername(username));
+  }, [dispatch, username]);
 
-  const [formData, setFormData] = useState({
+  const [user, setUser] = useState({
     username: "",
     email: "",
     imagen: "",
   });
 
   const [password, setPassword] = useState({
-    username:"",
+    username: "",
     contraseñaActual: "",
     nuevaContraseña: "",
-
-
-  })
+  });
   useEffect(() => {
     // Actualiza formData cuando el usuario cambie
-    setFormData({
+    setUser({
       username: usuario.username,
       email: usuario.email,
-      imagen: usuario.imagen,
     });
     setPassword({
       username: usuario.username,
       contraseñaActual: "",
-    nuevaContraseña: "",
+      nuevaContraseña: "",
     });
-  }, [usuario])
+  }, [usuario]);
 
   const [errors, setErrors] = useState({
     username: "",
@@ -50,10 +52,9 @@ function ActualizarPerfilUsuario() {
   // Agregar estado para verificar si algún campo está vacío
   const [isAnyFieldEmpty, setIsAnyFieldEmpty] = useState(false);
 
-
   const handleChangePerfil = (event) => {
-    setFormData({
-      ...formData,
+    setUser({
+      ...user,
       [event.target.name]: event.target.value,
     });
 
@@ -74,14 +75,12 @@ function ActualizarPerfilUsuario() {
     }
   };
 
-
   const handleChangePassword = (event) => {
     setPassword({
       ...password,
       [event.target.name]: event.target.value,
-    })
-   
-  }
+    });
+  };
 
   const handleActualizarPerfil = (event) => {
     event.preventDefault();
@@ -92,15 +91,52 @@ function ActualizarPerfilUsuario() {
       return;
     }
 
-    dispatch(actualizarPerfilUsuario(formData));
+    dispatch(actualizarPerfilUsuario(user));
+    console.log("userrrrrrrrrrrrrrrrrrrrrrrrrrrr", user);
   };
 
-  const handleActualizarPassword =(event)=>{
-    event.preventDefault()
-    dispatch(actualizarPasswordUsuario(password))
-    console.log("999999999999999999999999999", password)
-    
-  }
+  const handleActualizarPassword = (event) => {
+    event.preventDefault();
+    dispatch(actualizarPasswordUsuario(password));
+  };
+  console.log("999999999999999999999999999", user);
+  const handleChangeImage = async (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setSelectedImage(selectedFile);
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      formData.append("upload_preset", "Playclub");
+      try {
+        const response = await fetch(
+          "https://api.cloudinary.com/v1_1/dou3yyisb/image/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setUser({
+            ...user,
+            imagen: data.secure_url,
+          });
+        } else {
+          console.error("Error al cargar la imagen");
+        }
+      } catch (error) {
+        console.error("Error al cargar la imagen", error);
+      }
+    }
+  };
+
+  const previewImage = () => {
+    if (selectedImage) {
+      return (
+        <img src={URL.createObjectURL(selectedImage)} className={styles.img} />
+      );
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -109,8 +145,8 @@ function ActualizarPerfilUsuario() {
         <label className={styles.label}>Usuario</label>
         <input
           type="text"
-          name='username'
-          value={formData.username}
+          name="username"
+          value={user.username}
           onChange={handleChangePerfil}
           placeholder="Nombre de usuario"
           disabled={true}
@@ -121,8 +157,8 @@ function ActualizarPerfilUsuario() {
         <label className={styles.label}>Correo</label>
         <input
           type="text"
-          name='email'
-          value={formData.email}
+          name="email"
+          value={user.email}
           onChange={handleChangePerfil}
           placeholder="Email"
           className={styles.input}
@@ -131,16 +167,20 @@ function ActualizarPerfilUsuario() {
         <span className={styles.error}>{errors.email}</span>
         <label className={styles.label}>Imagen</label>
         <input
-          type="text"
-          name='imagen'
-          value={formData.imagen}
-          onChange={handleChangePerfil}
+          type="file"
+          name="imagen"
+          onChange={handleChangeImage}
           placeholder="URL de la imagen"
           className={styles.input}
           required
         />
+        {previewImage()}
         <span className={styles.error}>{errors.imagen}</span>
-        <button disabled={isAnyFieldEmpty} onClick={handleActualizarPerfil} className={styles.button}>
+        <button
+          disabled={isAnyFieldEmpty}
+          onClick={handleActualizarPerfil}
+          className={styles.button}
+        >
           Actualizar Perfil
         </button>
       </div>
@@ -150,50 +190,41 @@ function ActualizarPerfilUsuario() {
         {/* <label className={styles.label}>Usuario</label> */}
         <input
           type="text"
-          name='username'
+          name="username"
           value={password.username}
           placeholder="Nombre de usuario"
           disabled={true}
           className={styles.input}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={handleChangePassword}
-          
         />
         <span className={styles.error}>{errors.username}</span>
         <label className={styles.label}>Contraseña Actual</label>
         <input
           type="password"
-          name='contraseñaActual'
+          name="contraseñaActual"
           value={password.email}
           onChange={handleChangePassword}
           placeholder="Digite contraseña actual"
           className={styles.input}
-          
         />
         <span className={styles.error}>{errors.email}</span>
         <label className={styles.label}>Nueva Contraseña</label>
         <input
           type="password"
-          name='nuevaContraseña'
+          name="nuevaContraseña"
           value={password.imagen}
           onChange={handleChangePassword}
           placeholder="digite su nueva contraseña"
           className={styles.input}
-          
         />
         <span className={styles.error}>{errors.imagen}</span>
-        <button  onClick={handleActualizarPassword} className={styles.button}>
+        <button onClick={handleActualizarPassword} className={styles.button}>
           Actualizar Contraseña
         </button>
       </div>
-
-
-
     </div>
   );
 }
 
 export default ActualizarPerfilUsuario;
-
-
-

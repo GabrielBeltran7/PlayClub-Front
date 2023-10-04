@@ -1,12 +1,18 @@
 /* Estilos para la página */
 .page {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Centrar horizontalmente */
+  align-items: start; /* Centrar horizontalmente */
   justify-content: center; /* Centrar verticalmente */
-  min-height: 100vh; /* Altura mínima de la página al 100% de la ventana */
   background: rgb(5, 65, 158);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 65, 158, 1) 30%,
+    rgba(2, 21, 51, 1) 50%,
+    rgba(5, 65, 158, 1) 66%
+  );
   padding: 20px; /* Espaciado interior para dispositivos pequeños */
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 /* Estilos para el formulario */
@@ -37,11 +43,11 @@
 .terceracarta,
 .cuartacarta {
   margin-bottom: 20px;
-  border: 2px solid #FFD700; /* Borde amarillo fosforescente */
+  border: 3px solid #ffd700; /* Borde amarillo fosforescente */
   border-radius: 10px; /* Borde más redondeado */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%; /* Ancho al 100% para dispositivos pequeños */
-  max-width: 300px; /* Ancho máximo para dispositivos grandes */
+  max-width: 220px; /* Ancho máximo para dispositivos grandes */
   background: #fff; /* Fondo blanco */
   padding: 20px; /* Espaciado interior para dispositivos pequeños */
 }
@@ -52,4 +58,33 @@
 .cuartacarta p {
   font-size: 16px;
   color: #333; /* Texto negro */
+}
+
+@media screen and (max-width: 1000px) {
+  .page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    justify-items: center;
+    grid-template-areas:
+      "select select"
+      "ganador1 ganador2"
+      "ganador3 ganador4";
+  }
+  .primeracarta {
+    grid-area: ganador1;
+  }
+  .segundacarta {
+    grid-area: ganador2;
+  }
+  .terceracarta {
+    grid-area: ganador3;
+  }
+  .cuartacarta {
+    grid-area: ganador4;
+  }
+  .form {
+    grid-area: select;
+  }
 }

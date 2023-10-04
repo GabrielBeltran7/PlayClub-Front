@@ -22,44 +22,40 @@ import {
   CARGAR_PUNTOS_ADMIN,
   POST_GANADORES,
   ALL_APUESTAS,
-  
   GET_GANADORES,
   GET_RECARGAR_PUNTOS,
 } from "./ActionsTypes";
 import axios, { Axios } from "axios";
 import Swal from "sweetalert2";
 
-
-export const actualizarPasswordUsuario =(actualizarpassword)=>{
-  
-  return async (dispatch)=>{
+export const actualizarPasswordUsuario = (actualizarpassword) => {
+  return async (dispatch) => {
     try {
-      const response = await axios.post("/users/actualizarpaswordusuario", actualizarpassword)
+      const response = await axios.post(
+        "/users/actualizarpaswordusuario",
+        actualizarpassword
+      );
       Swal.fire({
         icon: "success",
         title: "Contraseña  actualizada con exito.",
         timerProgressBar: true,
         timer: 2500,
       });
-      
     } catch (error) {
-      const respuestaerror =(error.response.data.error)
+      const respuestaerror = error.response.data.error;
       Swal.fire({
         icon: "error",
         title: respuestaerror,
         timerProgressBar: true,
         timer: 2500,
       });
-
     }
-  }
-}
-
-
-
+  };
+};
 
 ///////////////////////////////////////////////////////////////////
 export const actualizarPerfilUsuario = (data) => {
+  console.log("dataaaaaaaaa", data);
   return async (dispatch) => {
     try {
       const response = await axios.patch(
@@ -76,8 +72,6 @@ export const actualizarPerfilUsuario = (data) => {
         });
       }
     } catch (error) {
-   
-       
       Swal.fire({
         icon: "error",
         title: "Error al actualizar el peril",
@@ -326,7 +320,7 @@ export const cargaBonosaUsuarios = (user) => {
       return response;
     } catch (error) {
       console.log(error);
-      const avisoError = error.response.data.error;
+      const avisoError = error.response.data.message;
       Swal.fire({
         icon: "error",
         title: avisoError,

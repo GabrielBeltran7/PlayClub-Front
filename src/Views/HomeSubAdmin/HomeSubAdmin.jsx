@@ -113,7 +113,7 @@ const HomeSubAdmin = () => {
               {
                 key: "2",
                 icon: <UserAddOutlined />,
-                label: "Crear Corredor",
+                label: "Añadir Corredor",
               },
 
               {
