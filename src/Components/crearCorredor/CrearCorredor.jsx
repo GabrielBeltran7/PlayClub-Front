@@ -100,7 +100,14 @@ const CrearCorredor = () => {
 
   return (
     <div className={style.container}>
-      <h1 className={style.title}>Agregar Corredor</h1>
+      <h1 className={style.title}>Añadir Corredores</h1>
+      <div className={style.containerLogo}>
+        <img
+          src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
+          alt=""
+          width="300"
+        />
+      </div>
       <div className={style.containerForm}>
         <form className={style.formulario} onSubmit={handleSubmit}>
           <label>Seleccione la carrera</label>
@@ -149,6 +156,7 @@ const CrearCorredor = () => {
 
           <button>Agregar</button>
         </form>
+
         <div className={style.previewCorredor}>
           <h2>{corredor.nombre}</h2>
           <p>{corredor.numero}</p>

@@ -151,11 +151,15 @@ const Home = () => {
   const handleChangewin = (event) => {
     const pointsApost = event.target.value;
     const puntosganados = (pointsApost * unicacarrera.porcentajeWin) / 100;
+    console.log("eeeeeeeeeeeeeeeeeeee");
+    const corredorId = event.target.options[event.target.selectedIndex].id;
     setWin({
       ...win,
       id: usuario.id,
       username: usuario.username,
       puntosganados: puntosganados,
+      puesto1: event.target.value,
+      iDprimerPuesto: corredorId,
       [event.target.name]: event.target.value,
     });
   };
@@ -164,14 +168,33 @@ const Home = () => {
   const handleChangeExacta = (event) => {
     const pointsApost = event.target.value;
     const puntosganados = (pointsApost * unicacarrera.porcentajeExacta) / 100;
+    const selectedIndex1 = event.target.options[event.target.selectedIndex].id;
+    const selectedIndex2 =
+      event.target.name === "puesto2" ? event.target.selectedIndex - 1 : null;
+
+    // const corredor1Id =
+    //   selectedIndex1 && selectedIndex1 >= 0
+    //     ? carreraycorredores.Crearcorredors[selectedIndex1].id
+    //     : null;
+    // const corredor2Id =
+    //   selectedIndex2 >= 0
+    //     ? carreraycorredores.Crearcorredors[selectedIndex2].id
+    //     : null;
+    console.log("jjjjjjjj", selectedIndex1);
+    // console.log("hhhhhhhhhh", corredor2Id);
     setExacta({
       ...exacta,
       id: usuario.id,
       username: usuario.username,
       puntosganados: puntosganados,
+      iDprimerPuesto: "",
+      // iDSegundoPuesto: corredor2Id,
+
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleId = (id) => {};
 
   //!--------------------------------------handlechange Trifecta-----------------------------
 
@@ -351,6 +374,9 @@ const Home = () => {
     navigate("/actualizarperfil");
   };
 
+  // console.log("carrera y corredoressssssssssss", carreraycorredores);
+  console.log("apuesta exacta", exacta);
+
   return (
     <div className={style.container}>
       <div className={style.navbarMisApuestas}>
@@ -368,8 +394,8 @@ const Home = () => {
           <div className={style.infoUsuario}>
             <Avatar
               size={{
-                xs: 60,
-                sm: 32,
+                xs: 80,
+                sm: 90,
                 md: 40,
                 lg: 64,
                 xl: 80,
@@ -388,7 +414,10 @@ const Home = () => {
                   </p>
                 )}
                 <Link to={`/actualizarperfil/${usuario.username}`}>
-                  <button disabled={!usuario.username}>
+                  <button
+                    disabled={!usuario.username}
+                    className={style.buttonPerfil}
+                  >
                     {" "}
                     <img src={iconoeditarusuario} alt="Icono Editar Usuario" />
                   </button>
@@ -419,9 +448,6 @@ const Home = () => {
             )}
           </div>
         </div>
-        <button className={style.botonganadores} onClick={redirigirAInicio}>
-          Ganadores
-        </button>
 
         <div className={style.contImageLogo}>
           <img
@@ -431,10 +457,13 @@ const Home = () => {
           />
         </div>
       </div>
+
+      <Ganadores />
+
       <div className={style.selectCarreraContainer}>
         <div className={style.preview}>
           <h2>Seleccione una Carrera</h2>
-          {usuario.id && usuario.username !== "Admin" ? (
+          {usuario.id && usuario.subadmin !== true ? (
             <>
               <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
                 <option value="">Carreras</option>
@@ -447,8 +476,8 @@ const Home = () => {
                 ,
               </select>
             </>
-          ) : usuario.username === "Admin" || usuario.username === "Angel" ? (
-            "Administrador no puede apostar"
+          ) : usuario.subadmin ? (
+            "El subadministrador no puede apostar"
           ) : (
             <>
               <p>
@@ -480,13 +509,12 @@ const Home = () => {
           <h2>Win</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select name="puesto1" onChange={handleChangewin} required>
+          <select onChange={handleChangewin} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
+                  <option key={element.id} name="puesto1" id={element.id}>
+                    {element.nombre} {element.numero}
                   </option>
                 ))
               : ""}
@@ -529,10 +557,22 @@ const Home = () => {
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
-                  </option>
+                  <>
+                    <option value={element.nombre} key={element.id}>
+                      {element.nombre} {element.numero}
+                    </option>
+                    <option value={element.id} key={element.id + 1}>
+                      {
+                        <select
+                          name="iDprimerPuesto"
+                          onChange={handleChangeExacta}
+                        >
+                          {element.id}
+                        </select>
+                      }
+                      {/* {element.nombre} {element.numero} */}
+                    </option>
+                  </>
                 ))
               : ""}
             ,
@@ -542,9 +582,9 @@ const Home = () => {
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} id={element.id}>
                     {" "}
-                    {element.nombre} {element.numero}{" "}
+                    {element.nombre} {element.numero}
                   </option>
                 ))
               : ""}

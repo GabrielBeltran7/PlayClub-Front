@@ -9,8 +9,8 @@ const ViewMisApuestas = () => {
   const usuario = useSelector((state) => state.user);
   const userName = usuario.username;
   const misApuestas = useSelector((state) => state.misApuestas);
-  console.log(misApuestas);
-  console.log(usuario);
+  // console.log(misApuestas);
+  // console.log(usuario);
 
   const [isOpen, setIsOpen] = useState({}); // Estado para controlar la apertura/cierre de las secciones
 

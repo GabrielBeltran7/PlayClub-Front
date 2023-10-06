@@ -69,9 +69,10 @@ const PublicarGanadoresAdmin = ({ user }) => {
 
   return (
     <div className={style.container}>
-      <h1 className={style.title}>Cargar Ganadores</h1>
+      <h1 className={style.title}>RESULTADOS DE CARRERAS</h1>
       <div className={style.contenedorTodo}>
         <form className={style.form} onSubmit={handleSubmit}>
+          <label>Seleccione una carrera</label>
           <select name="nombreCarrera" onChange={handleChange}>
             <option value="">Seleccione la carrera</option>
             {carrera.map((element) => (
@@ -133,7 +134,7 @@ const PublicarGanadoresAdmin = ({ user }) => {
               : ""}
             ,
           </select>
-          <button>Crear carrera</button>
+          <button>Cargar Ganadores</button>
         </form>
       </div>
     </div>
