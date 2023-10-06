@@ -72,9 +72,11 @@ export const actualizarPerfilUsuario = (data) => {
         });
       }
     } catch (error) {
+      const respuestaerror = error.response.data.mensaje;
+
       Swal.fire({
         icon: "error",
-        title: "Error al actualizar el peril",
+        title: respuestaerror,
         text: `revisa que el correo este bien`,
         timerProgressBar: true,
         timer: 3000,
@@ -193,7 +195,7 @@ export const getUserByUsername = (username) => {
         type: GET_USER_LOGIN,
         payload: response.data,
       });
-      console.log("getUserByUsername", response);
+      // console.log("getUserByUsername", response);
       return response;
     } catch (error) {
       throw error;
@@ -202,14 +204,13 @@ export const getUserByUsername = (username) => {
 };
 
 export const cargarpuntosaAdmin = (puntosAdmin) => {
-  console.log("puntosFRONTTTTTTTTTT", puntosAdmin);
   return async (dispatch) => {
     try {
       const response = await axios.post(
         "admin/cargarpuntosaadministrador",
         puntosAdmin
       );
-      console.log("PUNTOSBACKKKKKKKKK", response);
+      // console.log("PUNTOSBACKKKKKKKKK", response);
       dispatch({ type: CARGAR_PUNTOS_ADMIN, payload: response.data });
 
       return response;
@@ -225,7 +226,7 @@ export const cargarpuntosaAdmin = (puntosAdmin) => {
 };
 
 export const crearLinkDirectos = (linkdirectos) => {
-  console.log("linkdirectossssssss", linkdirectos);
+  // console.log("linkdirectossssssss", linkdirectos);
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/postlinkcamaras", linkdirectos);
@@ -239,7 +240,7 @@ export const crearLinkDirectos = (linkdirectos) => {
 };
 
 export const postUser = (user) => {
-  console.log("action post user", user);
+  // console.log("action post user", user);
   return async (dispatch) => {
     try {
       const response = await axios.post("/users", user);
@@ -315,12 +316,12 @@ export const cargaBonosaUsuarios = (user) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/agregarpuntosausuarios", user);
-      console.log("CARGAR_BONOS_USUARIO", response);
+      // console.log("CARGAR_BONOS_USUARIO", response);
       dispatch({ type: CARGAR_BONOS_USUARIO, payload: response.data });
       return response;
     } catch (error) {
       console.log(error);
-      const avisoError = error.response.data.message;
+      const avisoError = error.response.data.error;
       Swal.fire({
         icon: "error",
         title: avisoError,
@@ -476,7 +477,7 @@ export const getMisApuestas = (username) => {
     try {
       const response = await axios.get(`/users/getmisapuestas/${username}`);
       dispatch({ type: GET_MIS_APUESTAS, payload: response.data });
-      console.log("responseeeeeeeeeee", response.data);
+      // console.log("responseeeeeeeeeee", response.data);
       return response;
     } catch (error) {
       throw error;

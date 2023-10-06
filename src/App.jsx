@@ -36,7 +36,7 @@ function App() {
           path="/cargapuntos/:id"
           element={user.admin || user.subadmin ? <CargaPuntosUser /> : <Home />}
         />
-        <Route path="/home/subadmin/" element={<HomeSubAdmin />} />
+        <Route path="/home/subadmin/:username" element={<HomeSubAdmin />} />
       </Routes>
     </div>
   );

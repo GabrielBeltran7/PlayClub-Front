@@ -154,6 +154,7 @@ function ActualizarPerfilUsuario() {
           required
         />
         <span className={styles.error}>{errors.username}</span>
+
         <label className={styles.label}>Correo</label>
         <input
           type="text"
@@ -176,6 +177,7 @@ function ActualizarPerfilUsuario() {
         />
         {previewImage()}
         <span className={styles.error}>{errors.imagen}</span>
+
         <button
           disabled={isAnyFieldEmpty}
           onClick={handleActualizarPerfil}
@@ -198,7 +200,7 @@ function ActualizarPerfilUsuario() {
           style={{ display: "none" }}
           onChange={handleChangePassword}
         />
-        <span className={styles.error}>{errors.username}</span>
+
         <label className={styles.label}>Contraseña Actual</label>
         <input
           type="password"
@@ -208,7 +210,7 @@ function ActualizarPerfilUsuario() {
           placeholder="Digite contraseña actual"
           className={styles.input}
         />
-        <span className={styles.error}>{errors.email}</span>
+
         <label className={styles.label}>Nueva Contraseña</label>
         <input
           type="password"
@@ -218,7 +220,7 @@ function ActualizarPerfilUsuario() {
           placeholder="digite su nueva contraseña"
           className={styles.input}
         />
-        <span className={styles.error}>{errors.imagen}</span>
+
         <button onClick={handleActualizarPassword} className={styles.button}>
           Actualizar Contraseña
         </button>
