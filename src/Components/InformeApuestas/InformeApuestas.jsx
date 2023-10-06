@@ -39,7 +39,6 @@ const InformeApuestas = () => {
   const Exacta = allApuestas.exacta
   
   const Trifecta = allApuestas.trifecta
-  console.log("WinallApuestas", Trifecta)
   const Superfecta = allApuestas.superfecta
 
 /***************************************************************************************** */

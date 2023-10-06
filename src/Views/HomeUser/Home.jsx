@@ -36,12 +36,14 @@ const Home = () => {
   const usuario = useSelector((state) => state.user);
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
+ 
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const carreraycorredores = useSelector((state) => state.carreraycorredores);
+  console.log("***********************************", carreraycorredores)
   const [carreraMostrar, setCarreraMostrar] = useState({});
   const [carreraSeleccionada, setCarreraSeleccionada] = useState("");
 

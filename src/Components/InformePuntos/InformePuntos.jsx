@@ -5,6 +5,8 @@ import { Button, Input, Space, Table } from "antd";
 import { getRecargarPuntos } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import * as XLSX from 'xlsx';
+
 
 const InformePuntos = () => {
   const [searchText, setSearchText] = useState("");
@@ -12,6 +14,14 @@ const InformePuntos = () => {
   const searchInput = useRef(null);
   const dispatch = useDispatch();
   const getPuntos = useSelector((state) => state.recargarpuntos);
+
+  const exportToExcelPuntos = () => {
+    const ws = XLSX.utils.json_to_sheet(getPuntos);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Puntos');
+    XLSX.writeFile(wb, 'reportedepuntos.xlsx');
+  }
+
 
   useEffect(() => {
     dispatch(getRecargarPuntos());
@@ -26,20 +36,27 @@ const InformePuntos = () => {
     clearFilters();
     setSearchText("");
   };
+   
   const getColumnSearchProps = (dataIndex) => ({
+    
     filterDropdown: ({
       setSelectedKeys,
       selectedKeys,
       confirm,
       clearFilters,
       close,
+      
     }) => (
+      
       <div
+      
         style={{
           padding: 8,
         }}
         onKeyDown={(e) => e.stopPropagation()}
       >
+       
+        
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
@@ -53,6 +70,7 @@ const InformePuntos = () => {
             display: "block",
           }}
         />
+          
         <Space>
           <Button
             type="primary"
@@ -85,6 +103,7 @@ const InformePuntos = () => {
               setSearchedColumn(dataIndex);
             }}
           >
+           
             Filter
           </Button>
           <Button
@@ -94,10 +113,14 @@ const InformePuntos = () => {
               close();
             }}
           >
+
+
             close
           </Button>
         </Space>
+        
       </div>
+      
     ),
     filterIcon: (filtered) => (
       <SearchOutlined
@@ -105,6 +128,7 @@ const InformePuntos = () => {
           color: filtered ? "#1677ff" : undefined,
         }}
       />
+      
     ),
     onFilter: (value, record) =>
       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
@@ -113,6 +137,7 @@ const InformePuntos = () => {
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
+    
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
@@ -128,6 +153,7 @@ const InformePuntos = () => {
         text
       ),
   });
+  
   const columns = [
     {
       title: "Usario",
@@ -163,6 +189,14 @@ const InformePuntos = () => {
       render: (date) => moment(date).format("YYYY-MM-DD HH:mm:ss"),
     },
   ];
-  return <Table columns={columns} dataSource={getPuntos} />;
+  
+  
+  return (
+    <div>
+      <button onClick={exportToExcelPuntos} >Exportar a excel 📑</button> 
+<Table columns={columns} dataSource={getPuntos} />
+    </div>
+  );
+  
 };
 export default InformePuntos;
