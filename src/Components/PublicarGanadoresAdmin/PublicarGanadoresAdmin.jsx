@@ -19,10 +19,10 @@ const PublicarGanadoresAdmin = ({ user }) => {
     id: "",
     nombreCarrera: "",
     username: user.username,
-    primerPuesto: "",
-    segundoPuesto: "",
-    tercerPuesto: "",
-    cuartoPuesto: "",
+    iDprimerPuesto: "",
+    iDsegundoPuesto: "",
+    iDtercerPuesto: "",
+    iDcuartoPuesto: "",
   });
 
   useEffect(() => {
@@ -45,10 +45,10 @@ const PublicarGanadoresAdmin = ({ user }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (
-      !ganadores.primerPuesto ||
-      !ganadores.segundoPuesto ||
-      !ganadores.tercerPuesto ||
-      !ganadores.cuartoPuesto
+      !ganadores.iDprimerPuesto ||
+      !ganadores.iDsegundoPuesto ||
+      !ganadores.iDtercerPuesto ||
+      !ganadores.iDcuartoPuesto
     ) {
       Swal.fire({
         icon: "error",
@@ -83,11 +83,11 @@ const PublicarGanadoresAdmin = ({ user }) => {
             ))}
           </select>
           <label>Primer puesto</label>
-          <select name="primerPuesto" onChange={handleChange} required>
+          <select name="iDprimerPuesto" onChange={handleChange} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -96,11 +96,11 @@ const PublicarGanadoresAdmin = ({ user }) => {
             ,
           </select>
           <label>Segundo puesto</label>
-          <select name="segundoPuesto" onChange={handleChange} required>
+          <select name="iDsegundoPuesto" onChange={handleChange} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -109,11 +109,11 @@ const PublicarGanadoresAdmin = ({ user }) => {
             ,
           </select>
           <label>Tercer Puesto</label>
-          <select name="tercerPuesto" onChange={handleChange} required>
+          <select name="iDtercerPuesto" onChange={handleChange} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -122,11 +122,11 @@ const PublicarGanadoresAdmin = ({ user }) => {
             ,
           </select>
           <label>Cuarto puesto</label>
-          <select name="cuartoPuesto" onChange={handleChange} required>
+          <select name="iDcuartoPuesto" onChange={handleChange} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
