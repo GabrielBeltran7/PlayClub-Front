@@ -55,8 +55,8 @@ const Home = () => {
   const [win, setWin] = useState({
     id: usuario.id,
     username: usuario.username,
+    iDprimerPuesto: "",
     nombreapuesta: "",
-    puesto1: "",
     puntosapostados: "",
     puntosganados: "",
   });
@@ -64,8 +64,6 @@ const Home = () => {
     id: usuario.id,
     username: usuario.username,
     nombreapuesta: "",
-    puesto1: "",
-    puesto2: "",
     puntosapostados: "",
     puntosganados: "",
   });
@@ -73,9 +71,6 @@ const Home = () => {
     id: usuario.id,
     username: usuario.username,
     nombreapuesta: "",
-    puesto1: "",
-    puesto2: "",
-    puesto3: "",
     puntosapostados: "",
     puntosganados: "",
   });
@@ -84,10 +79,6 @@ const Home = () => {
     id: usuario.id,
     username: usuario.username,
     nombreapuesta: "",
-    puesto1: "",
-    puesto2: "",
-    puesto3: "",
-    puesto4: "",
     puntosapostados: "",
     puntosganados: "",
   });
@@ -151,15 +142,12 @@ const Home = () => {
   const handleChangewin = (event) => {
     const pointsApost = event.target.value;
     const puntosganados = (pointsApost * unicacarrera.porcentajeWin) / 100;
-    console.log("eeeeeeeeeeeeeeeeeeee");
-    const corredorId = event.target.options[event.target.selectedIndex].id;
+   
     setWin({
       ...win,
       id: usuario.id,
       username: usuario.username,
       puntosganados: puntosganados,
-      puesto1: event.target.value,
-      iDprimerPuesto: corredorId,
       [event.target.name]: event.target.value,
     });
   };
@@ -168,27 +156,13 @@ const Home = () => {
   const handleChangeExacta = (event) => {
     const pointsApost = event.target.value;
     const puntosganados = (pointsApost * unicacarrera.porcentajeExacta) / 100;
-    const selectedIndex1 = event.target.options[event.target.selectedIndex].id;
-    const selectedIndex2 =
-      event.target.name === "puesto2" ? event.target.selectedIndex - 1 : null;
 
-    // const corredor1Id =
-    //   selectedIndex1 && selectedIndex1 >= 0
-    //     ? carreraycorredores.Crearcorredors[selectedIndex1].id
-    //     : null;
-    // const corredor2Id =
-    //   selectedIndex2 >= 0
-    //     ? carreraycorredores.Crearcorredors[selectedIndex2].id
-    //     : null;
-  
     // console.log("hhhhhhhhhh", corredor2Id);
     setExacta({
       ...exacta,
       id: usuario.id,
       username: usuario.username,
       puntosganados: puntosganados,
-      iDprimerPuesto: "",
-      // iDSegundoPuesto: corredor2Id,
 
       [event.target.name]: event.target.value,
     });
@@ -375,7 +349,7 @@ const Home = () => {
   };
 
   // console.log("carrera y corredoressssssssssss", carreraycorredores);
-  console.log("apuesta exacta", exacta);
+  console.log("apuesta exacta", superfecta);
 
   return (
     <div className={style.container}>
@@ -509,11 +483,11 @@ const Home = () => {
           <h2>Win</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select onChange={handleChangewin} required>
+          <select name="iDprimerPuesto" onChange={handleChangewin} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} name="puesto1" id={element.id}>
+                  <option key={element.id} value={element.id}>
                     {element.nombre} {element.numero}
                   </option>
                 ))
@@ -553,36 +527,23 @@ const Home = () => {
           <label>Corredores</label>
           <label>Puesto 1</label>
 
-          <select name="puesto1" onChange={handleChangeExacta} required>
+          <select name="iDprimerPuesto" onChange={handleChangeExacta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <>
-                    <option value={element.nombre} key={element.id}>
-                      {element.nombre} {element.numero}
-                    </option>
-                    <option value={element.id} key={element.id + 1}>
-                      {
-                        <select
-                          name="iDprimerPuesto"
-                          onChange={handleChangeExacta}
-                        >
-                          {element.id}
-                        </select>
-                      }
-                      {/* {element.nombre} {element.numero} */}
-                    </option>
-                  </>
+                  <option key={element.id} value={element.id}>
+                    {element.nombre} {element.numero}
+                  </option>
                 ))
               : ""}
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="puesto2" onChange={handleChangeExacta} required>
+          <select name="iDsegundoPuesto" onChange={handleChangeExacta} required>
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} id={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}
                   </option>
@@ -621,11 +582,15 @@ const Home = () => {
           <h2>Trifecta</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select name="puesto1" onChange={handleChangeTrifecta} required>
+          <select
+            name="iDprimerPuesto"
+            onChange={handleChangeTrifecta}
+            required
+          >
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -634,11 +599,15 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="puesto2" onChange={handleChangeTrifecta} required>
+          <select
+            name="iDsegundoPuesto"
+            onChange={handleChangeTrifecta}
+            required
+          >
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -647,11 +616,15 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 3</label>
-          <select name="puesto3" onChange={handleChangeTrifecta} required>
+          <select
+            name="iDtercerPuesto"
+            onChange={handleChangeTrifecta}
+            required
+          >
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -690,11 +663,15 @@ const Home = () => {
           <h2>Superfecta</h2>
           <label>Corredores</label>
           <label>Puesto 1</label>
-          <select name="puesto1" onChange={handleChangeSuperfecta} required>
+          <select
+            name="iDprimerPuesto"
+            onChange={handleChangeSuperfecta}
+            required
+          >
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -703,11 +680,15 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 2</label>
-          <select name="puesto2" onChange={handleChangeSuperfecta} required>
+          <select
+            name="iDsegundoPuesto"
+            onChange={handleChangeSuperfecta}
+            required
+          >
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -716,11 +697,15 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 3</label>
-          <select name="puesto3" onChange={handleChangeSuperfecta} required>
+          <select
+            name="iDtercerPuesto"
+            onChange={handleChangeSuperfecta}
+            required
+          >
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
@@ -729,11 +714,15 @@ const Home = () => {
             ,
           </select>
           <label>Puesto 4</label>
-          <select name="puesto4" onChange={handleChangeSuperfecta} required>
+          <select
+            name="iDcuartoPuesto"
+            onChange={handleChangeSuperfecta}
+            required
+          >
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
               ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id}>
+                  <option key={element.id} value={element.id}>
                     {" "}
                     {element.nombre} {element.numero}{" "}
                   </option>
