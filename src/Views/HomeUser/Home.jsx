@@ -180,7 +180,7 @@ const Home = () => {
     //   selectedIndex2 >= 0
     //     ? carreraycorredores.Crearcorredors[selectedIndex2].id
     //     : null;
-    console.log("jjjjjjjj", selectedIndex1);
+  
     // console.log("hhhhhhhhhh", corredor2Id);
     setExacta({
       ...exacta,
