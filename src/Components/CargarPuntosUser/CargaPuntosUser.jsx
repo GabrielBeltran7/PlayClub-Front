@@ -8,6 +8,7 @@ import {
   cargarPuntosSubadmin,
 } from "../../Redux/Actions";
 import Swal from "sweetalert2";
+import BotonAtras from "../BotonAtras/BotonAtras";
 
 const CargaPuntosUser = () => {
   const { id } = useParams();
@@ -102,7 +103,10 @@ const CargaPuntosUser = () => {
 
   return (
     <div className={style.container}>
-      <div></div>
+      <div className={style.contanierboton}>
+      <BotonAtras />
+      </div>
+      
       <h1 className={style.title}>Recarga de puntos</h1>
       <div className={style.formContainer}>
         <div className={style.contImage}>

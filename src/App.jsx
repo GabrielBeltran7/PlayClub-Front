@@ -22,7 +22,10 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/actualizarperfil/:username" element={<ActualizarPerfilUsuario />} />
+        <Route
+          path="/actualizarperfil/:username"
+          element={<ActualizarPerfilUsuario />}
+        />
         <Route path="/CustomModal" element={<CustomModal />} />
         <Route path="/GanadoresCarrera" element={<GanadoresCarrera />} />
         <Route path={`/homeadmin/:username`} element={<HomeAdmin />} />

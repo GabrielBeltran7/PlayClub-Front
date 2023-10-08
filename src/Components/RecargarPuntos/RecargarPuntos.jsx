@@ -155,6 +155,7 @@ if(allUsers){
         }}
       />
     ),
+    
     onFilter: (value, record) =>
       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
@@ -162,6 +163,7 @@ if(allUsers){
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
+
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter

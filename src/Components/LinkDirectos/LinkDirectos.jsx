@@ -34,7 +34,7 @@ const LinkDirectos = ({user}) => {  /// me traje por props el usuario desde el c
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Cargar Puntos",
+      confirmButtonText: "Agregar Link",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(crearLinkDirectos(linkdirectos));
@@ -49,7 +49,7 @@ const LinkDirectos = ({user}) => {  /// me traje por props el usuario desde el c
           
         });
         Swal.fire(
-          "Transaccion completa!",
+          "Link cargados!",
           "Los Link  se enviaron de forma correcta",
           "success"
         );

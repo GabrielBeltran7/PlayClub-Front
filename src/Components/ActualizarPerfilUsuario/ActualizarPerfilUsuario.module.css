@@ -1,5 +1,13 @@
 /* ActualizarPerfilUsuario.module.css */
-
+body{
+  background: rgb(5, 65, 158);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 65, 158, 1) 30%,
+    rgba(2, 21, 51, 1) 50%,
+    rgba(5, 65, 158, 1) 66%
+  );
+}
 .container {
   max-width: 500px;
   margin: 40px auto 0; /* Margen superior aumentado para mover el contenedor hacia abajo */
@@ -46,12 +54,15 @@
   transition: background-color 0.3s;
 }
 
-.button:hover {
-  background-color: #0056b3;
-}
+
 
 .error {
   color: red;
   font-size: 14px;
   margin-top: 5px;
+}
+
+.img {
+  width: 30%;
+  border-radius: 50%;
 }

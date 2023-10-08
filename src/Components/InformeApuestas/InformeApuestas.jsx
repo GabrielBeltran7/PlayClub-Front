@@ -39,7 +39,6 @@ const InformeApuestas = () => {
   const Exacta = allApuestas.exacta
   
   const Trifecta = allApuestas.trifecta
-  console.log("WinallApuestas", Trifecta)
   const Superfecta = allApuestas.superfecta
 
 /***************************************************************************************** */
@@ -99,15 +98,9 @@ if(Superfecta){
     XLSX.writeFile(wb, 'ApuestaSuperfecta.xlsx');
   };
 
-
-
-
   useEffect(() => {
     dispatch(getAllApuestas());
   }, []);
-
-
-
   return (
     <div className={style.container}>
       <div className={style.buttonContainer}>

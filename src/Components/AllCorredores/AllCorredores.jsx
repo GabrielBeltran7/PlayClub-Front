@@ -1,3 +1,5 @@
+
+
 import { useDispatch, useSelector } from "react-redux";
 import React, { useRef, useState, useEffect } from "react";
 import { getCorredores } from "../../Redux/Actions";
@@ -5,6 +7,7 @@ import { Table } from "antd";
 
 const AllCorredores = () => {
   const allCorredores = useSelector((state) => state.corredor);
+  console.log("allCorredores",allCorredores)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCorredores());
