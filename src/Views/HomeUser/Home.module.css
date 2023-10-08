@@ -13,6 +13,7 @@
   );
 }.pala {
   color: white;
+
 }.centrar{
   text-align: center;
   text-decoration: underline;
@@ -20,6 +21,7 @@
   color: black;
   font-weight: bold;
   font-size: larger;
+
 }
 
 .botonganadores {
