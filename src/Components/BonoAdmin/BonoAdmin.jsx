@@ -38,19 +38,20 @@ const BonoAdmin = ({ user }) => {
             ...bonos,
             cantidad: "",
           });
-          console.log(response);
+          console.log("8888888888888888888888",response);
           if (response) {
-            Swal.fire(
-              "Transaccion completa!",
-              "Los puntos se cargaron correctamente",
-              "success"
-            );
+            Swal.fire({
+              icon: "success",
+              title: response.data.message,
+              timerProgressBar: true,
+              timer: 3000,
+            });
           } else {
             Swal.fire({
               icon: "error",
               title: "No eres un Administador Autorizado",
               timerProgressBar: true,
-              timer: 1500,
+              timer: 2500,
             });
           }
         }
