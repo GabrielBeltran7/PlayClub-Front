@@ -13,6 +13,13 @@
   );
 }.pala {
   color: white;
+}.centrar{
+  text-align: center;
+  text-decoration: underline;
+}.corredorestitulo{
+  color: black;
+  font-weight: bold;
+  font-size: larger;
 }
 
 .botonganadores {
@@ -109,8 +116,12 @@
   bottom: 15%;
   font-size: 30px;
   font-weight: bold;
+  color: #119b1cc9;
+  text-align: center;
 }
-
+.puntosGanados label{
+color: black;
+}
 .selectCarrera {
   position: absolute;
   bottom: 10%;
@@ -237,6 +248,7 @@
   position: sticky;
   bottom: 20px; /* Posición desde la parte inferior */
   right: 10px;
+  margin: 2rem;
 }
 
 .buttonPerfil {

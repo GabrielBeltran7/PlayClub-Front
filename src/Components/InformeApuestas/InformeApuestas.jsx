@@ -98,15 +98,9 @@ if(Superfecta){
     XLSX.writeFile(wb, 'ApuestaSuperfecta.xlsx');
   };
 
-
-
-
   useEffect(() => {
     dispatch(getAllApuestas());
   }, []);
-
-
-
   return (
     <div className={style.container}>
       <div className={style.buttonContainer}>

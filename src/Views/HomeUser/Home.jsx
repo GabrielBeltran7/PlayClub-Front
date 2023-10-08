@@ -147,28 +147,28 @@ const Home = () => {
       ...win,
       id: usuario.id,
       username: usuario.username,
-      puntosganados: puntosganados,
+       puntosganados: puntosganados,
       [event.target.name]: event.target.value,
     });
   };
 
   //!---------------------------------------handlechange Exacta----------------------------
+
+  
   const handleChangeExacta = (event) => {
     const pointsApost = event.target.value;
     const puntosganados = (pointsApost * unicacarrera.porcentajeExacta) / 100;
-
-    // console.log("hhhhhhhhhh", corredor2Id);
-    setExacta({
-      ...exacta,
+  
+    setExacta((prevExacta) => ({
+      ...prevExacta,
       id: usuario.id,
       username: usuario.username,
       puntosganados: puntosganados,
-
       [event.target.name]: event.target.value,
-    });
+    }));
   };
+  
 
-  const handleId = (id) => {};
 
   //!--------------------------------------handlechange Trifecta-----------------------------
 
@@ -231,8 +231,11 @@ const Home = () => {
   }, [dispatch, username]); // Cambiamos userId a username
 
   //!-----------------------------submit win-------------------------
+  const prueba = (win.puntosapostados * unicacarrera.porcentajeWin) / 100
+  console.log("555555555555555555",prueba)
   const handleSubmitWin = async (event) => {
     event.preventDefault();
+  
     try {
       const response = await dispatch(postApuestaWin(win));
 
@@ -451,7 +454,7 @@ const Home = () => {
               </select>
             </>
           ) : usuario.subadmin ? (
-            "El subadministrador no puede apostar"
+            <label className={style.centrar}>El subadministrador no puede apostar</label>
           ) : (
             <>
               <p>
@@ -478,10 +481,11 @@ const Home = () => {
         </div>
       </div>
       {/* //? ------------------------FormularioWIN--------------------------------- */}
+
       <div className={style.formContainer}>
         <form onSubmit={handleSubmitWin}>
           <h2>Win</h2>
-          <label>Corredores</label>
+          <label className={style.corredorestitulo}>Corredores</label>
           <label>Puesto 1</label>
           <select name="iDprimerPuesto" onChange={handleChangewin} required>
             <option value="">--Elije un corredor--</option>
@@ -500,6 +504,8 @@ const Home = () => {
               placeholder="Ingrese monto a apostar"
               name="puntosapostados"
               onChange={handleChangewin}
+              value={win.puntosganados? win.puntosapostados :""}
+         
             />
           ) : usuario.id ? (
             <label className={style.selectCarrera}>
@@ -510,10 +516,11 @@ const Home = () => {
           )}
 
           <p className={style.puntosGanados}>
+          <label>Ganancia:</label> <br />
             {win.puntosganados ? win.puntosganados : ""}
           </p>
           {usuario.id ? (
-            <button disabled={!win.puntosapostados}>Enviar apuesta</button>
+            <button disabled={!win.puntosapostados || !win.puntosganados}>Enviar apuesta</button>
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -524,7 +531,7 @@ const Home = () => {
         {/* //?-----------------------Formulario Exacta----------------------------- */}
         <form onSubmit={handleSubmitExacta}>
           <h2>Exacta</h2>
-          <label>Corredores</label>
+          <label  className={style.corredorestitulo}>Corredores</label>
           <label>Puesto 1</label>
 
           <select name="iDprimerPuesto" onChange={handleChangeExacta} required>
@@ -557,6 +564,8 @@ const Home = () => {
               placeholder="Ingrese monto a apostar"
               name="puntosapostados"
               onChange={handleChangeExacta}
+              value={exacta.puntosganados? exacta.puntosapostados :""}
+              
             />
           ) : usuario.id ? (
             <label className={style.selectCarrera}>
@@ -566,10 +575,13 @@ const Home = () => {
             ""
           )}
           <p className={style.puntosGanados}>
+          <label>Ganancia:</label> <br />
             {exacta.puntosganados ? exacta.puntosganados : ""}
           </p>
           {usuario.id ? (
-            <button disabled={!exacta.puntosapostados}>Enviar apuesta</button>
+            
+             <button disabled={!exacta.puntosapostados || !exacta.puntosganados}>Enviar apuesta</button>
+           
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -580,7 +592,7 @@ const Home = () => {
         {/* //?-------------------Formulario Trifecta------------ */}
         <form onSubmit={handleSubmitTrifecta}>
           <h2>Trifecta</h2>
-          <label>Corredores</label>
+          <label  className={style.corredorestitulo}>Corredores</label>
           <label>Puesto 1</label>
           <select
             name="iDprimerPuesto"
@@ -620,6 +632,7 @@ const Home = () => {
             name="iDtercerPuesto"
             onChange={handleChangeTrifecta}
             required
+            
           >
             <option value="">--Elije un corredor--</option>
             {Object.keys(carreraycorredores).length && carreraSeleccionada
@@ -638,6 +651,8 @@ const Home = () => {
               placeholder="Ingrese monto a apostar"
               name="puntosapostados"
               onChange={handleChangeTrifecta}
+              value={trifecta.puntosganados? trifecta.puntosapostados :""}
+         
             />
           ) : usuario.id ? (
             <label className={style.selectCarrera}>
@@ -647,10 +662,12 @@ const Home = () => {
             ""
           )}
           <p className={style.puntosGanados}>
+          <label>Ganancia:</label> <br />
             {trifecta.puntosganados ? trifecta.puntosganados : ""}
           </p>
           {usuario.id ? (
-            <button disabled={!trifecta.puntosapostados}>Enviar apuesta</button>
+            <button disabled={!trifecta.puntosapostados || !trifecta.puntosganados}>Enviar apuesta</button>
+
           ) : (
             <p className={style.avisoNoLogin}>
               <a href="/login">Inicia sesion</a> o
@@ -660,8 +677,8 @@ const Home = () => {
         </form>
         {/* //?-------------------Formulario Superfecta------------ */}
         <form onSubmit={handleSubmitSuperfecta}>
-          <h2>Superfecta</h2>
-          <label>Corredores</label>
+          <h2  >Superfecta</h2>
+          <label className={style.corredorestitulo}>Corredores</label>
           <label>Puesto 1</label>
           <select
             name="iDprimerPuesto"
@@ -736,6 +753,7 @@ const Home = () => {
               placeholder="Ingrese monto a apostar"
               name="puntosapostados"
               onChange={handleChangeSuperfecta}
+              value={superfecta.puntosganados? superfecta.puntosapostados :""}
             />
           ) : usuario.id ? (
             <label className={style.selectCarrera}>
@@ -744,11 +762,13 @@ const Home = () => {
           ) : (
             ""
           )}
+         
           <p className={style.puntosGanados}>
+          <label>Ganancia:</label> <br />
             {superfecta.puntosganados ? superfecta.puntosganados : ""}
           </p>
           {usuario.id ? (
-            <button disabled={!superfecta.puntosapostados}>
+            <button disabled={!superfecta.puntosapostados || !superfecta.puntosganados} >
               Enviar apuesta
             </button>
           ) : (

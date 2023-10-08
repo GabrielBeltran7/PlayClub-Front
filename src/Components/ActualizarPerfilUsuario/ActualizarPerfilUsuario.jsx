@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import BotonAtras from "../BotonAtras/BotonAtras";
 
 function ActualizarPerfilUsuario() {
   const dispatch = useDispatch();
@@ -139,7 +140,9 @@ function ActualizarPerfilUsuario() {
   };
 
   return (
+
     <div className={styles.container}>
+    <BotonAtras/>
       <h1 className={styles.title}>Actualizar Perfil</h1>
       <div className={styles.form}>
         <label className={styles.label}>Usuario</label>
@@ -209,6 +212,7 @@ function ActualizarPerfilUsuario() {
           onChange={handleChangePassword}
           placeholder="Digite contraseña actual"
           className={styles.input}
+          required
         />
 
         <label className={styles.label}>Nueva Contraseña</label>
@@ -219,9 +223,10 @@ function ActualizarPerfilUsuario() {
           onChange={handleChangePassword}
           placeholder="digite su nueva contraseña"
           className={styles.input}
+          required
         />
 
-        <button onClick={handleActualizarPassword} className={styles.button}>
+        <button  disabled={!password.contraseñaActual || !password.nuevaContraseña} onClick={handleActualizarPassword} className={styles.button}>
           Actualizar Contraseña
         </button>
       </div>

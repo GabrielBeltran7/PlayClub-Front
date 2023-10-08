@@ -302,7 +302,7 @@ export const postCorredor = (corredor) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/corredor", corredor);
-      dispatch({ type: POST_CORREDOR, payload: response.data });
+      // dispatch({ type: POST_CORREDOR, payload: response.data });
       return response;
     } catch (error) {
       throw error;
@@ -421,6 +421,7 @@ export const getCarrera = () => {
 };
 
 export const postApuestaWin = (apuesta) => {
+  
   return async (dispatch) => {
     try {
       const response = await axios.post(`/apuestas/win/`, apuesta);
@@ -494,7 +495,16 @@ export const postGanadores = (ganadores) => {
       dispatch({ type: POST_GANADORES, payload: response.data });
       return response;
     } catch (error) {
-      throw error;
+      
+      
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ya se registraron ganadores para esta carrera",
+        timerProgressBar: true,
+        timer: 2500,
+      });
+      
     }
   };
 };
@@ -517,24 +527,6 @@ export const getGanadores = (ganadoress) => {
   };
 };
 
-// export const getGanadores = (ganadores) => {
-//   return async (dispatch) => {
-//     try {
-//       console.log("getganadores", ganadores);
-
-//       const response = await axios.request({
-//         method: 'GET',
-//         url: '/users/ganadores/',
-//         data: ganadores, // Datos a enviar en el cuerpo (body) de la solicitud GET
-//       });
-
-//       dispatch({ type: GET_GANADORES, payload: response.data });
-//       return response;
-//     } catch (error) {
-//       throw error;
-//     }
-//   };
-// };
 
 export const getAllApuestas = () => {
   return async (dispatch) => {
