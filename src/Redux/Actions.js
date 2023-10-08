@@ -311,12 +311,10 @@ export const postCorredor = (corredor) => {
 };
 
 export const cargaBonosaUsuarios = (user) => {
-  console.log("CARGAR_BONOS_USUARIO", user);
-
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/agregarpuntosausuarios", user);
-      // console.log("CARGAR_BONOS_USUARIO", response);
+      
       dispatch({ type: CARGAR_BONOS_USUARIO, payload: response.data });
       return response;
     } catch (error) {
