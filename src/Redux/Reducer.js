@@ -23,7 +23,7 @@ import {
   POST_GANADORES,
   ALL_APUESTAS,
   GET_RECARGAR_PUNTOS,
-  ACT_DESACT_CARRERA,
+  GET_PUNTOS_PAGADOS,
   GET_GANADORES
 } from "./ActionsTypes";
 let inicialState = {
@@ -37,12 +37,12 @@ let inicialState = {
   apuestaWin: [],
   linkcamaras: [],
   carreraycorredores: [],
-  // linkcamaras: [],
   userLog: {},
   misApuestas: [],
   ganadores: [],
   allApuestas: [],
-  recargarpuntos:[]
+  recargarpuntos:[],
+  puntospagados: [],
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -52,11 +52,18 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         carreraycorredores: action.payload,
       };
+    
     case LOGIN_SUCCESS:
       return {
         ...state,
         userLog: action.payload,
         isAuthenticated: true,
+      };
+
+      case GET_PUNTOS_PAGADOS:
+      return{
+        ...state,
+        puntospagados: action.payload
       };
 
     case GET_MIS_APUESTAS:

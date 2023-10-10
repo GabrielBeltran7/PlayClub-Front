@@ -51,7 +51,7 @@ const RetirarPuntos = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Cargar Puntos",
+      confirmButtonText: "Retirar Puntos",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await dispatch(retirarPuntos(puntos));

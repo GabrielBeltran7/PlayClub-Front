@@ -1,0 +1,22 @@
+.containerAviso {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.aviso {
+  font-size: 35px;
+  text-align: center;
+  width: 30rem;
+  font-weight: 800;
+  background-color: transparent transparent;
+}.botonexcel{
+  display: flex;
+  margin: 10px;
+  justify-content: end;
+}
+.botonexcel button {
+  background-color: #f5f5dc;
+  font-size: 20px;
+  border: 2px solid #ffa500;
+}

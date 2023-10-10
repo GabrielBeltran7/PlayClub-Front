@@ -24,12 +24,33 @@ import {
   ALL_APUESTAS,
   GET_GANADORES,
   GET_RECARGAR_PUNTOS,
+  GET_PUNTOS_PAGADOS,
 } from "./ActionsTypes";
 import axios, { Axios } from "axios";
 import Swal from "sweetalert2";
 
+
+
+export const  getPuntosApostados =()=>{
+  return async (dispatch) =>{
+
+    try {
+      const response = await axios.get("/admin/getpuntospagados")
+      console.log("responsepuntos pagados", response)
+      dispatch({
+        type:GET_PUNTOS_PAGADOS,
+        payload: response.data
+      })
+    } catch (error) {
+      
+    }
+  }
+}
+
+
+
+
 export const retirarPuntos = (puntos) => {
-  console.log("retirarpuntos", puntos);
   return async (dispatch) => {
     try {
       const response = await axios.patch("/admin/cobrarpuntosusuario", puntos);
