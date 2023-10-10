@@ -28,6 +28,18 @@ import {
 import axios, { Axios } from "axios";
 import Swal from "sweetalert2";
 
+
+export const retirarPuntos = (puntos) =>{
+  console.log("retirarpuntos", puntos)
+  return async (dispatch) =>{
+    try { 
+      const response = await axios.patch( "/admin/cobrarpuntosusuario", puntos)
+      dispatch(getUserById());
+    } catch (error) {
+console.log(error)
+      }
+  }
+}
 export const actualizarPasswordUsuario = (actualizarpassword) => {
   return async (dispatch) => {
     try {

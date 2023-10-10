@@ -5,6 +5,7 @@ import React, { useRef, useState, useEffect } from "react";
 import {
   getUserByIdParams,
   cargaPuntos,
+  retirarPuntos,
   cargarPuntosSubadmin,
 } from "../../Redux/Actions";
 import Swal from "sweetalert2";
@@ -52,8 +53,8 @@ const RetirarPuntos = () => {
       confirmButtonText: "Cargar Puntos",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        if (user.admin) {
-          const response = await dispatch(cargaPuntos(puntos));
+       
+          const response = await dispatch(retirarPuntos(puntos));
           console.log("responses ad,ommmmmmmm", response);
           if (response) {
             Swal.fire(
@@ -69,24 +70,8 @@ const RetirarPuntos = () => {
               timer: 1500,
             });
           }
-        } else {
-          const response = await dispatch(cargarPuntosSubadmin(puntos));
-          console.log("responses subadminnn", response);
-          if (response !== undefined) {
-            Swal.fire(
-              "Retiro completado!",
-              "Los puntos se retiraron Correctamente",
-              "success"
-            );
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Error al intentar retirar puntos",
-              timerProgressBar: true,
-              timer: 1500,
-            });
-          }
-        }
+        
+        
 
         setPuntos({
           ...puntos,
