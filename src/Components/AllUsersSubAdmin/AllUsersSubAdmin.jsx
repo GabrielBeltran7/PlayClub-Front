@@ -38,7 +38,7 @@ const AllUsersSubAdmin = () => {
 
   useEffect(() => {
     dispatch(getUserById());
-  }, [dispatch]);
+  }, [rol]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -186,6 +186,34 @@ const AllUsersSubAdmin = () => {
       dataIndex: "cantidadtotal",
       key: "cantidadtotal",
       ...getColumnSearchProps("cantidadtotal"),
+    },
+    {
+      title: "Permisos",
+      dataIndex: "admin",
+      key: "city",
+      render: (text, record) => (
+        <Select
+          onChange={handleChange(record)}
+          defaultValue={
+            record.admin ? "admin" : record.subadmin ? "subadmin" : "usuario"
+          }
+          style={{ width: 120 }}
+        >
+          <Select.Option value="Admin">Admin</Select.Option>
+          <Select.Option value="SubAdmin">Sub Admin</Select.Option>
+          <Select.Option value="Usuario">Usuario</Select.Option>
+          {/* Agrega otras opciones según tus necesidades */}
+        </Select>
+      ),
+    },
+    {
+      title: "Retirar puntos",
+      key: "retirarPuntos",
+      fixed: "right",
+      width: "20%",
+      render: (text, record) => (
+        <a href={`/home/subadmin/retirarpuntos/${record.id}`}>Retirar Puntos</a>
+      ),
     },
   ];
 

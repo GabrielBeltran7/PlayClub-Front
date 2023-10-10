@@ -1,4 +1,4 @@
-import style from "./CargaPuntosUser.module.css";
+import style from "./RetirarPuntos.module.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useRef, useState, useEffect } from "react";
@@ -10,7 +10,7 @@ import {
 import Swal from "sweetalert2";
 import BotonAtras from "../BotonAtras/BotonAtras";
 
-const CargaPuntosUser = () => {
+const RetirarPuntos = () => {
   const { id } = useParams();
   const userById = useSelector((state) => state.userId);
 
@@ -20,26 +20,22 @@ const CargaPuntosUser = () => {
   useEffect(() => {
     dispatch(getUserByIdParams(id));
   }, []);
-
-  const [carga, setCarga] = useState({
-    id: user.id,
-    UserId: id,
-    username: username,
+  console.log(userById.username);
+  const [puntos, setPuntos] = useState({
+    username: userById.username,
     cantidad: 0,
-    precio: 0,
   });
 
   useEffect(() => {
-    setCarga({
-      ...carga,
-      username: username,
+    setPuntos({
+      ...puntos,
+      username: userById.username,
     });
   }, [userById]);
 
   const handleChange = (event) => {
-    setCarga({
-      ...carga,
-      username: username,
+    setPuntos({
+      ...puntos,
       [event.target.name]: event.target.value,
     });
   };
@@ -47,8 +43,8 @@ const CargaPuntosUser = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     Swal.fire({
-      title: `¿Estas seguro de cargar ${carga.cantidad} puntos?`,
-      text: `Estas por cargar ${carga.cantidad} puntos a ${userById.username}`,
+      title: `¿Estas seguro de retirar ${puntos.cantidad} puntos?`,
+      text: `Estas por retirar ${puntos.cantidad} puntos a ${userById.username}`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -57,43 +53,43 @@ const CargaPuntosUser = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         if (user.admin) {
-          const response = await dispatch(cargaPuntos(carga));
+          const response = await dispatch(cargaPuntos(puntos));
           console.log("responses ad,ommmmmmmm", response);
           if (response) {
             Swal.fire(
-              "Transaccion Completada!",
-              "Los puntos se cargaron Correctamente",
+              "Retiro completado!",
+              "Los puntos se retiraron Correctamente",
               "success"
             );
           } else {
             Swal.fire({
               icon: "error",
-              title: "Error al intentar cargar puntos",
+              title: "Error al intentar retirar puntos",
               timerProgressBar: true,
               timer: 1500,
             });
           }
         } else {
-          const response = await dispatch(cargarPuntosSubadmin(carga));
+          const response = await dispatch(cargarPuntosSubadmin(puntos));
           console.log("responses subadminnn", response);
           if (response !== undefined) {
             Swal.fire(
-              "Transaccion completa!",
-              "Los puntos se cargaron Correctamente",
+              "Retiro completado!",
+              "Los puntos se retiraron Correctamente",
               "success"
             );
           } else {
             Swal.fire({
               icon: "error",
-              title: "Error al intentar cargar puntos",
+              title: "Error al intentar retirar puntos",
               timerProgressBar: true,
               timer: 1500,
             });
           }
         }
 
-        setCarga({
-          ...carga,
+        setPuntos({
+          ...puntos,
           cantidad: "",
           precio: "",
         });
@@ -101,14 +97,15 @@ const CargaPuntosUser = () => {
     });
   };
 
-  console.log(carga);
+  console.log(puntos);
+
   return (
     <div className={style.container}>
       <div className={style.contanierboton}>
         <BotonAtras />
       </div>
 
-      <h1 className={style.title}>Recarga de puntos</h1>
+      <h1 className={style.title}>Retiro de puntos</h1>
       <div className={style.formContainer}>
         <div className={style.contImage}>
           <img
@@ -118,30 +115,22 @@ const CargaPuntosUser = () => {
           />
         </div>
         <form className={style.formulario} onSubmit={handleSubmit}>
-          <label>Usuario a cargar</label>
+          <label>Vas a retirarle puntos a</label>
           <label>{userById.username}</label>
-          <label>Ingrese monto a cargar</label>
+          <label>Ingrese monto a retirar</label>
           <input
             type="number"
             name="cantidad"
             onChange={handleChange}
-            value={carga.cantidad}
+            value={puntos.cantidad}
             min="0"
             pattern="^[0-9]+"
           />
-          <label>Precio monto</label>
-          <input
-            type="number"
-            name="precio"
-            onChange={handleChange}
-            value={carga.precio}
-            min="0"
-            pattern="^[0-9]+"
-          />
-          {carga.cantidad <= 0 || carga.precio <= 0 ? (
-            <button disabled>Cargar Puntos</button>
+
+          {puntos.cantidad <= 0 ? (
+            <button disabled>Retirar Puntos</button>
           ) : (
-            <button>Cargar Puntos</button>
+            <button>Retirar Puntos</button>
           )}
         </form>
         <div className={style.contImage}>
@@ -156,4 +145,4 @@ const CargaPuntosUser = () => {
   );
 };
 
-export default CargaPuntosUser;
+export default RetirarPuntos;
