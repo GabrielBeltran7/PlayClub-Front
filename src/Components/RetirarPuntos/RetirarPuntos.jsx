@@ -12,18 +12,18 @@ import Swal from "sweetalert2";
 import BotonAtras from "../BotonAtras/BotonAtras";
 
 const RetirarPuntos = () => {
-  const { id } = useParams();
+  const { id, idSubAdmin } = useParams();
   const userById = useSelector((state) => state.userId);
 
   const user = useSelector((state) => state.user);
-  const username = useSelector((state) => state.user.username);
+  //   const username = useSelector((state) => state.user.username);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserByIdParams(id));
   }, []);
-  console.log(userById.username);
   const [puntos, setPuntos] = useState({
     username: userById.username,
+    id: idSubAdmin,
     cantidad: 0,
   });
 
@@ -31,6 +31,7 @@ const RetirarPuntos = () => {
     setPuntos({
       ...puntos,
       username: userById.username,
+      id: idSubAdmin,
     });
   }, [userById]);
 
@@ -53,25 +54,15 @@ const RetirarPuntos = () => {
       confirmButtonText: "Cargar Puntos",
     }).then(async (result) => {
       if (result.isConfirmed) {
-       
-          const response = await dispatch(retirarPuntos(puntos));
-          console.log("responses ad,ommmmmmmm", response);
-          if (response) {
-            Swal.fire(
-              "Retiro completado!",
-              "Los puntos se retiraron Correctamente",
-              "success"
-            );
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Error al intentar retirar puntos",
-              timerProgressBar: true,
-              timer: 1500,
-            });
-          }
-        
-        
+        const response = await dispatch(retirarPuntos(puntos));
+        console.log(response);
+        if (response) {
+          Swal.fire(
+            "Retiro completado!",
+            "Los puntos se retiraron Correctamente",
+            "success"
+          );
+        }
 
         setPuntos({
           ...puntos,
@@ -81,8 +72,6 @@ const RetirarPuntos = () => {
       }
     });
   };
-
-  console.log(puntos);
 
   return (
     <div className={style.container}>

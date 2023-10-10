@@ -21,6 +21,7 @@ const CargaPuntosUser = () => {
     dispatch(getUserByIdParams(id));
   }, []);
 
+  console.log(user);
   const [carga, setCarga] = useState({
     id: user.id,
     UserId: id,
@@ -101,7 +102,6 @@ const CargaPuntosUser = () => {
     });
   };
 
-  console.log(carga);
   return (
     <div className={style.container}>
       <div className={style.contanierboton}>

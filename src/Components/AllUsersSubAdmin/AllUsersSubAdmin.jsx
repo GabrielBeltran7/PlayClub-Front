@@ -15,6 +15,8 @@ const AllUsersSubAdmin = () => {
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
 
+  const user = useSelector((state) => state.user);
+  console.log("userrrrr", user);
   const allUsers = useSelector((state) => state.userId);
   // console.log("allusersssss", allUsers);
 
@@ -199,7 +201,6 @@ const AllUsersSubAdmin = () => {
           }
           style={{ width: 120 }}
         >
-          <Select.Option value="Admin">Admin</Select.Option>
           <Select.Option value="SubAdmin">Sub Admin</Select.Option>
           <Select.Option value="Usuario">Usuario</Select.Option>
           {/* Agrega otras opciones según tus necesidades */}
@@ -212,7 +213,9 @@ const AllUsersSubAdmin = () => {
       fixed: "right",
       width: "20%",
       render: (text, record) => (
-        <a href={`/home/subadmin/retirarpuntos/${record.id}`}>Retirar Puntos</a>
+        <a href={`/home/subadmin/retirarpuntos/${record.id}/${user.id}`}>
+          Retirar Puntos
+        </a>
       ),
     },
   ];

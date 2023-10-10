@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 axios.defaults.baseURL = "http://localhost:3001/";
 function App() {
   const user = useSelector((state) => state.user);
-
+  console.log(user);
   return (
     <div className="App">
       <Routes>
@@ -39,8 +39,8 @@ function App() {
         />
         <Route path="/home/subadmin/:username" element={<HomeSubAdmin />} />
         <Route
-          path="/home/subadmin/retirarpuntos/:id"
-          element={<RetirarPuntos />}
+          path="/home/subadmin/retirarpuntos/:id/:idSubAdmin"
+          element={<RetirarPuntos user={user} />}
         />
       </Routes>
     </div>

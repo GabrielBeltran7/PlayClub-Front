@@ -28,18 +28,25 @@ import {
 import axios, { Axios } from "axios";
 import Swal from "sweetalert2";
 
-
-export const retirarPuntos = (puntos) =>{
-  console.log("retirarpuntos", puntos)
-  return async (dispatch) =>{
-    try { 
-      const response = await axios.patch( "/admin/cobrarpuntosusuario", puntos)
+export const retirarPuntos = (puntos) => {
+  console.log("retirarpuntos", puntos);
+  return async (dispatch) => {
+    try {
+      const response = await axios.patch("/admin/cobrarpuntosusuario", puntos);
       dispatch(getUserById());
+      return response;
     } catch (error) {
-console.log(error)
-      }
-  }
-}
+      console.log(error);
+      const avisoError = error.response.data.error;
+      Swal.fire({
+        icon: "error",
+        title: avisoError,
+        timerProgressBar: true,
+        timer: 3500,
+      });
+    }
+  };
+};
 export const actualizarPasswordUsuario = (actualizarpassword) => {
   return async (dispatch) => {
     try {
@@ -326,7 +333,7 @@ export const cargaBonosaUsuarios = (user) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("/admin/agregarpuntosausuarios", user);
-      
+
       dispatch({ type: CARGAR_BONOS_USUARIO, payload: response.data });
       return response;
     } catch (error) {
@@ -431,7 +438,6 @@ export const getCarrera = () => {
 };
 
 export const postApuestaWin = (apuesta) => {
-  
   return async (dispatch) => {
     try {
       const response = await axios.post(`/apuestas/win/`, apuesta);
@@ -505,8 +511,6 @@ export const postGanadores = (ganadores) => {
       dispatch({ type: POST_GANADORES, payload: response.data });
       return response;
     } catch (error) {
-      
-      
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -514,7 +518,6 @@ export const postGanadores = (ganadores) => {
         timerProgressBar: true,
         timer: 2500,
       });
-      
     }
   };
 };
@@ -536,7 +539,6 @@ export const getGanadores = (ganadoress) => {
     }
   };
 };
-
 
 export const getAllApuestas = () => {
   return async (dispatch) => {
