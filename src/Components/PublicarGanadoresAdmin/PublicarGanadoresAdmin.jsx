@@ -69,7 +69,13 @@ const PublicarGanadoresAdmin = ({ user }) => {
 
   return (
     <div className={style.container}>
+
       <h1 className={style.title}>RESULTADOS DE CARRERAS</h1>
+      <img
+          src="https://res.cloudinary.com/dou3yyisb/image/upload/v1694444797/PlayGame/logo-removebg_haqooq.png"
+          alt=""
+          width="300"
+        />
       <div className={style.contenedorTodo}>
         <form className={style.form} onSubmit={handleSubmit}>
           <label>Seleccione una carrera</label>
