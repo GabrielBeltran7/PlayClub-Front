@@ -50,14 +50,18 @@
   max-width: 220px; /* Ancho máximo para dispositivos grandes */
   background: #fff; /* Fondo blanco */
   padding: 20px; /* Espaciado interior para dispositivos pequeños */
+  font-weight: 800;
 }
-
+.ant-card-head-title {
+  font-weight: 800;
+}
 .primeracarta p,
 .segundacarta p,
 .terceracarta p,
 .cuartacarta p {
   font-size: 16px;
   color: #333; /* Texto negro */
+  
 }
 
 @media screen and (max-width: 1000px) {
