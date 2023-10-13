@@ -13,8 +13,8 @@ import CustomModal from "./Components/RecuperarContraseña/CustomModal";
 import ActualizarPerfilUsuario from "./Components/ActualizarPerfilUsuario/ActualizarPerfilUsuario";
 import RetirarPuntos from "./Components/RetirarPuntos/RetirarPuntos";
 import { useSelector } from "react-redux";
-axios.defaults.baseURL = "https://win123.onrender.com/";
-//axios.defaults.baseURL = "http://localhost:3001/";
+//axios.defaults.baseURL = "https://win123.onrender.com/";
+axios.defaults.baseURL = "http://localhost:3001/";
 function App() {
   const user = useSelector((state) => state.user);
   console.log(user);

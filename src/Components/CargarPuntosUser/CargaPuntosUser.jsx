@@ -66,14 +66,7 @@ const CargaPuntosUser = () => {
               "Los puntos se cargaron Correctamente",
               "success"
             );
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Error al intentar cargar puntos",
-              timerProgressBar: true,
-              timer: 1500,
-            });
-          }
+          } 
         } else {
           const response = await dispatch(cargarPuntosSubadmin(carga));
           console.log("responses subadminnn", response);
@@ -83,13 +76,7 @@ const CargaPuntosUser = () => {
               "Los puntos se cargaron Correctamente",
               "success"
             );
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Error al intentar cargar puntos",
-              timerProgressBar: true,
-              timer: 1500,
-            });
+          
           }
         }
 
