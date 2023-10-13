@@ -186,7 +186,7 @@ const InformeRetirarPuntos = () => {
       ...getColumnSearchProps("username"),
     },
     {
-      title: "Cargado a",
+      title: "Retirado a",
       dataIndex: "username",
       key: "username",
       width: "20%",
