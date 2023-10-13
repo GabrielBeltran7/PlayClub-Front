@@ -4,12 +4,25 @@ import {
   postCorredor,
   getCarrera,
   getcarreraActiva,
+  getCorredores
 } from "../../Redux/Actions";
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 const CrearCorredor = () => {
+
   const dispatch = useDispatch();
+
+  const allCorredores = useSelector((state) => state.corredor);
+  
+  const allCorredoresFilter = allCorredores.filter((corredor, index, self) =>
+  self.findIndex(c => c.nombre.toLowerCase() === corredor.nombre.toLowerCase()) === index
+);
+
+  
+  useEffect(() => {
+    dispatch(getCorredores());
+  }, [dispatch]);
   const carrera = useSelector((state) => state.carrera);
   const unicacarrera = useSelector((state) => state.unicacarrera);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -21,7 +34,7 @@ const CrearCorredor = () => {
     descripcion: "",
     imagen1: "",
   });
-  console.log("carrerrrrrrrrrrrrr", unicacarrera);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!corredor.nombre || !corredor.numero || !corredor.descripcion) {
@@ -128,6 +141,16 @@ const CrearCorredor = () => {
             value={corredor.nombre}
             onChange={handleChange}
           />
+          <label >O seleccione corredor existente</label>
+           <select name="nombre" onChange={handleChange}>
+            <option value="">Seleccione la carrera</option>
+            {allCorredoresFilter.map((element) => (
+              <option key={element.id}>
+                {" "}
+                {element.nombre} {" "}
+              </option>
+            ))}
+          </select>
           <label>Ingresar numero del corredor</label>
           <input
             type="number"
