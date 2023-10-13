@@ -62,7 +62,7 @@ if(allUsers){
 
   useEffect(() => {
     dispatch(getUserById());
-  }, [dispatch]);
+  }, [dispatch, rol]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();

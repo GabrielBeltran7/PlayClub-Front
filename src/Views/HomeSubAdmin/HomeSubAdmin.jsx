@@ -28,6 +28,7 @@ import CargarpuntosAdmin from "../../Components/CargarPuntosaAdmin/CargarpuntosA
 import InformeApuestas from "../../Components/InformeApuestas/InformeApuestas";
 import AllCarreras from "../../Components/AllCarreras/AllCarreras";
 import InformePuntos from "../../Components/InformePuntos/InformePuntos";
+import InformeRetirarPuntos from "../../Components/InformeRetirarPuntos/InformeRetirarPuntos";
 
 const { Header, Sider, Content } = Layout;
 const HomeSubAdmin = () => {
@@ -78,6 +79,8 @@ const HomeSubAdmin = () => {
         return <AllCarreras />;
       case "14":
         return <InformePuntos />;
+        case "15":
+        return <InformeRetirarPuntos  />;
       default:
         return null;
     }
@@ -152,6 +155,12 @@ const HomeSubAdmin = () => {
                 icon: <TrophyOutlined />,
                 label: "Todas las carreras",
               },
+              {
+                key: "15",
+                icon: <TrophyOutlined />,
+                label: "Informe Retiros",
+              },
+
               {
                 key: "7",
                 icon: <HomeOutlined />,
