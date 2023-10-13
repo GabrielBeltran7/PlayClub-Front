@@ -404,7 +404,14 @@ export const cargaPuntos = (user) => {
       dispatch({ type: POST_PUNTOS, payload: response.data });
       return response;
     } catch (error) {
-      throw error;
+      const errorAviso = error.response.data.error;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorAviso,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   };
 };
