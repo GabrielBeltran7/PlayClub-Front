@@ -46,10 +46,11 @@ const GanadoresCarrera = () => {
 
 
   <Card className={style.primeracarta}
-    title="Primer Puesto"
+    title="#1 Primer Lugar"
     bordered={false}
     style={{
       width: 300,
+      height:150
     }}
   >
     <p>{ganadorescarrera && ganadorescarrera.length ? ganadorescarrera[0].primerPuesto : "No ahi resultados"}</p>
@@ -57,30 +58,33 @@ const GanadoresCarrera = () => {
 
   <Card
   className={style.segundacarta}
-    title="Segundo Puesto"
+    title="#2 Segundo Lugar"
     bordered={false}
     style={{
       width: 300,
+      height:150
     }}
   >
     <p>{ganadorescarrera && ganadorescarrera.length ? ganadorescarrera[0].segundoPuesto :"No ahi resultados"}</p>
   </Card>
   <Card
   className={style.terceracarta}
-    title="Tercer Puesto"
+    title="#3 Lugar"
     bordered={false}
     style={{
       width: 300,
+      height:150
     }}
   >
     <p>{ganadorescarrera && ganadorescarrera.length? ganadorescarrera[0].tercerPuesto :"No ahi resultados"}</p>
   </Card>
   <Card
   className={style.cuartacarta}
-    title="Cuarto Puesto"
+    title="#4 lugar"
     bordered={false}
     style={{
       width: 300,
+      height:150
     }}
   >
     <p>{ganadorescarrera && ganadorescarrera.length? ganadorescarrera[0].cuartoPuesto :"No ahi resultados"}</p>
