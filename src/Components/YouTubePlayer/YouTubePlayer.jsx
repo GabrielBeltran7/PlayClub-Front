@@ -36,33 +36,33 @@ function App() {
   return (
     <div className={style.container}>
       <div className={style.containerTitle}>
-        <h2 className={style.title}>Transmisiones</h2>
+        <h2 className={style.title}>TRANSMISIONES</h2>
       </div>
       <div className={style.containerVideos}>
         <div className={style.botonVideos}>
           <>
             <button onClick={() => handleVideoToggle("camara1")}>
-              Ver Cámara 1
+               CAMARA 1
             </button>
           </>
           <>
             <button onClick={() => handleVideoToggle("camara2")}>
-              Ver Cámara 2
+              CAMARA 2
             </button>
           </>
           <>
             <button onClick={() => handleVideoToggle("camara3")}>
-              Ver Cámara 3
+              CAMARA 3
             </button>
           </>
           <>
             <button onClick={() => handleVideoToggle("camara4")}>
-              Ver Cámara 4
+             CAMARA 4
             </button>
           </>
           <>
             <button onClick={() => handleVideoToggle("camara5")}>
-              Ver Cámara 5
+              CAMARA 5
             </button>
           </>
         </div>

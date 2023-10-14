@@ -237,11 +237,7 @@ const InformeRetirarPuntos = () => {
       <Table columns={columns} dataSource={puntospagados} />
       <div>
         <div className={style.containerAviso}>
-          <label className={style.aviso}>
-            Para cargar puntos a un usuario, presiona sobre el nombre de un
-            usuario y te llevará al formulario para cargar puntos al usuario
-            seleccionado.
-          </label>
+          
         </div>
       </div>
     </div>

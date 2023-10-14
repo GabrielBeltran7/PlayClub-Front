@@ -49,11 +49,13 @@
   width: 100%; /* Ancho al 100% para dispositivos pequeños */
   max-width: 220px; /* Ancho máximo para dispositivos grandes */
   background: #fff; /* Fondo blanco */
-  padding: 20px; /* Espaciado interior para dispositivos pequeños */
+
   font-weight: 800;
-}
-.ant-card-head-title {
-  font-weight: 800;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .primeracarta p,
 .segundacarta p,
@@ -61,7 +63,6 @@
 .cuartacarta p {
   font-size: 16px;
   color: #333; /* Texto negro */
-  
 }
 
 @media screen and (max-width: 1000px) {
@@ -90,5 +91,14 @@
   }
   .form {
     grid-area: select;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 }

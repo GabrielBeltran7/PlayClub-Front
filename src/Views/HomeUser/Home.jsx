@@ -228,7 +228,7 @@ const Home = () => {
 
   //!-----------------------------submit win-------------------------
   const prueba = (win.puntosapostados * unicacarrera.porcentajeWin) / 100;
-  console.log("555555555555555555", prueba);
+  
   const handleSubmitWin = async (event) => {
     event.preventDefault();
 
@@ -347,7 +347,7 @@ const Home = () => {
     navigate("/actualizarperfil");
   };
 
-  // console.log("carrera y corredoressssssssssss", carreraycorredores);
+ 
   console.log("apuesta exacta", superfecta);
 
   return (
@@ -357,11 +357,13 @@ const Home = () => {
           <div className={style.navbar}>
             <Navbar props={usuario.admin} />
           </div>
+        ) : usuario.id ? (
+          <ViewMisApuestas />
         ) : (
-          <></>
+          ""
         )}
-        <ViewMisApuestas />
       </div>
+
       <div className={style.containerInfoUser}>
         <div className={style.contendorUser}>
           <div className={style.infoUsuario}>
@@ -432,356 +434,380 @@ const Home = () => {
       </div>
 
       <Ganadores />
-
-      <div className={style.selectCarreraContainer}>
-        <div className={style.preview}>
-          <h2>Seleccione una Carrera</h2>
-          {usuario.id && usuario.subadmin !== true ? (
-            <>
-              <select name="nombreapuesta" onChange={handlechangecarreraActiva}>
-                <option value="">Carreras</option>
-                {carreraFilter.map((element) => (
-                  <option key={element.id}>
+      {usuario.admin || usuario.subadmin ? (
+        <></>
+      ) : (
+        <>
+          <div className={style.selectCarreraContainer}>
+            <div className={style.preview}>
+              <h2>SELECCIONE UNA CARRERA</h2>
+              {usuario.id && usuario.subadmin !== true ? (
+                <>
+                  <select
+                    name="nombreapuesta"
+                    onChange={handlechangecarreraActiva}
+                  >
+                    <option value="">Carreras</option>
+                    {carreraFilter.map((element) => (
+                      <option key={element.id}>
+                        {" "}
+                        {element.nombrecarrera} {element.numero}{" "}
+                      </option>
+                    ))}
+                    ,
+                  </select>
+                </>
+              ) : usuario.subadmin ? (
+                <label className={style.centrar}>
+                  El subadministrador no puede apostar
+                </label>
+              ) : (
+                <>
+                  <p>
                     {" "}
-                    {element.nombrecarrera} {element.numero}{" "}
-                  </option>
-                ))}
+                    <a href="/login">inicie sesión</a> o{" "}
+                    <a href="/register">Registrese</a>
+                  </p>
+                </>
+              )}
+
+              <div className={style.bloque}>
+                <img src={imagenes.win} alt="" width="30" />
+                <label>WIN: {carreraMostrar.porcentajeWin}%</label>
+                <img src={imagenes.exacta} alt="" width="30" />
+                <label>EXACTA: {carreraMostrar.porcentajeExacta}%</label>
+              </div>
+              <div className={style.bloque}>
+                <img src={imagenes.trifecta} alt="" width="30" />
+                <label>TRIFECTA: {carreraMostrar.porcentajeTrifecta}%</label>
+
+                <img src={imagenes.superfecta} alt="" width="30" />
+                <label>
+                  SUPERFECTA: {carreraMostrar.porcentajeSuperfecta}%
+                </label>
+              </div>
+            </div>
+          </div>
+          {/* //? ------------------------FormularioWIN--------------------------------- */}
+          <div className={style.formContainer}>
+            <form onSubmit={handleSubmitWin}>
+              <h2>WIN</h2>
+              <label className={style.corredorestitulo}>CORREDORES</label>
+              <label># 1</label>
+              <select name="iDprimerPuesto" onChange={handleChangewin} required>
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {element.nombre}   #{element.numero}
+                      </option>
+                    ))
+                  : ""}
                 ,
               </select>
-            </>
-          ) : usuario.subadmin ? (
-            <label className={style.centrar}>
-              El subadministrador no puede apostar
-            </label>
-          ) : (
-            <>
-              <p>
-                {" "}
-                <a href="/login">inicie sesión</a> o{" "}
-                <a href="/register">Registrese</a>
+              {unicacarrera.id ? (
+                <input
+                  type="number"
+                  placeholder="Ingrese monto a apostar"
+                  name="puntosapostados"
+                  onChange={handleChangewin}
+                  value={win.puntosganados ? win.puntosapostados : ""}
+                />
+              ) : usuario.id ? (
+                <label className={style.selectCarrera}>
+                  Seleccione una carrera
+                </label>
+              ) : (
+                ""
+              )}
+
+              <p className={style.puntosGanados}>
+                <label>GANANCIAS:</label> <br />
+                {win.puntosganados ? win.puntosganados : ""}
               </p>
-            </>
-          )}
+              {usuario.id ? (
+                <button disabled={!win.puntosapostados || !win.puntosganados}>
+                  Enviar apuesta
+                </button>
+              ) : (
+                <p className={style.avisoNoLogin}>
+                  <a href="/login">Inicia sesion</a> o
+                  <a href="/register"> registrate</a>
+                </p>
+              )}
+            </form>
+            {/* //?-----------------------Formulario Exacta----------------------------- */}
+            <form onSubmit={handleSubmitExacta}>
+              <h2>EXACTA</h2>
+              <label className={style.corredorestitulo}>CORREDORES</label>
+              <label># 1</label>
 
-          <div className={style.bloque}>
-            <img src={imagenes.win} alt="" width="30" />
-            <label>WIN: {carreraMostrar.porcentajeWin}%</label>
-            <img src={imagenes.exacta} alt="" width="30" />
-            <label>EXACTA: {carreraMostrar.porcentajeExacta}%</label>
-          </div>
-          <div className={style.bloque}>
-            <img src={imagenes.trifecta} alt="" width="30" />
-            <label>TRIFECTA: {carreraMostrar.porcentajeTrifecta}%</label>
+              <select
+                name="iDprimerPuesto"
+                onChange={handleChangeExacta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {element.nombre}  #{element.numero}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              <label># 2</label>
+              <select
+                name="iDsegundoPuesto"
+                onChange={handleChangeExacta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {" "}
+                        {element.nombre}   #{element.numero}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              {unicacarrera.id ? (
+                <input
+                  type="number"
+                  placeholder="Ingrese monto a apostar"
+                  name="puntosapostados"
+                  onChange={handleChangeExacta}
+                  value={exacta.puntosganados ? exacta.puntosapostados : ""}
+                />
+              ) : usuario.id ? (
+                <label className={style.selectCarrera}>
+                  Seleccione una carrera
+                </label>
+              ) : (
+                ""
+              )}
+              <p className={style.puntosGanados}>
+                <label>GANANCIAS:</label> <br />
+                {exacta.puntosganados ? exacta.puntosganados : ""}
+              </p>
+              {usuario.id ? (
+                <button
+                  disabled={!exacta.puntosapostados || !exacta.puntosganados}
+                >
+                  Enviar apuesta
+                </button>
+              ) : (
+                <p className={style.avisoNoLogin}>
+                  <a href="/login">Inicia sesion</a> o
+                  <a href="/register"> registrate</a>
+                </p>
+              )}
+            </form>
+            {/* //?-------------------Formulario Trifecta------------ */}
+            <form onSubmit={handleSubmitTrifecta}>
+              <h2>TRIFECTA</h2>
+              <label className={style.corredorestitulo}>CORREDORES</label>
+              <label># 1</label>
+              <select
+                name="iDprimerPuesto"
+                onChange={handleChangeTrifecta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {" "}
+                        {element.nombre}  #{element.numero}{" "}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              <label># 2</label>
+              <select
+                name="iDsegundoPuesto"
+                onChange={handleChangeTrifecta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {" "}
+                        {element.nombre}   #{element.numero}{" "}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              <label># 3</label>
+              <select
+                name="iDtercerPuesto"
+                onChange={handleChangeTrifecta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {" "}
+                        {element.nombre}   #{element.numero}{" "}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              {unicacarrera.id ? (
+                <input
+                  type="number"
+                  placeholder="Ingrese monto a apostar"
+                  name="puntosapostados"
+                  onChange={handleChangeTrifecta}
+                  value={trifecta.puntosganados ? trifecta.puntosapostados : ""}
+                />
+              ) : usuario.id ? (
+                <label className={style.selectCarrera}>
+                  Seleccione una carrera
+                </label>
+              ) : (
+                ""
+              )}
+              <p className={style.puntosGanados}>
+                <label>GANANCIAS:</label> <br />
+                {trifecta.puntosganados ? trifecta.puntosganados : ""}
+              </p>
+              {usuario.id ? (
+                <button
+                  disabled={
+                    !trifecta.puntosapostados || !trifecta.puntosganados
+                  }
+                >
+                  Enviar apuesta
+                </button>
+              ) : (
+                <p className={style.avisoNoLogin}>
+                  <a href="/login">Inicia sesion</a> o
+                  <a href="/register"> registrate</a>
+                </p>
+              )}
+            </form>
+            {/* //?-------------------Formulario Superfecta------------ */}
+            <form onSubmit={handleSubmitSuperfecta}>
+              <h2>SUPERFECTA</h2>
+              <label className={style.corredorestitulo}>CORREDORES</label>
+              <label># 1</label>
+              <select
+                name="iDprimerPuesto"
+                onChange={handleChangeSuperfecta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {" "}
+                        {element.nombre}  #{element.numero}{" "}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              <label># 2</label>
+              <select
+                name="iDsegundoPuesto"
+                onChange={handleChangeSuperfecta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {" "}
+                        {element.nombre} {element.numero}{" "}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              <label># 3</label>
+              <select
+                name="iDtercerPuesto"
+                onChange={handleChangeSuperfecta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {" "}
+                        {element.nombre} {element.numero}{" "}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              <label># 4</label>
+              <select
+                name="iDcuartoPuesto"
+                onChange={handleChangeSuperfecta}
+                required
+              >
+                <option value="">--Elije un corredor--</option>
+                {Object.keys(carreraycorredores).length && carreraSeleccionada
+                  ? carreraycorredores.Crearcorredors.map((element) => (
+                      <option key={element.id} value={element.id}>
+                        {" "}
+                        {element.nombre} {element.numero}{" "}
+                      </option>
+                    ))
+                  : ""}
+                ,
+              </select>
+              {unicacarrera.id ? (
+                <input
+                  type="number"
+                  placeholder="Ingrese monto a apostar"
+                  name="puntosapostados"
+                  onChange={handleChangeSuperfecta}
+                  value={
+                    superfecta.puntosganados ? superfecta.puntosapostados : ""
+                  }
+                />
+              ) : usuario.id ? (
+                <label className={style.selectCarrera}>
+                  Seleccione una carrera
+                </label>
+              ) : (
+                ""
+              )}
 
-            <img src={imagenes.superfecta} alt="" width="30" />
-            <label>SUPERFECTA: {carreraMostrar.porcentajeSuperfecta}%</label>
-          </div>
-        </div>
-      </div>
-      {/* //? ------------------------FormularioWIN--------------------------------- */}
+              <p className={style.puntosGanados}>
+                <label>GANANCIAS:</label> <br />
+                {superfecta.puntosganados ? superfecta.puntosganados : ""}
+              </p>
+              {usuario.id ? (
+                <button
+                  disabled={
+                    !superfecta.puntosapostados || !superfecta.puntosganados
+                  }
+                >
+                  Enviar apuesta
+                </button>
+              ) : (
+                <p className={style.avisoNoLogin}>
+                  <a href="/login">Inicia sesion</a> o
+                  <a href="/register"> registrate</a>
+                </p>
+              )}
+            </form>
+          </div>{" "}
+        </>
+      )}
 
-      <div className={style.formContainer}>
-        <form onSubmit={handleSubmitWin}>
-          <h2>Win</h2>
-          <label className={style.corredorestitulo}>Corredores</label>
-          <label>Puesto 1</label>
-          <select name="iDprimerPuesto" onChange={handleChangewin} required>
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {element.nombre} {element.numero}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          {unicacarrera.id ? (
-            <input
-              type="number"
-              placeholder="Ingrese monto a apostar"
-              name="puntosapostados"
-              onChange={handleChangewin}
-              value={win.puntosganados ? win.puntosapostados : ""}
-            />
-          ) : usuario.id ? (
-            <label className={style.selectCarrera}>
-              Seleccione una carrera
-            </label>
-          ) : (
-            ""
-          )}
-
-          <p className={style.puntosGanados}>
-            <label>Ganancia:</label> <br />
-            {win.puntosganados ? win.puntosganados : ""}
-          </p>
-          {usuario.id ? (
-            <button disabled={!win.puntosapostados || !win.puntosganados}>
-              Enviar apuesta
-            </button>
-          ) : (
-            <p className={style.avisoNoLogin}>
-              <a href="/login">Inicia sesion</a> o
-              <a href="/register"> registrate</a>
-            </p>
-          )}
-        </form>
-        {/* //?-----------------------Formulario Exacta----------------------------- */}
-        <form onSubmit={handleSubmitExacta}>
-          <h2>Exacta</h2>
-          <label className={style.corredorestitulo}>Corredores</label>
-          <label>Puesto 1</label>
-
-          <select name="iDprimerPuesto" onChange={handleChangeExacta} required>
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {element.nombre} {element.numero}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          <label>Puesto 2</label>
-          <select name="iDsegundoPuesto" onChange={handleChangeExacta} required>
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          {unicacarrera.id ? (
-            <input
-              type="number"
-              placeholder="Ingrese monto a apostar"
-              name="puntosapostados"
-              onChange={handleChangeExacta}
-              value={exacta.puntosganados ? exacta.puntosapostados : ""}
-            />
-          ) : usuario.id ? (
-            <label className={style.selectCarrera}>
-              Seleccione una carrera
-            </label>
-          ) : (
-            ""
-          )}
-          <p className={style.puntosGanados}>
-            <label>Ganancia:</label> <br />
-            {exacta.puntosganados ? exacta.puntosganados : ""}
-          </p>
-          {usuario.id ? (
-            <button disabled={!exacta.puntosapostados || !exacta.puntosganados}>
-              Enviar apuesta
-            </button>
-          ) : (
-            <p className={style.avisoNoLogin}>
-              <a href="/login">Inicia sesion</a> o
-              <a href="/register"> registrate</a>
-            </p>
-          )}
-        </form>
-        {/* //?-------------------Formulario Trifecta------------ */}
-        <form onSubmit={handleSubmitTrifecta}>
-          <h2>Trifecta</h2>
-          <label className={style.corredorestitulo}>Corredores</label>
-          <label>Puesto 1</label>
-          <select
-            name="iDprimerPuesto"
-            onChange={handleChangeTrifecta}
-            required
-          >
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          <label>Puesto 2</label>
-          <select
-            name="iDsegundoPuesto"
-            onChange={handleChangeTrifecta}
-            required
-          >
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          <label>Puesto 3</label>
-          <select
-            name="iDtercerPuesto"
-            onChange={handleChangeTrifecta}
-            required
-          >
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          {unicacarrera.id ? (
-            <input
-              type="number"
-              placeholder="Ingrese monto a apostar"
-              name="puntosapostados"
-              onChange={handleChangeTrifecta}
-              value={trifecta.puntosganados ? trifecta.puntosapostados : ""}
-            />
-          ) : usuario.id ? (
-            <label className={style.selectCarrera}>
-              Seleccione una carrera
-            </label>
-          ) : (
-            ""
-          )}
-          <p className={style.puntosGanados}>
-            <label>Ganancia:</label> <br />
-            {trifecta.puntosganados ? trifecta.puntosganados : ""}
-          </p>
-          {usuario.id ? (
-            <button
-              disabled={!trifecta.puntosapostados || !trifecta.puntosganados}
-            >
-              Enviar apuesta
-            </button>
-          ) : (
-            <p className={style.avisoNoLogin}>
-              <a href="/login">Inicia sesion</a> o
-              <a href="/register"> registrate</a>
-            </p>
-          )}
-        </form>
-        {/* //?-------------------Formulario Superfecta------------ */}
-        <form onSubmit={handleSubmitSuperfecta}>
-          <h2>Superfecta</h2>
-          <label className={style.corredorestitulo}>Corredores</label>
-          <label>Puesto 1</label>
-          <select
-            name="iDprimerPuesto"
-            onChange={handleChangeSuperfecta}
-            required
-          >
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          <label>Puesto 2</label>
-          <select
-            name="iDsegundoPuesto"
-            onChange={handleChangeSuperfecta}
-            required
-          >
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          <label>Puesto 3</label>
-          <select
-            name="iDtercerPuesto"
-            onChange={handleChangeSuperfecta}
-            required
-          >
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          <label>Puesto 4</label>
-          <select
-            name="iDcuartoPuesto"
-            onChange={handleChangeSuperfecta}
-            required
-          >
-            <option value="">--Elije un corredor--</option>
-            {Object.keys(carreraycorredores).length && carreraSeleccionada
-              ? carreraycorredores.Crearcorredors.map((element) => (
-                  <option key={element.id} value={element.id}>
-                    {" "}
-                    {element.nombre} {element.numero}{" "}
-                  </option>
-                ))
-              : ""}
-            ,
-          </select>
-          {unicacarrera.id ? (
-            <input
-              type="number"
-              placeholder="Ingrese monto a apostar"
-              name="puntosapostados"
-              onChange={handleChangeSuperfecta}
-              value={superfecta.puntosganados ? superfecta.puntosapostados : ""}
-            />
-          ) : usuario.id ? (
-            <label className={style.selectCarrera}>
-              Seleccione una carrera
-            </label>
-          ) : (
-            ""
-          )}
-
-          <p className={style.puntosGanados}>
-            <label>Ganancia:</label> <br />
-            {superfecta.puntosganados ? superfecta.puntosganados : ""}
-          </p>
-          {usuario.id ? (
-            <button
-              disabled={
-                !superfecta.puntosapostados || !superfecta.puntosganados
-              }
-            >
-              Enviar apuesta
-            </button>
-          ) : (
-            <p className={style.avisoNoLogin}>
-              <a href="/login">Inicia sesion</a> o
-              <a href="/register"> registrate</a>
-            </p>
-          )}
-        </form>
-      </div>
       <YouTubePlayer />
       <div className={style.whatsapp}>
         <Whatsapp />

@@ -14,7 +14,7 @@ const CargarpuntosAdmin = ({ user }) => {
     username: username,
     cantidad: "",
   });
-  console.log("777777777777777777777", puntosAdmin.username);
+
   const handleChange = (event) => {
     setpuntosAdmin({
       ...puntosAdmin,
@@ -51,7 +51,7 @@ const CargarpuntosAdmin = ({ user }) => {
               icon: "error",
               title: "No eres un Administador Autorizado",
               timerProgressBar: true,
-              timer: 1500,
+              timer: 2500,
             });
           }
         }
