@@ -228,7 +228,7 @@ const Home = () => {
 
   //!-----------------------------submit win-------------------------
   const prueba = (win.puntosapostados * unicacarrera.porcentajeWin) / 100;
-  console.log("555555555555555555", prueba);
+  
   const handleSubmitWin = async (event) => {
     event.preventDefault();
 
@@ -347,7 +347,7 @@ const Home = () => {
     navigate("/actualizarperfil");
   };
 
-  // console.log("carrera y corredoressssssssssss", carreraycorredores);
+ 
   console.log("apuesta exacta", superfecta);
 
   return (
@@ -357,8 +357,10 @@ const Home = () => {
           <div className={style.navbar}>
             <Navbar props={usuario.admin} />
           </div>
-        ) : (
+        ) : usuario.id ? (
           <ViewMisApuestas />
+        ) : (
+          ""
         )}
       </div>
 
@@ -438,7 +440,7 @@ const Home = () => {
         <>
           <div className={style.selectCarreraContainer}>
             <div className={style.preview}>
-              <h2>Seleccione una Carrera</h2>
+              <h2>SELECCIONE UNA CARRERA</h2>
               {usuario.id && usuario.subadmin !== true ? (
                 <>
                   <select
@@ -489,15 +491,15 @@ const Home = () => {
           {/* //? ------------------------FormularioWIN--------------------------------- */}
           <div className={style.formContainer}>
             <form onSubmit={handleSubmitWin}>
-              <h2>Win</h2>
-              <label className={style.corredorestitulo}>Corredores</label>
-              <label>Puesto 1</label>
+              <h2>WIN</h2>
+              <label className={style.corredorestitulo}>CORREDORES</label>
+              <label># 1</label>
               <select name="iDprimerPuesto" onChange={handleChangewin} required>
                 <option value="">--Elije un corredor--</option>
                 {Object.keys(carreraycorredores).length && carreraSeleccionada
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
-                        {element.nombre} {element.numero}
+                        {element.nombre}   #{element.numero}
                       </option>
                     ))
                   : ""}
@@ -520,7 +522,7 @@ const Home = () => {
               )}
 
               <p className={style.puntosGanados}>
-                <label>Ganancia:</label> <br />
+                <label>GANANCIAS:</label> <br />
                 {win.puntosganados ? win.puntosganados : ""}
               </p>
               {usuario.id ? (
@@ -536,9 +538,9 @@ const Home = () => {
             </form>
             {/* //?-----------------------Formulario Exacta----------------------------- */}
             <form onSubmit={handleSubmitExacta}>
-              <h2>Exacta</h2>
-              <label className={style.corredorestitulo}>Corredores</label>
-              <label>Puesto 1</label>
+              <h2>EXACTA</h2>
+              <label className={style.corredorestitulo}>CORREDORES</label>
+              <label># 1</label>
 
               <select
                 name="iDprimerPuesto"
@@ -549,13 +551,13 @@ const Home = () => {
                 {Object.keys(carreraycorredores).length && carreraSeleccionada
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
-                        {element.nombre} {element.numero}
+                        {element.nombre}  #{element.numero}
                       </option>
                     ))
                   : ""}
                 ,
               </select>
-              <label>Puesto 2</label>
+              <label># 2</label>
               <select
                 name="iDsegundoPuesto"
                 onChange={handleChangeExacta}
@@ -566,7 +568,7 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre} {element.numero}
+                        {element.nombre}   #{element.numero}
                       </option>
                     ))
                   : ""}
@@ -588,7 +590,7 @@ const Home = () => {
                 ""
               )}
               <p className={style.puntosGanados}>
-                <label>Ganancia:</label> <br />
+                <label>GANANCIAS:</label> <br />
                 {exacta.puntosganados ? exacta.puntosganados : ""}
               </p>
               {usuario.id ? (
@@ -606,9 +608,9 @@ const Home = () => {
             </form>
             {/* //?-------------------Formulario Trifecta------------ */}
             <form onSubmit={handleSubmitTrifecta}>
-              <h2>Trifecta</h2>
-              <label className={style.corredorestitulo}>Corredores</label>
-              <label>Puesto 1</label>
+              <h2>TRIFECTA</h2>
+              <label className={style.corredorestitulo}>CORREDORES</label>
+              <label># 1</label>
               <select
                 name="iDprimerPuesto"
                 onChange={handleChangeTrifecta}
@@ -619,13 +621,13 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre} {element.numero}{" "}
+                        {element.nombre}  #{element.numero}{" "}
                       </option>
                     ))
                   : ""}
                 ,
               </select>
-              <label>Puesto 2</label>
+              <label># 2</label>
               <select
                 name="iDsegundoPuesto"
                 onChange={handleChangeTrifecta}
@@ -636,13 +638,13 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre} {element.numero}{" "}
+                        {element.nombre}   #{element.numero}{" "}
                       </option>
                     ))
                   : ""}
                 ,
               </select>
-              <label>Puesto 3</label>
+              <label># 3</label>
               <select
                 name="iDtercerPuesto"
                 onChange={handleChangeTrifecta}
@@ -653,7 +655,7 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre} {element.numero}{" "}
+                        {element.nombre}   #{element.numero}{" "}
                       </option>
                     ))
                   : ""}
@@ -675,7 +677,7 @@ const Home = () => {
                 ""
               )}
               <p className={style.puntosGanados}>
-                <label>Ganancia:</label> <br />
+                <label>GANANCIAS:</label> <br />
                 {trifecta.puntosganados ? trifecta.puntosganados : ""}
               </p>
               {usuario.id ? (
@@ -695,9 +697,9 @@ const Home = () => {
             </form>
             {/* //?-------------------Formulario Superfecta------------ */}
             <form onSubmit={handleSubmitSuperfecta}>
-              <h2>Superfecta</h2>
-              <label className={style.corredorestitulo}>Corredores</label>
-              <label>Puesto 1</label>
+              <h2>SUPERFECTA</h2>
+              <label className={style.corredorestitulo}>CORREDORES</label>
+              <label># 1</label>
               <select
                 name="iDprimerPuesto"
                 onChange={handleChangeSuperfecta}
@@ -708,13 +710,13 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre} {element.numero}{" "}
+                        {element.nombre}  #{element.numero}{" "}
                       </option>
                     ))
                   : ""}
                 ,
               </select>
-              <label>Puesto 2</label>
+              <label># 2</label>
               <select
                 name="iDsegundoPuesto"
                 onChange={handleChangeSuperfecta}
@@ -731,7 +733,7 @@ const Home = () => {
                   : ""}
                 ,
               </select>
-              <label>Puesto 3</label>
+              <label># 3</label>
               <select
                 name="iDtercerPuesto"
                 onChange={handleChangeSuperfecta}
@@ -748,7 +750,7 @@ const Home = () => {
                   : ""}
                 ,
               </select>
-              <label>Puesto 4</label>
+              <label># 4</label>
               <select
                 name="iDcuartoPuesto"
                 onChange={handleChangeSuperfecta}
@@ -784,7 +786,7 @@ const Home = () => {
               )}
 
               <p className={style.puntosGanados}>
-                <label>Ganancia:</label> <br />
+                <label>GANANCIAS:</label> <br />
                 {superfecta.puntosganados ? superfecta.puntosganados : ""}
               </p>
               {usuario.id ? (

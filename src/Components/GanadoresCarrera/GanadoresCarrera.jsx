@@ -34,9 +34,8 @@ const GanadoresCarrera = () => {
   return (
     <div className={style.page}>
       <form className={style.form}>
-        <label className={style.label}>Ganadores </label>
-
-        <select
+        <label className={style.label}>GANADORES </label>
+         <select
           className={style.select}
           name="nombrecarrera"
           onChange={handleChange}
@@ -53,7 +52,7 @@ const GanadoresCarrera = () => {
 
       <Card
         className={style.primeracarta}
-        title="#1 Primer Lugar"
+        title="#1  LUGAR"
         bordered={false}
         style={{
           width: 300,
@@ -68,7 +67,7 @@ const GanadoresCarrera = () => {
 
       <Card
         className={style.segundacarta}
-        title="#2 Segundo Lugar"
+        title="#2  LUGAR"
         bordered={false}
         style={{
           width: 300,
@@ -82,7 +81,7 @@ const GanadoresCarrera = () => {
       </Card>
       <Card
         className={style.terceracarta}
-        title="#3 Lugar"
+        title="#3 LUGAR"
         bordered={false}
         style={{
           width: 300,
@@ -96,7 +95,7 @@ const GanadoresCarrera = () => {
       </Card>
       <Card
         className={style.cuartacarta}
-        title="#4 lugar"
+        title="#4 LUGAR"
         bordered={false}
         style={{
           width: 300,

@@ -17,6 +17,7 @@ const CargaPuntosUser = () => {
   const user = useSelector((state) => state.user);
   const username = useSelector((state) => state.user.username);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getUserByIdParams(id));
   }, []);
@@ -119,18 +120,19 @@ const CargaPuntosUser = () => {
             pattern="^[0-9]+"
           />
           <label>Precio monto</label>
-          <>
-          $
-          <input
-
-            type="number"
-            name="precio"
-            onChange={handleChange}
-            value={carga.cantidad}
-            min="0"
-            pattern="^[0-9]+"
-          />
-          </>
+          <div className={style.inputPrecio}>
+            <label>
+              $
+              <input
+                type="number"
+                name="precio"
+                onChange={handleChange}
+                value={carga.cantidad}
+                min="0"
+                pattern="^[0-9]+"
+              />
+            </label>
+          </div>
           {carga.cantidad <= 0 || carga.precio <= 0 ? (
             <button disabled>Cargar Puntos</button>
           ) : (
