@@ -357,8 +357,10 @@ const Home = () => {
           <div className={style.navbar}>
             <Navbar props={usuario.admin} />
           </div>
-        ) : (
+        ) : usuario.id ? (
           <ViewMisApuestas />
+        ) : (
+          ""
         )}
       </div>
 
