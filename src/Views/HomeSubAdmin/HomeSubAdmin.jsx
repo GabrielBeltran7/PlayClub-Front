@@ -12,6 +12,8 @@ import {
   TrophyOutlined,
   VideoCameraOutlined,
   GoldOutlined,
+  GlobalOutlined,
+  BankOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
 import CrearCorredor from "../../Components/crearCorredor/CrearCorredor";
@@ -79,8 +81,8 @@ const HomeSubAdmin = () => {
         return <AllCarreras />;
       case "14":
         return <InformePuntos />;
-        case "15":
-        return <InformeRetirarPuntos  />;
+      case "15":
+        return <InformeRetirarPuntos />;
       default:
         return null;
     }
@@ -142,23 +144,24 @@ const HomeSubAdmin = () => {
               },
               {
                 key: "12",
-                icon: <TrophyOutlined />,
+                icon: <AuditOutlined />,
                 label: "Informe Apuestas",
               },
               {
                 key: "14",
-                icon: <TrophyOutlined />,
+                icon: <BookOutlined />,
                 label: "Informe Puntos",
+              },
+
+              {
+                key: "15",
+                icon: <BankOutlined />,
+                label: "Informe Retiros",
               },
               {
                 key: "13",
-                icon: <TrophyOutlined />,
+                icon: <GlobalOutlined />,
                 label: "Todas las carreras",
-              },
-              {
-                key: "15",
-                icon: <TrophyOutlined />,
-                label: "Informe Retiros",
               },
 
               {

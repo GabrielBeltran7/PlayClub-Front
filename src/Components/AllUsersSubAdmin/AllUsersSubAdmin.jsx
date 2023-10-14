@@ -159,13 +159,15 @@ const AllUsersSubAdmin = () => {
 
   const columns = [
     {
-      title: "Username",
+      title: "Usuario",
       dataIndex: "username",
       key: "username",
       width: "20%",
       ...getColumnSearchProps("username"),
       render: (text, record) => (
-        <a href={`/cargapuntos/${record.id}`}>{text}</a>
+        <a className={style.userName} href={`/cargapuntos/${record.id}`}>
+          {text}
+        </a>
       ),
     },
     {
@@ -176,7 +178,7 @@ const AllUsersSubAdmin = () => {
       ...getColumnSearchProps("email"),
     },
     {
-      title: "Role",
+      title: "Rol",
       dataIndex: "admin",
       key: "role",
       render: (text, record) => (
@@ -216,7 +218,10 @@ const AllUsersSubAdmin = () => {
       fixed: "right",
       width: "20%",
       render: (text, record) => (
-        <a href={`/home/subadmin/retirarpuntos/${record.id}/${user.id}`}>
+        <a
+          className={style.retirarPuntos}
+          href={`/home/subadmin/retirarpuntos/${record.id}/${user.id}`}
+        >
           Retirar Puntos
         </a>
       ),

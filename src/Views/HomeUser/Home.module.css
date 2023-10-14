@@ -11,17 +11,18 @@
     rgba(2, 21, 51, 1) 50%,
     rgba(5, 65, 158, 1) 66%
   );
-}.pala {
+}
+.pala {
   color: white;
-
-}.centrar{
+}
+.centrar {
   text-align: center;
   text-decoration: underline;
-}.corredorestitulo{
+}
+.corredorestitulo {
   color: black;
   font-weight: bold;
   font-size: larger;
-
 }
 
 .botonganadores {
@@ -121,8 +122,8 @@
   color: #119b1cc9;
   text-align: center;
 }
-.puntosGanados label{
-color: black;
+.puntosGanados label {
+  color: black;
 }
 .selectCarrera {
   position: absolute;
@@ -173,21 +174,19 @@ color: black;
   text-align: center;
   width: 10rem;
   position: absolute;
-  bottom: 0;
+  
 }
 
 .navbarMisApuestas {
   display: flex;
   justify-content: space-around;
-  align-items: start;
-  position: fixed;
-  z-index: 9999;
+  align-items: center;
 }
 
 .navbar {
   display: flex;
-  justify-content: start;
-  align-items: start;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   gap: 5rem;
 }
@@ -288,7 +287,7 @@ color: black;
 }
 
 /* Media querys -- responsive*/
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 590px) {
   .formContainer {
     display: flex;
     justify-content: center;
@@ -324,7 +323,7 @@ color: black;
   }
   .preview {
     padding: 0px;
-    width: 80%;
+    width: 90%;
     gap: 0;
     font-size: 15px;
     font-weight: 800;

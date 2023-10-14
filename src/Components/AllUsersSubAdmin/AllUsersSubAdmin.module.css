@@ -11,3 +11,13 @@
   font-weight: 800;
   background-color: transparent transparent;
 }
+
+.userName {
+  color: rgb(14, 179, 41);
+  font-weight: 800;
+}
+
+.retirarPuntos {
+  color: rgb(190, 0, 0);
+  font-weight: 600;
+}

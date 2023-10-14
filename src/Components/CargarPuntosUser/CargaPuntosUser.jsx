@@ -21,7 +21,6 @@ const CargaPuntosUser = () => {
     dispatch(getUserByIdParams(id));
   }, []);
 
-  console.log(user);
   const [carga, setCarga] = useState({
     id: user.id,
     UserId: id,
@@ -41,6 +40,8 @@ const CargaPuntosUser = () => {
     setCarga({
       ...carga,
       username: username,
+      precio: event.target.value,
+
       [event.target.name]: event.target.value,
     });
   };
@@ -66,7 +67,7 @@ const CargaPuntosUser = () => {
               "Los puntos se cargaron Correctamente",
               "success"
             );
-          } 
+          }
         } else {
           const response = await dispatch(cargarPuntosSubadmin(carga));
           console.log("responses subadminnn", response);
@@ -76,7 +77,6 @@ const CargaPuntosUser = () => {
               "Los puntos se cargaron Correctamente",
               "success"
             );
-          
           }
         }
 
@@ -88,6 +88,8 @@ const CargaPuntosUser = () => {
       }
     });
   };
+
+  console.log("***********", carga);
 
   return (
     <div className={style.container}>
@@ -117,14 +119,18 @@ const CargaPuntosUser = () => {
             pattern="^[0-9]+"
           />
           <label>Precio monto</label>
+          <>
+          $
           <input
+
             type="number"
             name="precio"
             onChange={handleChange}
-            value={carga.precio}
+            value={carga.cantidad}
             min="0"
             pattern="^[0-9]+"
           />
+          </>
           {carga.cantidad <= 0 || carga.precio <= 0 ? (
             <button disabled>Cargar Puntos</button>
           ) : (
