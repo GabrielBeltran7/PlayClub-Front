@@ -1,3 +1,4 @@
+
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
@@ -16,7 +17,12 @@ import style from "./RecargarPuntos.module.css";
 
 const RecargarPuntos = () => {
 
- 
+
+  const user = useSelector((state) => state.user);
+useEffect(()=>{
+dispatch(getUserById())
+},[user])
+
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -249,11 +255,7 @@ if(allUsers){
       
       <div>
         <div className={style.containerAviso}>
-          <label className={style.aviso}>
-            Para cargar puntos a un usuario presionar sobre el nombre de un
-            usuario y ahí te llevará al formulario para cargar puntos al usuario
-            seleccionado
-          </label>
+         
         </div>
       </div>
     </div>

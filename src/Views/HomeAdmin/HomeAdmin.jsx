@@ -42,6 +42,8 @@ const HomeAdmin = () => {
   useEffect(() => {
     dispatch(getUserByUsername(username));
   }, [username]);
+
+  
   const {
     token: { colorBgContainer },
   } = theme.useToken();

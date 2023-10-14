@@ -16,10 +16,13 @@ const AllUsersSubAdmin = () => {
   const searchInput = useRef(null);
 
   const user = useSelector((state) => state.user);
-  console.log("userrrrr", user);
+ 
   const allUsers = useSelector((state) => state.userId);
-  // console.log("allusersssss", allUsers);
 
+  useEffect(()=>{
+    dispatch(getUserById())
+    },[user]) 
+    
   const dispatch = useDispatch();
   const allUsersNormal = allUsers.filter((user) => user.admin === false);
   const [rol, setRol] = useState(false);
@@ -228,11 +231,7 @@ const AllUsersSubAdmin = () => {
       />
       <div>
         <div className={style.containerAviso}>
-          <label className={style.aviso}>
-            Para cargar puntos a un usuario presionar sobre el nombre de un
-            usuario y ahí te llevará al formulario para cargar puntos al usuario
-            seleccionado
-          </label>
+          
         </div>
       </div>
     </div>
