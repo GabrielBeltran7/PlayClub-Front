@@ -34,7 +34,7 @@ const GanadoresCarrera = () => {
   return (
     <div className={style.page}>
       <form className={style.form}>
-        <label className={style.label}>GANADORES </label>
+        <label className={style.label}>GANADORES</label>
          <select
           className={style.select}
           name="nombrecarrera"

@@ -21,7 +21,9 @@ const AllUsersSubAdmin = () => {
 
   useEffect(()=>{
     dispatch(getUserById())
-    },[user]) 
+    },[user, allUsers]) 
+
+  
     
   const dispatch = useDispatch();
   const allUsersNormal = allUsers.filter((user) => user.admin === false);
