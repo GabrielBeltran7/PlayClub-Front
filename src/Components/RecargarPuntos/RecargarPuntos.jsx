@@ -58,11 +58,11 @@ const RecargarPuntos = () => {
 
   useEffect(() => {
     dispatch(getUserById());
-  }, [dispatch, rol]);
+  }, [dispatch, allUsers]);
 
   useEffect(() => {
     dispatch(getUserById());
-  }, [dispatch,user, rol]);
+  }, [dispatch,user]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
