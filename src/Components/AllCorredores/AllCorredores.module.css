@@ -1,0 +1,13 @@
+.contenedorbotones{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+  .contenedorbotones button{
+    background-color: #f5f5dc;
+    font-size: 20px;
+    border: 2px solid #ffa500;
+
+  }

@@ -8,7 +8,7 @@ import moment from "moment";
 import Swal from "sweetalert2";
 //
 
-import { getUserById, apdateRoluser } from "../../Redux/Actions";
+import { getUserById, apdateRoluser, deleteUser } from "../../Redux/Actions";
 import style from "./RecargarPuntos.module.css";
 
 const RecargarPuntos = () => {
@@ -53,9 +53,9 @@ const RecargarPuntos = () => {
     }
   };
 
-  useEffect(() => {
+const actualizar = ()=>{
     dispatch(getUserById());
-  }, [dispatch, allUsers]);
+  }
 
   useEffect(() => {
     dispatch(getUserById());
@@ -182,10 +182,11 @@ const RecargarPuntos = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "si, borrar!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        dispatch(deleteUser(username))
+        Swal.fire("Borrado!", "el usuario fue borrado correctamente.", "success");
       }
     });
 
@@ -239,14 +240,18 @@ const RecargarPuntos = () => {
           defaultValue={
             record.admin ? "admin" : record.subadmin ? "subadmin" : "usuario"
           }
+          
           style={{ width: 120 }}
         >
+          
           <Select.Option value="Admin">Admin</Select.Option>
           <Select.Option value="SubAdmin">Sub Admin</Select.Option>
           <Select.Option value="Usuario">Usuario</Select.Option>
           {/* Agrega otras opciones según tus necesidades */}
         </Select>
+        
       ),
+      
     },
     {
       title: "Borrar Usuario",
@@ -262,6 +267,9 @@ const RecargarPuntos = () => {
   return (
     <div>
       <div className={style.botonexcel}>
+ 
+
+      <button onClick={actualizar}>Actualizar</button>
         <button onClick={exportToExcel}>Exportar a excel 📑</button>
       </div>
 

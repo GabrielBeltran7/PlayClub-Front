@@ -7,9 +7,13 @@ import {
   getUserById,
   apdateRoluser,
   getUserByUsername,
+  deleteUser
 } from "../../Redux/Actions";
 import style from "./AllUsersSubAdmin.module.css";
 import Swal from "sweetalert2";
+import * as XLSX from "xlsx";
+import moment from "moment";
+
 
 const AllUsersSubAdmin = () => {
   const [searchText, setSearchText] = useState("");
@@ -20,9 +24,26 @@ const AllUsersSubAdmin = () => {
 
   const allUsers = useSelector((state) => state.userId);
 
+  if (allUsers) {
+    allUsers.forEach((user) => {
+      // Formatea la fecha en el formato deseado
+      user.createdAt = moment(user.createdAt).format("YYYY-MM-DD HH:mm:ss");
+      user.updatedAt = moment(user.updatedAt).format("YYYY-MM-DD HH:mm:ss");
+    });
+  }
+  const exportToExcel = () => {
+    const ws = XLSX.utils.json_to_sheet(allUsers);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "User");
+
+    // Guardar el archivo de Excel
+    XLSX.writeFile(wb, "users.xlsx");
+  };
+ 
+
   useEffect(() => {
     dispatch(getUserById());
-  }, [user, allUsers]);
+  }, [user]);
 
   const dispatch = useDispatch();
   const allUsersNormal = allUsers.filter((user) => user.admin === false);
@@ -45,6 +66,13 @@ const AllUsersSubAdmin = () => {
   useEffect(() => {
     dispatch(getUserById());
   }, [rol]);
+
+  const actualizar = ()=>{
+    dispatch(getUserById());
+  }
+
+      
+
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -166,10 +194,11 @@ const AllUsersSubAdmin = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "si, borrar!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        dispatch(deleteUser(username))
+        Swal.fire("Borrado!", "el usuario fue borrado correctamente.", "success");
       }
     });
 
@@ -256,13 +285,20 @@ const AllUsersSubAdmin = () => {
     },
   ];
 
+
+
   return (
     <div>
+      <div className={style.botonexcel}>
+      <button onClick={actualizar}>Actualizar</button>
+      <button onClick={exportToExcel}>Exportar a excel 📑</button>
+      </div>
       <Table
         columns={columns}
         dataSource={allUsersNormal.map((user) => ({ ...user, key: user.id }))}
       />
       <div>
+      
         <div className={style.containerAviso}></div>
       </div>
     </div>

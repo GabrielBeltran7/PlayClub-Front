@@ -31,6 +31,49 @@ import Swal from "sweetalert2";
 
 
 
+export const deleteCorredor = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`/admin/deletecorredor/${id}`);
+      
+      // Si necesitas realizar alguna acción después de eliminar el corredor, agrégala aquí.
+      // Por ejemplo, puedes llamar a una función para actualizar la lista de corredores.
+      if (response.status === 200) {
+        dispatch(getCorredores());
+      }
+    } catch (error) {
+      console.error(error);
+      
+    }
+  };
+}
+
+
+
+
+export const deleteUser = (username) => {
+  console.log("Usuario a eliminar:", username);
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`/users/deleteuser/${username}`);
+
+      
+        if (response.status === 200) {
+          dispatch(getUserById());
+        
+        
+      } else {
+        console.log("Hubo un problema al eliminar el usuario.");
+      
+      }
+    } catch (error) {
+      console.error(error);
+      
+    }
+  };
+}
+
+
 export const  getPuntosApostados =()=>{
   return async (dispatch) =>{
 
