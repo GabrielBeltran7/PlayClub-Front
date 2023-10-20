@@ -20,4 +20,15 @@
 .retirarPuntos {
   color: rgb(190, 0, 0);
   font-weight: 600;
+}  .botonexcel {
+  display: flex;
+  margin: 10px;
+  justify-content: end;
+  gap: 10px;
+
+}
+.botonexcel button {
+  background-color: #f5f5dc;
+  font-size: 20px;
+  border: 2px solid #ffa500;
 }
