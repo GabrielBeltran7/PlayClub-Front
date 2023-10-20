@@ -1,4 +1,3 @@
-
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
@@ -6,6 +5,7 @@ import { Button, Input, Space, Table, Typography, Tag, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import moment from "moment";
+import Swal from "sweetalert2";
 //
 
 import { getUserById, apdateRoluser } from "../../Redux/Actions";
@@ -18,9 +18,6 @@ const RecargarPuntos = () => {
 
   const allUsers = useSelector((state) => state.userId);
   const user = useSelector((state) => state.user);
-
-
-
 
   if (allUsers) {
     allUsers.forEach((user) => {
@@ -62,7 +59,7 @@ const RecargarPuntos = () => {
 
   useEffect(() => {
     dispatch(getUserById());
-  }, [dispatch,user]);
+  }, [dispatch, user]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -177,6 +174,23 @@ const RecargarPuntos = () => {
         text
       ),
   });
+  const handleDelete = (id, username) => {
+    Swal.fire({
+      title: `Estás seguro de borrar al usuario ${username}?`,
+      text: `Estás por borrar a ${username}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+
+    console.log(id);
+  };
 
   const columns = [
     {
@@ -234,6 +248,15 @@ const RecargarPuntos = () => {
         </Select>
       ),
     },
+    {
+      title: "Borrar Usuario",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <a onClick={() => handleDelete(record.id, record.username)}>Borrar</a>
+        </Space>
+      ),
+    },
   ];
 
   return (
@@ -248,9 +271,7 @@ const RecargarPuntos = () => {
       />
 
       <div>
-        <div className={style.containerAviso}>
-         
-        </div>
+        <div className={style.containerAviso}></div>
       </div>
     </div>
   );

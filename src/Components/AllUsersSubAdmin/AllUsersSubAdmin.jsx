@@ -9,6 +9,7 @@ import {
   getUserByUsername,
 } from "../../Redux/Actions";
 import style from "./AllUsersSubAdmin.module.css";
+import Swal from "sweetalert2";
 
 const AllUsersSubAdmin = () => {
   const [searchText, setSearchText] = useState("");
@@ -16,15 +17,13 @@ const AllUsersSubAdmin = () => {
   const searchInput = useRef(null);
 
   const user = useSelector((state) => state.user);
- 
+
   const allUsers = useSelector((state) => state.userId);
 
-  useEffect(()=>{
-    dispatch(getUserById())
-    },[user, allUsers]) 
+  useEffect(() => {
+    dispatch(getUserById());
+  }, [user, allUsers]);
 
-  
-    
   const dispatch = useDispatch();
   const allUsersNormal = allUsers.filter((user) => user.admin === false);
   const [rol, setRol] = useState(false);
@@ -159,6 +158,24 @@ const AllUsersSubAdmin = () => {
       ),
   });
 
+  const handleDelete = (id, username) => {
+    Swal.fire({
+      title: `Estás seguro de borrar al usuario ${username}?`,
+      text: `Estás por borrar a ${username}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+
+    console.log(id);
+  };
+
   const columns = [
     {
       title: "Usuario",
@@ -228,6 +245,15 @@ const AllUsersSubAdmin = () => {
         </a>
       ),
     },
+    {
+      title: "Borrar Usuario",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <a onClick={() => handleDelete(record.id, record.username)}>Borrar</a>
+        </Space>
+      ),
+    },
   ];
 
   return (
@@ -237,9 +263,7 @@ const AllUsersSubAdmin = () => {
         dataSource={allUsersNormal.map((user) => ({ ...user, key: user.id }))}
       />
       <div>
-        <div className={style.containerAviso}>
-          
-        </div>
+        <div className={style.containerAviso}></div>
       </div>
     </div>
   );
