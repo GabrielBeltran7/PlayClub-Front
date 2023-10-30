@@ -504,7 +504,7 @@ const Home = () => {
                   : ""}
                 ,
               </select>
-              {unicacarrera.id ? (
+              {unicacarrera.id && usuario.id ? (
                 <input
                   type="number"
                   placeholder="Ingrese monto a apostar"
@@ -573,7 +573,7 @@ const Home = () => {
                   : ""}
                 ,
               </select>
-              {unicacarrera.id ? (
+              {unicacarrera.id && usuario.id ? (
                 <input
                   type="number"
                   placeholder="Ingrese monto a apostar"
@@ -660,7 +660,7 @@ const Home = () => {
                   : ""}
                 ,
               </select>
-              {unicacarrera.id ? (
+              {unicacarrera.id && usuario.id ? (
                 <input
                   type="number"
                   placeholder="Ingrese monto a apostar"
@@ -766,7 +766,7 @@ const Home = () => {
                   : ""}
                 ,
               </select>
-              {unicacarrera.id ? (
+              {unicacarrera.id && usuario.id ? (
                 <input
                   type="number"
                   placeholder="Ingrese monto a apostar"

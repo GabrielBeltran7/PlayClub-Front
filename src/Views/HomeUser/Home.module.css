@@ -85,9 +85,9 @@
   border-radius: 20px;
   gap: 10px;
   font-size: 20px;
-  height: fit-content;
+  height: 35rem;
   width: 12rem;
-  /* position: relative; */
+  position: relative;
   box-shadow: 5px 5px 10px black;
   font-family: "Dancing Script", cursive;
   font-family: "Great Vibes", cursive;
@@ -98,8 +98,8 @@
 }
 
 .formContainer form input {
-  /* position: absolute; */
-  /* bottom: 10%; */
+  position: absolute;
+  bottom: 10%;
 }
 .formContainer form select {
   width: 90%;
@@ -107,16 +107,16 @@
 }
 
 .formContainer form button {
-  /* position: absolute;
-  bottom: 3%; */
+  position: absolute;
+  bottom: 3%;
 }
 
 .formContainer form h2 {
   text-decoration: underline;
 }
 .puntosGanados {
-  /* position: absolute; */
-  /* bottom: 15%; */
+  position: absolute;
+  bottom: 15%;
   font-size: 30px;
   font-weight: bold;
   color: #119b1cc9;
@@ -126,8 +126,8 @@
   color: black;
 }
 .selectCarrera {
-  /* position: absolute;
-  bottom: 10%; */
+  position: absolute;
+  bottom: 10%;
 }
 
 .containerInfoUser {
@@ -173,7 +173,7 @@
   font-size: 20px;
   text-align: center;
   width: 10rem;
-  /* position: absolute; */
+  position: absolute;
   bottom: 5%;
 }
 
@@ -283,6 +283,30 @@
   }
   .infoUsuario img {
     width: 100%;
+  }
+
+  .formContainer form {
+    height: fit-content;
+    position: static;
+  }
+  .formContainer form input {
+    position: static;
+  }
+  .formContainer form button {
+    position: static;
+  }
+
+  .avisoNoLogin {
+    font-size: 20px;
+    text-align: center;
+    width: 10rem;
+    position: initial;
+  }
+  .puntosGanados {
+    position: static;
+  }
+  .selectCarrera {
+    position: static;
   }
 }
 
