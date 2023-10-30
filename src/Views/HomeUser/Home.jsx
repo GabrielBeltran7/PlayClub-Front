@@ -42,7 +42,7 @@ const Home = () => {
   };
 
   const carreraycorredores = useSelector((state) => state.carreraycorredores);
-  console.log("***********************************", carreraycorredores);
+  // console.log("***********************************", carreraycorredores);
   const [carreraMostrar, setCarreraMostrar] = useState({});
   const [carreraSeleccionada, setCarreraSeleccionada] = useState("");
 
@@ -228,7 +228,7 @@ const Home = () => {
 
   //!-----------------------------submit win-------------------------
   const prueba = (win.puntosapostados * unicacarrera.porcentajeWin) / 100;
-  
+
   const handleSubmitWin = async (event) => {
     event.preventDefault();
 
@@ -347,8 +347,7 @@ const Home = () => {
     navigate("/actualizarperfil");
   };
 
- 
-  console.log("apuesta exacta", superfecta);
+  // console.log("apuesta exacta", superfecta);
 
   return (
     <div className={style.container}>
@@ -499,7 +498,7 @@ const Home = () => {
                 {Object.keys(carreraycorredores).length && carreraSeleccionada
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
-                        {element.nombre}   #{element.numero}
+                        {element.nombre} #{element.numero}
                       </option>
                     ))
                   : ""}
@@ -551,7 +550,7 @@ const Home = () => {
                 {Object.keys(carreraycorredores).length && carreraSeleccionada
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
-                        {element.nombre}  #{element.numero}
+                        {element.nombre} #{element.numero}
                       </option>
                     ))
                   : ""}
@@ -568,7 +567,7 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre}   #{element.numero}
+                        {element.nombre} #{element.numero}
                       </option>
                     ))
                   : ""}
@@ -621,7 +620,7 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre}  #{element.numero}{" "}
+                        {element.nombre} #{element.numero}{" "}
                       </option>
                     ))
                   : ""}
@@ -638,7 +637,7 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre}   #{element.numero}{" "}
+                        {element.nombre} #{element.numero}{" "}
                       </option>
                     ))
                   : ""}
@@ -655,7 +654,7 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre}   #{element.numero}{" "}
+                        {element.nombre} #{element.numero}{" "}
                       </option>
                     ))
                   : ""}
@@ -710,7 +709,7 @@ const Home = () => {
                   ? carreraycorredores.Crearcorredors.map((element) => (
                       <option key={element.id} value={element.id}>
                         {" "}
-                        {element.nombre}  #{element.numero}{" "}
+                        {element.nombre} #{element.numero}{" "}
                       </option>
                     ))
                   : ""}
